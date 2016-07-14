@@ -8,10 +8,9 @@
 
 import Foundation
 
+typealias ApodCompletionHandler = (pictureData: ApodData?, error: NSError?) -> Void
+
 protocol ApodStore {
-	associatedtype ApodCompletionHandler = (pictureData: Data?, error: NSError?) -> Void
-	
 	func fetchTodaysPicture(completionHandler: ApodCompletionHandler)
 	func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler)
-	func fetchHDPictureFor(date: Date, completionHandler: ApodCompletionHandler)
 }
