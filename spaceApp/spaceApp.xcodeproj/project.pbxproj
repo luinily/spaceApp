@@ -17,6 +17,7 @@
 		8F941DFB1D363A9E00C56ACE /* spaceAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941DFA1D363A9E00C56ACE /* spaceAppUITests.swift */; };
 		8F941E091D366C6400C56ACE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F941E081D366C6400C56ACE /* Alamofire.framework */; };
 		8F941E0A1D366C6400C56ACE /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F941E081D366C6400C56ACE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8F941E0D1D3739F800C56ACE /* ApodStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E0C1D3739F800C56ACE /* ApodStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		8F941DFA1D363A9E00C56ACE /* spaceAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spaceAppUITests.swift; sourceTree = "<group>"; };
 		8F941DFC1D363A9E00C56ACE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F941E081D366C6400C56ACE /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Alamofire.framework; path = "/Users/yoann/Library/Developer/Xcode/DerivedData/spaceApp-bmyiuyvhkyhscmejhgsvaojatsje/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<absolute>"; };
+		8F941E0C1D3739F800C56ACE /* ApodStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodStore.swift; path = ../ApodStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		8F941DD61D363A9E00C56ACE /* spaceApp */ = {
 			isa = PBXGroup;
 			children = (
+				8F941E0C1D3739F800C56ACE /* ApodStore.swift */,
 				8F941DD71D363A9E00C56ACE /* AppDelegate.swift */,
 				8F941DD91D363A9E00C56ACE /* ViewController.swift */,
 				8F941DDB1D363A9E00C56ACE /* Main.storyboard */,
@@ -291,6 +294,7 @@
 				8F941DDA1D363A9E00C56ACE /* ViewController.swift in Sources */,
 				8F941DE01D363A9E00C56ACE /* spaceApp.xcdatamodeld in Sources */,
 				8F941DD81D363A9E00C56ACE /* AppDelegate.swift in Sources */,
+				8F941E0D1D3739F800C56ACE /* ApodStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
