@@ -13,13 +13,15 @@ class NetworkApodStoreTests: XCTestCase {
 	// MARK: Subject under test
 	private var target: NetworkApodStore!
 	private var mockNetworkTool: MockNetworkTool!
+	private var dataConvertor: MockDataConvertor!
 }
 
 // MARK: Test lifecycle
 extension NetworkApodStoreTests {
 	override func setUp() {
 		mockNetworkTool = MockNetworkTool()
-		target = NetworkApodStore(networkTool: mockNetworkTool)
+		dataConvertor = MockDataConvertor()
+		target = NetworkApodStore(networkTool: mockNetworkTool, dataConvertor: dataConvertor)
 	}
 	
 	override func tearDown() {
@@ -38,10 +40,23 @@ extension NetworkApodStoreTests {
 		var makeGetRequestCalled = false
 		var requestURL: String?
 		var requestParameters: [String: String]?
+		
 		func makeGetRequest(url: String, parameters: [String: String], completionHandler: RequestCompletionHandler) {
 			makeGetRequestCalled = true
 			requestURL = url
 			requestParameters = parameters
+			completionHandler(data: Data(), error: nil)
+		}
+	}
+	
+	class MockDataConvertor: DataToApodDataConverter {
+		var convertDataToApodDataHasBeenCalled = false
+		
+		func convertDataToApodData(data: Data) throws -> ApodData {
+			convertDataToApodDataHasBeenCalled = true
+			
+			let url = URL(string: "google.com")
+			return ApodData(title: "", url: url!, hdUrl: url!, date: Date(), explanation: "", copyright: "")
 		}
 	}
 }
@@ -86,5 +101,44 @@ extension NetworkApodStoreTests {
 		} else {
 			XCTAssert(false) //should never be called
 		}
+	}
+	
+	func testFetchTodaysPicture_WhenGotData_AskToConverterToApodData() {
+		// Arrange
+		
+		// Act
+		target.fetchTodaysPicture() {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		// Assert
+		XCTAssertTrue(dataConvertor.convertDataToApodDataHasBeenCalled)
+	}
+	
+	func testFetchTodaysPicture_WhenGotData_CallsCompletionHandler() {
+		// Arrange
+		var completionHandlerHasBeenCalled = false
+		// Act
+		
+		target.fetchTodaysPicture() {
+			pictureData, error in
+			completionHandlerHasBeenCalled = true
+		}
+		
+		// Assert
+		XCTAssertTrue(completionHandlerHasBeenCalled)
+	}
+	
+	func testFetchTodaysPicture_WhenGotData_CallsCompletionHandlerWithApodData() {
+		// Arrange
+		var apodData: ApodData? = nil
+		// Act
+		
+		target.fetchTodaysPicture() {
+			pictureData, error in
+			apodData = pictureData
+		}
+		
+		// Assert
+		XCTAssertNotNil(apodData)
 	}
 }

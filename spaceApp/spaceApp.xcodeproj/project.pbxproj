@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F4387491D38D2EB00E21C3F /* DataToApodDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4387481D38D2EB00E21C3F /* DataToApodDataConverter.swift */; };
 		8F941DD81D363A9E00C56ACE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941DD71D363A9E00C56ACE /* AppDelegate.swift */; };
 		8F941DDA1D363A9E00C56ACE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941DD91D363A9E00C56ACE /* ViewController.swift */; };
 		8F941DDD1D363A9E00C56ACE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F941DDB1D363A9E00C56ACE /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8F4387481D38D2EB00E21C3F /* DataToApodDataConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataToApodDataConverter.swift; sourceTree = "<group>"; };
 		8F941DD41D363A9E00C56ACE /* spaceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spaceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F941DD71D363A9E00C56ACE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F941DD91D363A9E00C56ACE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				8F941E161D3743F300C56ACE /* NetworkApodStore.swift */,
 				8F941E101D373DBD00C56ACE /* NetworkTool.swift */,
+				8F4387481D38D2EB00E21C3F /* DataToApodDataConverter.swift */,
 				8F941E121D373E4100C56ACE /* AlamofireTool.swift */,
 				8F941E0C1D3739F800C56ACE /* ApodStore.swift */,
 				8F941E141D3742C400C56ACE /* ApodData.swift */,
@@ -311,6 +314,7 @@
 				8F941E0D1D3739F800C56ACE /* ApodStore.swift in Sources */,
 				8F941E131D373E4100C56ACE /* AlamofireTool.swift in Sources */,
 				8F941E151D3742C400C56ACE /* ApodData.swift in Sources */,
+				8F4387491D38D2EB00E21C3F /* DataToApodDataConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +551,7 @@
 				8F941E011D363A9E00C56ACE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8F941E021D363A9E00C56ACE /* Build configuration list for PBXNativeTarget "spaceAppTests" */ = {
 			isa = XCConfigurationList;
@@ -555,6 +560,7 @@
 				8F941E041D363A9E00C56ACE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8F941E051D363A9E00C56ACE /* Build configuration list for PBXNativeTarget "spaceAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -563,6 +569,7 @@
 				8F941E071D363A9E00C56ACE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

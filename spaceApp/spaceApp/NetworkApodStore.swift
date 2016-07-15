@@ -10,17 +10,25 @@ import Foundation
 
 struct NetworkApodStore {
 	private let _requestURL = "https://api.nasa.gov/planetary/apod"
+	private let _apiKey = "ooZOv9QcCFLU8kOE9rKJlEx9TtdOhaT4oo9smEx3"
 	private let _networkTool: NetworkTool
+	private let _dataConvertor: DataToApodDataConverter
 	
-	init(networkTool: NetworkTool) {
+	init(networkTool: NetworkTool, dataConvertor: DataToApodDataConverter) {
 		_networkTool = networkTool
+		_dataConvertor = dataConvertor
 	}
 }
 
 extension NetworkApodStore: ApodStore {
 	func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
 		_networkTool.makeGetRequest(url: _requestURL, parameters: [String: String]()) {
-			_,_ in
+			data, error in
+			
+			if let data = data {
+				let apodData = try? self._dataConvertor.convertDataToApodData(data: data)
+				completionHandler(pictureData: apodData, error: nil)
+			}
 		}
 	}
 	
