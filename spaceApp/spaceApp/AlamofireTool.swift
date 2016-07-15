@@ -9,13 +9,9 @@
 import Foundation
 import Alamofire
 
-struct AlamofireTool {
-	
-}
-
-extension AlamofireTool: NetworkTool {
-	func makeGetRequest(url: String, parameters: [String: String], completionHandler: RequestCompletionHandler) {
-		let request = Alamofire.request(.GET, url, parameters: parameters)
+struct AlamofireTool: NetworkTool {
+	func makeGetRequest(url: URL, apiKey: String, parameters: [String: String], completionHandler: RequestCompletionHandler) {
+		let request = Alamofire.request(.GET, url.urlString, parameters: parameters)
 		let validatedRequest = request.validate()
 		validatedRequest.responseJSON {
 			response in

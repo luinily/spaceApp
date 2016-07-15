@@ -14,6 +14,9 @@ class NetworkApodStoreTests: XCTestCase {
 	private var target: NetworkApodStore!
 	private var mockNetworkTool: MockNetworkTool!
 	private var dataConvertor: MockDataConvertor!
+	
+	private var requestURL = "requestURL"
+	private var apiKey = "apiKey"
 }
 
 // MARK: Test lifecycle
@@ -21,7 +24,7 @@ extension NetworkApodStoreTests {
 	override func setUp() {
 		mockNetworkTool = MockNetworkTool()
 		dataConvertor = MockDataConvertor()
-		target = NetworkApodStore(networkTool: mockNetworkTool, dataConvertor: dataConvertor)
+		target = NetworkApodStore(requestURL: requestURL, apiKey: apiKey, networkTool: mockNetworkTool, dataConvertor: dataConvertor)
 	}
 	
 	override func tearDown() {
@@ -39,11 +42,13 @@ extension NetworkApodStoreTests {
 	class MockNetworkTool: NetworkTool {
 		var makeGetRequestCalled = false
 		var requestURL: String?
+		var key: String?
 		var requestParameters: [String: String]?
 		
-		func makeGetRequest(url: String, parameters: [String: String], completionHandler: RequestCompletionHandler) {
+		func makeGetRequest(url: URL, apiKey: String, parameters: [String: String], completionHandler: RequestCompletionHandler) {
 			makeGetRequestCalled = true
-			requestURL = url
+			requestURL = url.absoluteString
+			key = apiKey
 			requestParameters = parameters
 			completionHandler(data: Data(), error: nil)
 		}
@@ -84,7 +89,19 @@ extension NetworkApodStoreTests {
 		}
 		
 		// Assert
-		XCTAssertEqual(mockNetworkTool.requestURL, "https://api.nasa.gov/planetary/apod")
+		XCTAssertEqual(mockNetworkTool.requestURL, requestURL)
+	}
+	
+	func testFetchTodaysPicture_keyIsCorrect() {
+		// Arrange
+		
+		// Act
+		target.fetchTodaysPicture() {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		XCTAssertEqual(mockNetworkTool.key, apiKey)
 	}
 	
 	func testFetchTodaysPicture_hasNoParameters() {
