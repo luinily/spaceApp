@@ -31,10 +31,17 @@ extension NetworkApodStore: ApodStore {
 		_networkTool.makeGetRequest(url: _requestURL, apiKey: _apiKey, parameters: [String: String]()) {
 			data, error in
 			
-			if let data = data {
-				let apodData = try? self._dataConvertor.convertDataToApodData(data: data)
-				completionHandler(pictureData: apodData, error: nil)
+			guard error == nil else {
+				completionHandler(pictureData: nil, error: error)
+				return
 			}
+			
+			guard let data = data else {
+				return
+			}
+			
+			let apodData = try? self._dataConvertor.convertDataToApodData(data: data)
+			completionHandler(pictureData: apodData, error: nil)
 		}
 	}
 	

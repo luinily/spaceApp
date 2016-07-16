@@ -45,17 +45,25 @@ extension NetworkApodStoreTests {
 		var key: String?
 		var requestParameters: [String: String]?
 		
+		var shouldReturnError = false
+		
 		func makeGetRequest(url: URL, apiKey: String, parameters: [String: String], completionHandler: RequestCompletionHandler) {
 			makeGetRequestCalled = true
 			requestURL = url.absoluteString
 			key = apiKey
 			requestParameters = parameters
-			completionHandler(data: Data(), error: nil)
+			
+			if shouldReturnError {
+				completionHandler(data: nil, error: NSError(domain: "", code: 0, userInfo: nil))
+			} else {
+				completionHandler(data: Data(), error: nil)
+			}
 		}
 	}
 	
 	class MockDataConvertor: DataToApodDataConverter {
 		var convertDataToApodDataHasBeenCalled = false
+		
 		
 		func convertDataToApodData(data: Data) throws -> ApodData {
 			convertDataToApodDataHasBeenCalled = true
@@ -158,4 +166,21 @@ extension NetworkApodStoreTests {
 		// Assert
 		XCTAssertNotNil(apodData)
 	}
+	
+	func testFetchTodaysPicture_WhenHasError_CallsCompletionHandlerWithError() {
+		// Arrange
+		var error: NSError? = nil
+		mockNetworkTool.shouldReturnError = true
+		
+		// Act
+		target.fetchTodaysPicture() {
+			pictureData, fetchError in
+			error = fetchError
+		}
+		
+		// Assert
+		XCTAssertNotNil(error)
+		
+	}
+	
 }
