@@ -15,6 +15,11 @@ struct TodayApodRequest {
 }
 
 struct ApodResponse {
+	var apodData: ApodData
+}
+
+struct ApodErrorResponse {
+	var error: NSError
 }
 
 struct ApodViewModel {

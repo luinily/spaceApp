@@ -16,7 +16,8 @@ protocol ApodInteractorInput {
 }
 
 protocol ApodInteractorOutput {
-	func presentSomething(response: ApodResponse)
+	func presentApod(response: ApodResponse)
+	func presentError(response: ApodErrorResponse)
 }
 
 class ApodInteractor: ApodInteractorInput {
@@ -30,8 +31,16 @@ class ApodInteractor: ApodInteractorInput {
 	// MARK: Business logic
 	func fetchTodayApod(request: TodayApodRequest) {
 		_apodWorker.fetchTodayAPOD() {
-			_,_ in
+			data, error in
+			if let data = data {
+				let response = ApodResponse(apodData: data)
+				self.output.presentApod(response: response)
+			}
 			
+			if let error = error {
+				let response = ApodErrorResponse(error: error)
+				self.output.presentError(response: response)
+			}
 		}
 	}
 //	func doSomething(request: ApodRequest) {

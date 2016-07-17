@@ -12,11 +12,12 @@
 import UIKit
 
 protocol ApodPresenterInput {
-	func presentSomething(response: ApodResponse)
+	func presentApod(response: ApodResponse)
+	func presentError(response: ApodErrorResponse)
 }
 
 protocol ApodPresenterOutput: class {
-	func displayTodayApod(viewModel: ApodViewModel)
+	func displayApod(viewModel: ApodViewModel)
 }
 
 class ApodPresenter: ApodPresenterInput {
@@ -24,10 +25,14 @@ class ApodPresenter: ApodPresenterInput {
 	
 	// MARK: Presentation logic
 	
-	func presentSomething(response: ApodResponse) {
+	func presentApod(response: ApodResponse) {
 		// NOTE: Format the response from the Interactor and pass the result back to the View Controller
 		
 //		let viewModel = ApodViewModel()
 //		output.displaySomething(viewModel: viewModel)
+	}
+	
+	func presentError(response: ApodErrorResponse) {
+		
 	}
 }

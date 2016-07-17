@@ -16,6 +16,7 @@ class ApodInteractorTests: XCTestCase {
 	// MARK: Subject under test
 	var target: ApodInteractor!
 	var mochApodWorker: MockApodWorker!
+	var mochOutput: MockOutput!
 }
 
 // MARK: Test lifecycle
@@ -35,6 +36,9 @@ extension ApodInteractorTests {
 	func setupApodInteractor() {
 		mochApodWorker = MockApodWorker()
 		target = ApodInteractor(apodWorker: mochApodWorker)
+		
+		mochOutput = MockOutput()
+		target.output = mochOutput
 	}
 }
 
@@ -53,19 +57,40 @@ extension ApodInteractorTests {
 	class MockApodWorker: ApodWorker {
 		var fetchTodayApodCalled = false
 		
+		var shouldReturnData = true
 		init() {
 			super.init(apodStore: MockApodStore())
 		}
 		
 		override func fetchTodayAPOD(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
 			fetchTodayApodCalled = true
+			if shouldReturnData {
+				let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
+				completionHandler(apodData: apodData, error: nil)
+			} else {
+				let error = NSError(domain: "", code: 0, userInfo: nil)
+				completionHandler(apodData: nil, error: error)
+			}
+		}
+	}
+	
+	class MockOutput: ApodInteractorOutput {
+		var presentOutputCalled = false
+		var presentErrorCalled = false
+		
+		func presentApod(response: ApodResponse) {
+			presentOutputCalled = true
+		}
+		
+		func presentError(response: ApodErrorResponse) {
+			presentErrorCalled = true
 		}
 	}
 }
 
 // MARK: Tests
 extension ApodInteractorTests {
-	func test_fetchTodayApod_callsTheOutputShowDevice() {
+	func test_fetchTodayApod_callsWorkerFetchTodayApod() {
 		// Arrange
 		let request = TodayApodRequest()
 		
@@ -74,6 +99,28 @@ extension ApodInteractorTests {
 		
 		// Assert
 		XCTAssertTrue(mochApodWorker.fetchTodayApodCalled)
+	}
+	
+	func test_fetchTodayApod_WhatIsTested_callsOutputPresentApod() {
+		// Arrange
+		let request = TodayApodRequest()
 		
+		// Act
+		target.fetchTodayApod(request: request)
+		
+		// Assert
+		XCTAssertTrue(mochOutput.presentOutputCalled)
+	}
+	
+	func test_fetchTodayApod_WhatIsTested_callsOutputPresentError() {
+		// Arrange
+		let request = TodayApodRequest()
+		mochApodWorker.shouldReturnData = false
+		
+		// Act
+		target.fetchTodayApod(request: request)
+		
+		// Assert
+		XCTAssertTrue(mochOutput.presentErrorCalled)
 	}
 }

@@ -14,11 +14,11 @@ import XCTest
 
 class ApodPresenterTests: XCTestCase {
 	// MARK: Subject under test
-	
-	var sut: ApodPresenter!
-	
-	// MARK: Test lifecycle
-	
+	var target: ApodPresenter!
+}
+
+// MARK: Test lifecycle
+extension ApodPresenterTests {
 	override func setUp() {
 		super.setUp()
 		setupApodPresenter()
@@ -27,22 +27,34 @@ class ApodPresenterTests: XCTestCase {
 	override func tearDown() {
 		super.tearDown()
 	}
-	
-	// MARK: Test setup
-	
+}
+
+// MARK: Test setup
+extension ApodPresenterTests {
 	func setupApodPresenter() {
-		sut = ApodPresenter()
-	}
-	
-	// MARK: Test doubles
-	
-	// MARK: Tests
-	
-	func testSomething() {
-		// Given
-		
-		// When
-		
-		// Then
+		target = ApodPresenter()
 	}
 }
+
+// MARK: Test doubles
+extension ApodPresenterTests {
+	class MockOutput: ApodPresenterOutput {
+		var displayApodCalled = false
+		
+		func displayApod(viewModel: ApodViewModel) {
+			displayApodCalled = true
+		}
+	}
+}
+
+// MARK: Tests
+extension ApodPresenterTests {
+	func test_presentApod_callsDisplayAPOD() {
+		// Arrange
+		
+		// Act
+//		target.presentApod(response: <#T##ApodResponse#>)
+		// Assert
+	}
+}
+

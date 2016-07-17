@@ -12,7 +12,7 @@
 import UIKit
 
 protocol ApodViewControllerInput {
-	func displayTodayApod(viewModel: ApodViewModel)
+	func displayApod(viewModel: ApodViewModel)
 }
 
 protocol ApodViewControllerOutput {
@@ -48,7 +48,7 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 	
 	// MARK: Display logic
 	
-	func displayTodayApod(viewModel: ApodViewModel) {
+	func displayApod(viewModel: ApodViewModel) {
 		// NOTE: Display the result from the Presenter
 		
 		// nameTextField.text = viewModel.name
