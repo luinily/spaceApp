@@ -21,6 +21,7 @@ enum JSonToApodConvertorError: ErrorProtocol {
 	case canNotMakeURLFromUrl
 	case titleNotInJson
 }
+
 struct JsonToApodConvertor: DataToApodDataConverter {
 	
 	func convertDataToApodData(data: Data) throws -> ApodData {

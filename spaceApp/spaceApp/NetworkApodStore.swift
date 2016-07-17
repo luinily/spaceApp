@@ -9,8 +9,8 @@
 import Foundation
 
 struct NetworkApodStore {
-	private let _requestURL: URL //"https://api.nasa.gov/planetary/apod"
-	private let _apiKey: String //"ooZOv9QcCFLU8kOE9rKJlEx9TtdOhaT4oo9smEx3"
+	private let _requestURL: URL 
+	private let _apiKey: String 
 	private let _networkTool: NetworkTool
 	private let _dataConvertor: DataToApodDataConverter
 	

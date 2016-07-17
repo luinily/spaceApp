@@ -27,6 +27,19 @@
 		8F941E151D3742C400C56ACE /* ApodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E141D3742C400C56ACE /* ApodData.swift */; };
 		8F941E171D3743F300C56ACE /* NetworkApodStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E161D3743F300C56ACE /* NetworkApodStore.swift */; };
 		8F941E191D37486300C56ACE /* NetworkApodStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E181D37486300C56ACE /* NetworkApodStoreTests.swift */; };
+		8FB2948E1D3B29B400E6C7A3 /* ApodConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294871D3B29B400E6C7A3 /* ApodConfigurator.swift */; };
+		8FB2948F1D3B29B400E6C7A3 /* ApodInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294881D3B29B400E6C7A3 /* ApodInteractor.swift */; };
+		8FB294901D3B29B400E6C7A3 /* ApodModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294891D3B29B400E6C7A3 /* ApodModels.swift */; };
+		8FB294911D3B29B400E6C7A3 /* ApodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB2948A1D3B29B400E6C7A3 /* ApodPresenter.swift */; };
+		8FB294921D3B29B400E6C7A3 /* ApodRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB2948B1D3B29B400E6C7A3 /* ApodRouter.swift */; };
+		8FB294931D3B29B400E6C7A3 /* ApodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB2948C1D3B29B400E6C7A3 /* ApodViewController.swift */; };
+		8FB294941D3B29B400E6C7A3 /* ApodWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB2948D1D3B29B400E6C7A3 /* ApodWorker.swift */; };
+		8FB2949A1D3B29EE00E6C7A3 /* ApodInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294961D3B29EE00E6C7A3 /* ApodInteractorTests.swift */; };
+		8FB2949B1D3B29EE00E6C7A3 /* ApodPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294971D3B29EE00E6C7A3 /* ApodPresenterTests.swift */; };
+		8FB2949C1D3B29EE00E6C7A3 /* ApodViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294981D3B29EE00E6C7A3 /* ApodViewControllerTests.swift */; };
+		8FB2949D1D3B29EE00E6C7A3 /* ApodWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294991D3B29EE00E6C7A3 /* ApodWorkerTests.swift */; };
+		8FD5D2B11D3B755B007A5F3D /* ApodInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD5D2B01D3B755B007A5F3D /* ApodInitializer.swift */; };
+		8FD5D2B51D3B7701007A5F3D /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD5D2B41D3B7701007A5F3D /* Initializer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +99,19 @@
 		8F941E141D3742C400C56ACE /* ApodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApodData.swift; sourceTree = "<group>"; };
 		8F941E161D3743F300C56ACE /* NetworkApodStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkApodStore.swift; sourceTree = "<group>"; };
 		8F941E181D37486300C56ACE /* NetworkApodStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkApodStoreTests.swift; path = spaceAppTests/NetworkApodStoreTests.swift; sourceTree = SOURCE_ROOT; };
+		8FB294871D3B29B400E6C7A3 /* ApodConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodConfigurator.swift; path = ApodScene/ApodConfigurator.swift; sourceTree = "<group>"; };
+		8FB294881D3B29B400E6C7A3 /* ApodInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodInteractor.swift; path = ApodScene/ApodInteractor.swift; sourceTree = "<group>"; };
+		8FB294891D3B29B400E6C7A3 /* ApodModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodModels.swift; path = ApodScene/ApodModels.swift; sourceTree = "<group>"; };
+		8FB2948A1D3B29B400E6C7A3 /* ApodPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodPresenter.swift; path = ApodScene/ApodPresenter.swift; sourceTree = "<group>"; };
+		8FB2948B1D3B29B400E6C7A3 /* ApodRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodRouter.swift; path = ApodScene/ApodRouter.swift; sourceTree = "<group>"; };
+		8FB2948C1D3B29B400E6C7A3 /* ApodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodViewController.swift; path = ApodScene/ApodViewController.swift; sourceTree = "<group>"; };
+		8FB2948D1D3B29B400E6C7A3 /* ApodWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodWorker.swift; path = ApodScene/ApodWorker.swift; sourceTree = "<group>"; };
+		8FB294961D3B29EE00E6C7A3 /* ApodInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodInteractorTests.swift; path = Apod/ApodInteractorTests.swift; sourceTree = "<group>"; };
+		8FB294971D3B29EE00E6C7A3 /* ApodPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodPresenterTests.swift; path = Apod/ApodPresenterTests.swift; sourceTree = "<group>"; };
+		8FB294981D3B29EE00E6C7A3 /* ApodViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodViewControllerTests.swift; path = Apod/ApodViewControllerTests.swift; sourceTree = "<group>"; };
+		8FB294991D3B29EE00E6C7A3 /* ApodWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodWorkerTests.swift; path = Apod/ApodWorkerTests.swift; sourceTree = "<group>"; };
+		8FD5D2B01D3B755B007A5F3D /* ApodInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApodInitializer.swift; sourceTree = "<group>"; };
+		8FD5D2B41D3B7701007A5F3D /* Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,12 +168,15 @@
 				8F43874E1D39E69800E21C3F /* JSonToApodConvertor.swift */,
 				8F766AAB1D39FE020024442F /* ApodDateConvertor.swift */,
 				8F941E101D373DBD00C56ACE /* NetworkTool.swift */,
+				8FD5D2B41D3B7701007A5F3D /* Initializer.swift */,
+				8FD5D2B01D3B755B007A5F3D /* ApodInitializer.swift */,
 				8F4387481D38D2EB00E21C3F /* DataToApodDataConverter.swift */,
 				8F941E121D373E4100C56ACE /* AlamofireTool.swift */,
 				8F941E0C1D3739F800C56ACE /* ApodStore.swift */,
 				8F941E141D3742C400C56ACE /* ApodData.swift */,
 				8F941DD71D363A9E00C56ACE /* AppDelegate.swift */,
 				8F941DD91D363A9E00C56ACE /* ViewController.swift */,
+				8FB294951D3B29BE00E6C7A3 /* ApodScene */,
 				8F941DDB1D363A9E00C56ACE /* Main.storyboard */,
 				8F941DE11D363A9E00C56ACE /* Assets.xcassets */,
 				8F941DE31D363A9E00C56ACE /* LaunchScreen.storyboard */,
@@ -162,6 +191,7 @@
 			children = (
 				8F43874C1D39E24100E21C3F /* JsonToApodConvertorTests.swift */,
 				8F941E181D37486300C56ACE /* NetworkApodStoreTests.swift */,
+				8FB2949E1D3B29F200E6C7A3 /* ApodScene */,
 				8F766AAD1D39FE1B0024442F /* ApodDateConvertorTests.swift */,
 				8F941DF11D363A9E00C56ACE /* Info.plist */,
 			);
@@ -175,6 +205,31 @@
 				8F941DFC1D363A9E00C56ACE /* Info.plist */,
 			);
 			path = spaceAppUITests;
+			sourceTree = "<group>";
+		};
+		8FB294951D3B29BE00E6C7A3 /* ApodScene */ = {
+			isa = PBXGroup;
+			children = (
+				8FB294871D3B29B400E6C7A3 /* ApodConfigurator.swift */,
+				8FB294881D3B29B400E6C7A3 /* ApodInteractor.swift */,
+				8FB294891D3B29B400E6C7A3 /* ApodModels.swift */,
+				8FB2948A1D3B29B400E6C7A3 /* ApodPresenter.swift */,
+				8FB2948B1D3B29B400E6C7A3 /* ApodRouter.swift */,
+				8FB2948C1D3B29B400E6C7A3 /* ApodViewController.swift */,
+				8FB2948D1D3B29B400E6C7A3 /* ApodWorker.swift */,
+			);
+			name = ApodScene;
+			sourceTree = "<group>";
+		};
+		8FB2949E1D3B29F200E6C7A3 /* ApodScene */ = {
+			isa = PBXGroup;
+			children = (
+				8FB294961D3B29EE00E6C7A3 /* ApodInteractorTests.swift */,
+				8FB294971D3B29EE00E6C7A3 /* ApodPresenterTests.swift */,
+				8FB294981D3B29EE00E6C7A3 /* ApodViewControllerTests.swift */,
+				8FB294991D3B29EE00E6C7A3 /* ApodWorkerTests.swift */,
+			);
+			name = ApodScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,15 +373,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB294921D3B29B400E6C7A3 /* ApodRouter.swift in Sources */,
 				8F941DDA1D363A9E00C56ACE /* ViewController.swift in Sources */,
+				8FB294901D3B29B400E6C7A3 /* ApodModels.swift in Sources */,
 				8F941E111D373DBD00C56ACE /* NetworkTool.swift in Sources */,
+				8FD5D2B51D3B7701007A5F3D /* Initializer.swift in Sources */,
 				8F941DE01D363A9E00C56ACE /* spaceApp.xcdatamodeld in Sources */,
+				8FB294941D3B29B400E6C7A3 /* ApodWorker.swift in Sources */,
 				8F941E171D3743F300C56ACE /* NetworkApodStore.swift in Sources */,
+				8FD5D2B11D3B755B007A5F3D /* ApodInitializer.swift in Sources */,
 				8F766AAC1D39FE020024442F /* ApodDateConvertor.swift in Sources */,
+				8FB294931D3B29B400E6C7A3 /* ApodViewController.swift in Sources */,
+				8FB2948F1D3B29B400E6C7A3 /* ApodInteractor.swift in Sources */,
 				8F941DD81D363A9E00C56ACE /* AppDelegate.swift in Sources */,
 				8F941E0D1D3739F800C56ACE /* ApodStore.swift in Sources */,
 				8F941E131D373E4100C56ACE /* AlamofireTool.swift in Sources */,
+				8FB2948E1D3B29B400E6C7A3 /* ApodConfigurator.swift in Sources */,
 				8F43874F1D39E69800E21C3F /* JSonToApodConvertor.swift in Sources */,
+				8FB294911D3B29B400E6C7A3 /* ApodPresenter.swift in Sources */,
 				8F941E151D3742C400C56ACE /* ApodData.swift in Sources */,
 				8F4387491D38D2EB00E21C3F /* DataToApodDataConverter.swift in Sources */,
 			);
@@ -336,8 +400,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB2949D1D3B29EE00E6C7A3 /* ApodWorkerTests.swift in Sources */,
 				8F766AAE1D39FE1B0024442F /* ApodDateConvertorTests.swift in Sources */,
 				8F941E191D37486300C56ACE /* NetworkApodStoreTests.swift in Sources */,
+				8FB2949B1D3B29EE00E6C7A3 /* ApodPresenterTests.swift in Sources */,
+				8FB2949A1D3B29EE00E6C7A3 /* ApodInteractorTests.swift in Sources */,
+				8FB2949C1D3B29EE00E6C7A3 /* ApodViewControllerTests.swift in Sources */,
 				8F43874D1D39E24100E21C3F /* JsonToApodConvertorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
