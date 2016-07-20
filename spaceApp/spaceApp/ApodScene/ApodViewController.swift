@@ -38,6 +38,11 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		fetchTodaysApod()
+		imageScrollView.delegate = self
+	}
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return .lightContent
 	}
 	
 	// MARK: Event handling
@@ -62,6 +67,20 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 	private func setPicture(picture: UIImage) {
 		setImageView(picture: picture)
 		imageScrollView.contentSize = picture.size
+		setZoomScales(picture: picture)
+	}
+	
+	private func setZoomScales(picture: UIImage) {
+		imageScrollView.minimumZoomScale = calculateMinimumZoomScale(picture: picture)
+		imageScrollView.zoomScale = imageScrollView.minimumZoomScale
+		updateImageViewFrame(scrollView: imageScrollView)
+	}
+	
+	private func calculateMinimumZoomScale(picture: UIImage) -> CGFloat {
+		let minWidthScale = imageScrollView.frame.width / picture.size.width
+		let minHeightScale = imageScrollView.frame.height / picture.size.height
+		
+		return min(minWidthScale, minHeightScale)
 	}
 	
 	private func setImageView(picture: UIImage) {
@@ -84,6 +103,24 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 			return views.first as? UIImageView
 		}
 		return nil
+	}
+}
+
+extension ApodViewController: UIScrollViewDelegate {
+	func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+		return getImageViewFromScrollView()
+	}
+	
+	func scrollViewDidZoom(_ scrollView: UIScrollView) {
+		updateImageViewFrame(scrollView: scrollView)
+	}
+	
+	private func updateImageViewFrame(scrollView: UIScrollView) {
+		if let imageView = getImageViewFromScrollView() {
+			let yOffset = max(0, (scrollView.frame.height - imageView.frame.height) / 2)
+			let xOffset = max(0, (scrollView.frame.width - imageView.frame.width) / 2)
+			imageView.frame = CGRect(x: xOffset, y: yOffset, width: imageView.frame.width, height: imageView.frame.height)
+		}
 	}
 }
 

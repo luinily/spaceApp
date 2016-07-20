@@ -79,6 +79,21 @@ extension ApodViewControllerTests {
 		XCTAssertTrue(outputSpy.fetchTodayApodCalled)
 	}
 	
+	func test_viewDidLoad_ViewControllerIsScrollViewDelegate() {
+		// Arrange
+		
+		// Act
+		loadView()
+		
+		// Assert
+		guard let delegate = target.imageScrollView.delegate else {
+			XCTAssert(false)
+			return
+		}
+		
+		XCTAssertTrue(delegate === target)
+	}
+	
 	func test_displayApod_TitleIsDisplayed() {
 		// Arrange
 		loadView()
@@ -154,6 +169,38 @@ extension ApodViewControllerTests {
 		// Assert
 		XCTAssertEqual(imageView?.frame, frame)
 		
+	}
+	
+	func test_displayApod_SetsScrollViewMinimumZoomScale() {
+		// Arrange
+		loadView()
+		let viewModel = prepareViewModel()
+		let scale = calculateMinimumZoomScale(imageScrollView: target.imageScrollView, picture: viewModel.picture!)
+		
+		// Act
+		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertEqual(target.imageScrollView.minimumZoomScale, scale)
+	}
+	
+	private func calculateMinimumZoomScale(imageScrollView: UIScrollView, picture: UIImage) -> CGFloat {
+		let minWidthScale = imageScrollView.frame.width / picture.size.width
+		let minHeightScale = imageScrollView.frame.height / picture.size.height
+		
+		return min(minWidthScale, minHeightScale)
+	}
+	
+	func test_displayApod_SetsScrollViewScaleToMinimumZoomScale() {
+		// Arrange
+		loadView()
+		let viewModel = prepareViewModel()
+		
+		// Act
+		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertEqual(target.imageScrollView.zoomScale, target.imageScrollView.minimumZoomScale)
 	}
 	
 }
