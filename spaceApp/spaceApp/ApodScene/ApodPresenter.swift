@@ -26,13 +26,37 @@ class ApodPresenter: ApodPresenterInput {
 	// MARK: Presentation logic
 	
 	func presentApod(response: ApodResponse) {
-		// NOTE: Format the response from the Interactor and pass the result back to the View Controller
+		let viewModel = makeApodViewModel(apodData: response.apodData) 
 		
-//		let viewModel = ApodViewModel()
-//		output.displaySomething(viewModel: viewModel)
+		output.displayApod(viewModel: viewModel)
+	}
+	
+	private func makeApodViewModel(apodData: ApodData) -> ApodViewModel {
+		let title = apodData.title
+		let date = dateToString(date: apodData.date)
+		let explanation = apodData.explanation
+		let copyright = apodData.copyright
+		let picture = loadImage(url: apodData.hdUrl)
+		
+		return ApodViewModel(title: title, picture: picture, date: date, explanation: explanation, copyright: copyright)
+	}
+	
+	private func dateToString(date: Date) -> String {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "yyyy年MM月dd日"
+		return formatter.string(from: date)
+	}
+	
+	private func loadImage(url: URL) -> UIImage? {
+		guard let data = try? Data(contentsOf: url) else {
+			return nil
+		}
+		
+		return UIImage(data: data)
 	}
 	
 	func presentError(response: ApodErrorResponse) {
 		
 	}
+	
 }

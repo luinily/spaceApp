@@ -101,7 +101,7 @@ extension ApodInteractorTests {
 		XCTAssertTrue(mochApodWorker.fetchTodayApodCalled)
 	}
 	
-	func test_fetchTodayApod_WhatIsTested_callsOutputPresentApod() {
+	func test_fetchTodayApod_callsOutputPresentApod() {
 		// Arrange
 		let request = TodayApodRequest()
 		
@@ -112,7 +112,7 @@ extension ApodInteractorTests {
 		XCTAssertTrue(mochOutput.presentOutputCalled)
 	}
 	
-	func test_fetchTodayApod_WhatIsTested_callsOutputPresentError() {
+	func test_fetchTodayApod_callsOutputPresentError() {
 		// Arrange
 		let request = TodayApodRequest()
 		mochApodWorker.shouldReturnData = false

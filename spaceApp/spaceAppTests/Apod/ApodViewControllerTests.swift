@@ -44,6 +44,15 @@ extension ApodViewControllerTests {
 		window.addSubview(target.view)
 		RunLoop.current.run(until: Date())
 	}
+	
+	func prepareViewModel() -> ApodViewModel {
+		let title = "Title"
+		let picture = UIImage()
+		let date = "2016年07月19日"
+		let explanation = "explanation"
+		let copyright = "copyright"
+		return ApodViewModel(title: title, picture: picture, date: date, explanation: explanation, copyright: copyright)
+	}
 }
 
 // MARK: Test doubles
@@ -69,5 +78,42 @@ extension ApodViewControllerTests {
 		// Assert
 		XCTAssertTrue(outputSpy.fetchTodayApodCalled)
 	}
+	
+	func test_displayApod_TitleIsDisplayed() {
+		// Arrange
+		loadView()
+		let viewModel = prepareViewModel()
+		
+		// Act
+		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertEqual(target.titleLabel.text, viewModel.title)
+	}
+	
+	func test_displayApod_ExplanationIsDisplayed() {
+		// Arrange
+		loadView()
+		let viewModel = prepareViewModel()
+		
+		// Act
+		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertEqual(target.explanationTextView.text, viewModel.explanation)
+	}
+	
+	func test_displayApod_PictureIsDisplayed() {
+		// Arrange
+		loadView()
+		let viewModel = prepareViewModel()
+		
+		// Act
+		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertEqual(target.image.image, viewModel.picture)
+	}
+	
 }
 

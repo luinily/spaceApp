@@ -9,7 +9,12 @@
 import Foundation
 
 struct NetworkApodStore {
-	private let _requestURL: URL 
+	private let _requestURL: URL
+	private let _apiKeyParameterName = "api_key"
+	private let _hdParameterName = "hd"
+	private let _hdParameterValue = "true"
+	private let _dateParameterName = "date"
+	private let _dateParameterFormat = "yyyy-MM-dd"
 	private let _apiKey: String 
 	private let _networkTool: NetworkTool
 	private let _dataConvertor: DataToApodDataConverter
@@ -28,7 +33,9 @@ struct NetworkApodStore {
 
 extension NetworkApodStore: ApodStore {
 	func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
-		_networkTool.makeGetRequest(url: _requestURL, apiKey: _apiKey, parameters: [String: String]()) {
+		let parameters = makeParameters()
+		
+		_networkTool.makeGetRequest(url: _requestURL, parameters: parameters)  {
 			data, error in
 			
 			guard error == nil else {
@@ -43,6 +50,23 @@ extension NetworkApodStore: ApodStore {
 			let apodData = try? self._dataConvertor.convertDataToApodData(data: data)
 			completionHandler(pictureData: apodData, error: nil)
 		}
+	}
+	
+	private func makeParameters(date: Date? = nil) -> [String: String] {
+		var parameters = [String: String]()
+		parameters[_apiKeyParameterName] = _apiKey
+		parameters[_hdParameterName] = _hdParameterValue
+//		if let date = date {
+//			parameters[_dateParameterName] = makeDateParameter(date: date)
+//		}
+		
+		return parameters
+	}
+	
+	private func makeDateParameter(date: Date) -> String {
+		let formatter = DateFormatter()
+		formatter.dateFormat = _dateParameterFormat
+		return formatter.string(from: date)
 	}
 	
 	func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {

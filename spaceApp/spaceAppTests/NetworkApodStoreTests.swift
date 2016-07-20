@@ -47,10 +47,10 @@ extension NetworkApodStoreTests {
 		
 		var shouldReturnError = false
 		
-		func makeGetRequest(url: URL, apiKey: String, parameters: [String: String], completionHandler: RequestCompletionHandler) {
+		func makeGetRequest(url: URL, parameters: [String: String], completionHandler: RequestCompletionHandler) {
 			makeGetRequestCalled = true
 			requestURL = url.absoluteString
-			key = apiKey
+			key = parameters["api_key"]
 			requestParameters = parameters
 			
 			if shouldReturnError {
@@ -112,7 +112,7 @@ extension NetworkApodStoreTests {
 		XCTAssertEqual(mockNetworkTool.key, apiKey)
 	}
 	
-	func testFetchTodaysPicture_hasNoParameters() {
+	func testFetchTodaysPicture_hasKeyParameter() {
 		// Arrange
 		
 		// Act
@@ -122,7 +122,23 @@ extension NetworkApodStoreTests {
 		
 		// Assert
 		if let parameters = mockNetworkTool.requestParameters {
-			XCTAssertTrue(parameters.isEmpty)
+			XCTAssertEqual(parameters["api_key"], apiKey)
+		} else {
+			XCTAssert(false) //should never be called
+		}
+	}
+	
+	func testFetchTodaysPicture_hasHDParameterAtTrue() {
+		// Arrange
+		
+		// Act
+		target.fetchTodaysPicture() {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		if let parameters = mockNetworkTool.requestParameters {
+			XCTAssertEqual(parameters["hd"], "true")
 		} else {
 			XCTAssert(false) //should never be called
 		}

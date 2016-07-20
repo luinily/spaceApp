@@ -11,7 +11,6 @@ import Foundation
 enum JSonToApodConvertorError: ErrorProtocol {
 	case couldNotConvertDataToJson
 	case dataWasNotJsonDictionaryData
-	case copyrightNotInJson
 	case dateNotInJson
 	case couldNotConvertDateStringToDate
 	case explanationNotInJson
@@ -40,8 +39,9 @@ struct JsonToApodConvertor: DataToApodDataConverter {
 	}
 	
 	private func convertJsonToApod(json: [String: AnyObject]) throws -> ApodData {
-		guard let copyright = json["copyright"] as? String else {
-			throw JSonToApodConvertorError.copyrightNotInJson
+		var copyright = ""
+		if let copyrightString = json["copyright"] as? String {
+			copyright = copyrightString
 		}
 		
 		guard let dateString = json["date"] as? String else {

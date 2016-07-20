@@ -23,6 +23,9 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 	var output: ApodViewControllerOutput!
 	var router: ApodRouter!
 	
+	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var image: UIImageView!
+	@IBOutlet weak var explanationTextView: UITextView!
 	// MARK: Object lifecycle
 	
 	override func awakeFromNib() {
@@ -49,8 +52,9 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 	// MARK: Display logic
 	
 	func displayApod(viewModel: ApodViewModel) {
-		// NOTE: Display the result from the Presenter
-		
-		// nameTextField.text = viewModel.name
+		titleLabel.text = viewModel.title
+		explanationTextView.text = viewModel.explanation
+		image.image = viewModel.picture
+		image.reloadInputViews()
 	}
 }

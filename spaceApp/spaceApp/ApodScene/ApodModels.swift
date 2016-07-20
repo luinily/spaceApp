@@ -23,4 +23,9 @@ struct ApodErrorResponse {
 }
 
 struct ApodViewModel {
+	var title: String
+	var picture: UIImage?
+	var date: String
+	var explanation: String
+	var copyright: String
 }

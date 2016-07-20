@@ -15,6 +15,7 @@ import XCTest
 class ApodPresenterTests: XCTestCase {
 	// MARK: Subject under test
 	var target: ApodPresenter!
+	var mockOutput: MockOutput!
 }
 
 // MARK: Test lifecycle
@@ -33,6 +34,19 @@ extension ApodPresenterTests {
 extension ApodPresenterTests {
 	func setupApodPresenter() {
 		target = ApodPresenter()
+		mockOutput = MockOutput()
+		target.output = mockOutput
+	}
+	
+	func makeDate(year: Int, month: Int, day: Int) -> Date {
+		var components = DateComponents()
+		components.year = year
+		components.month = month
+		components.day = day
+		components.hour = 0
+		components.minute = 0
+		
+		return Calendar.current.date(from: components)!
 	}
 }
 
@@ -40,9 +54,11 @@ extension ApodPresenterTests {
 extension ApodPresenterTests {
 	class MockOutput: ApodPresenterOutput {
 		var displayApodCalled = false
+		var viewModel: ApodViewModel!
 		
 		func displayApod(viewModel: ApodViewModel) {
 			displayApodCalled = true
+			self.viewModel = viewModel
 		}
 	}
 }
@@ -51,10 +67,74 @@ extension ApodPresenterTests {
 extension ApodPresenterTests {
 	func test_presentApod_callsDisplayAPOD() {
 		// Arrange
+		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
+		let response = ApodResponse(apodData: apodData)
 		
 		// Act
-//		target.presentApod(response: <#T##ApodResponse#>)
+		target.presentApod(response: response)
+		
 		// Assert
+		XCTAssertTrue(mockOutput.displayApodCalled)
+	}
+	
+	func test_presentApod_viewModelContainsTitle() {
+		let title = "title"
+		let apodData = ApodData(title: title, url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
+		let response = ApodResponse(apodData: apodData)
+		
+		// Act
+		target.presentApod(response: response)
+		
+		// Assert
+		XCTAssertEqual(mockOutput.viewModel.title, title)
+	}
+	
+	func test_presentApod_viewModelContainsFormatedDate() {
+		let date = makeDate(year: 2016, month: 07, day: 18)
+		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: date, explanation: "", copyright: "")
+		let response = ApodResponse(apodData: apodData)
+		
+		// Act
+		target.presentApod(response: response)
+		
+		// Assert
+		XCTAssertEqual(mockOutput.viewModel.date, "2016年07月18日")
+	}
+	
+	func test_presentApod_viewModelContainsExplaination() {
+		let explanation = "explanation"
+		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: explanation, copyright: "")
+		let response = ApodResponse(apodData: apodData)
+		
+		// Act
+		target.presentApod(response: response)
+		
+		// Assert
+		XCTAssertEqual(mockOutput.viewModel.explanation, explanation)
+	}
+	
+	func test_presentApod_viewModelContainsCopyright() {
+		let copyright = "copyright"
+		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: copyright)
+		let response = ApodResponse(apodData: apodData)
+		
+		// Act
+		target.presentApod(response: response)
+		
+		// Assert
+		XCTAssertEqual(mockOutput.viewModel.copyright, copyright)
+	}
+	
+	func test_presentApod_viewModelContainsUIImage() {
+		let url = URL(string: "http://apod.nasa.gov/apod/image/1607/NGC2736NBbicolor_1250_Jurasevich1024c.jpg")!
+		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: url, date: Date(), explanation: "", copyright: "")
+		let response = ApodResponse(apodData: apodData)
+		
+		// Act
+		target.presentApod(response: response)
+		
+		// Assert
+		XCTAssertNotEqual(mockOutput.viewModel.picture?.size, CGSize.zero)
 	}
 }
 
