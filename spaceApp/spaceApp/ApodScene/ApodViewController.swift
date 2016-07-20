@@ -24,10 +24,10 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 	var router: ApodRouter!
 	
 	@IBOutlet weak var titleLabel: UILabel!
-	@IBOutlet weak var image: UIImageView!
 	@IBOutlet weak var explanationTextView: UITextView!
-	// MARK: Object lifecycle
+	@IBOutlet weak var imageScrollView: UIScrollView!
 	
+	// MARK: Object lifecycle
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		ApodConfigurator.sharedInstance.configure(viewController: self)
@@ -54,7 +54,36 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 	func displayApod(viewModel: ApodViewModel) {
 		titleLabel.text = viewModel.title
 		explanationTextView.text = viewModel.explanation
-		image.image = viewModel.picture
-		image.reloadInputViews()
+		if let picture = viewModel.picture {
+			setPicture(picture: picture)
+		}
+	}
+	
+	private func setPicture(picture: UIImage) {
+		setImageView(picture: picture)
+		imageScrollView.contentSize = picture.size
+	}
+	
+	private func setImageView(picture: UIImage) {
+		if let imageView = getImageViewFromScrollView() {
+			imageView.image = picture
+		} else {
+			let imageView = UIImageView(image: picture)
+			imageView.restorationIdentifier = "imageView"
+			imageScrollView.addSubview(imageView)
+		}
+	}
+	
+	func getImageViewFromScrollView() -> UIImageView? {
+		//ScrollView contains 2 UIImageView for the scrolls, ours is the third one
+		if imageScrollView.subviews.count == 3 {
+			let views = imageScrollView.subviews.filter() {
+					view in
+					return view.restorationIdentifier == "imageView"
+				}
+			return views.first as? UIImageView
+		}
+		return nil
 	}
 }
+

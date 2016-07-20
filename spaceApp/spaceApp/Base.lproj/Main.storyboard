@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11163.2" systemVersion="16A254g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11173.2" systemVersion="16A254g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11133"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11143.2"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,41 +19,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dMR-Xx-xLt"/>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ar1-z4-cvO">
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Bh6-vX-8Z2"/>
                                 </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8cV-rt-aK8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8cV-rt-aK8">
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nNC-jT-ehx"/>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ar1-z4-cvO" firstAttribute="top" secondItem="8cV-rt-aK8" secondAttribute="bottom" constant="8" id="15Q-SH-jL2"/>
+                            <constraint firstItem="nNC-jT-ehx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1H6-LZ-87h"/>
                             <constraint firstItem="Ar1-z4-cvO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1ba-b5-0xd"/>
                             <constraint firstItem="8cV-rt-aK8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NPS-Wj-O6L"/>
+                            <constraint firstItem="8cV-rt-aK8" firstAttribute="top" secondItem="nNC-jT-ehx" secondAttribute="bottom" constant="8" id="T2j-CR-F19"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8cV-rt-aK8" secondAttribute="trailing" id="TL6-mU-eGD"/>
-                            <constraint firstItem="8cV-rt-aK8" firstAttribute="top" secondItem="dMR-Xx-xLt" secondAttribute="bottom" constant="8" id="VdM-fm-Qwx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ar1-z4-cvO" secondAttribute="trailing" id="XGb-Js-6gL"/>
-                            <constraint firstItem="dMR-Xx-xLt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Yk9-Vn-yil"/>
-                            <constraint firstAttribute="trailing" secondItem="dMR-Xx-xLt" secondAttribute="trailing" id="e7H-bs-wez"/>
+                            <constraint firstItem="nNC-jT-ehx" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="YWK-Yh-S9T"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ar1-z4-cvO" secondAttribute="bottom" id="llp-4V-VDn"/>
-                            <constraint firstItem="dMR-Xx-xLt" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="pBH-s9-49j"/>
+                            <constraint firstAttribute="trailing" secondItem="nNC-jT-ehx" secondAttribute="trailing" id="rZK-20-Fii"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="explanationTextView" destination="Ar1-z4-cvO" id="ye8-PU-jfM"/>
-                        <outlet property="image" destination="dMR-Xx-xLt" id="NeV-eo-4d2"/>
+                        <outlet property="imageScrollView" destination="nNC-jT-ehx" id="1uh-U4-Zrx"/>
                         <outlet property="titleLabel" destination="8cV-rt-aK8" id="w1J-2f-Jdy"/>
                     </connections>
                 </viewController>

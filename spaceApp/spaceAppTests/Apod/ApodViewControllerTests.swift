@@ -47,7 +47,7 @@ extension ApodViewControllerTests {
 	
 	func prepareViewModel() -> ApodViewModel {
 		let title = "Title"
-		let picture = UIImage()
+		let picture = UIImage(imageLiteralResourceName: "UnitTestImage")
 		let date = "2016年07月19日"
 		let explanation = "explanation"
 		let copyright = "copyright"
@@ -103,7 +103,7 @@ extension ApodViewControllerTests {
 		XCTAssertEqual(target.explanationTextView.text, viewModel.explanation)
 	}
 	
-	func test_displayApod_PictureIsDisplayed() {
+	func test_displayApod_ScrollViewHasSubview() {
 		// Arrange
 		loadView()
 		let viewModel = prepareViewModel()
@@ -112,7 +112,48 @@ extension ApodViewControllerTests {
 		target.displayApod(viewModel: viewModel)
 		
 		// Assert
-		XCTAssertEqual(target.image.image, viewModel.picture)
+		XCTAssertFalse(target.imageScrollView.subviews.isEmpty)
+	}
+	
+	func test_displayApod_ScrollViewSubviewsDoNotAddup() {
+		// Arrange
+		loadView()
+		let viewModel = prepareViewModel()
+		
+		// Act
+		target.displayApod(viewModel: viewModel)
+		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertEqual(target.imageScrollView.subviews.count, 3)
+		//the scroll views contains 2 views for the sliders and our view making it 3
+	}
+	
+	func test_displayApod_ScrollViewContentsSizeSetToImageSize() {
+		// Arrange
+		loadView()
+		let viewModel = prepareViewModel()
+		
+		// Act
+		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertEqual(target.imageScrollView.contentSize, viewModel.picture?.size)
+	}
+	
+	func test_displayApod_SetsImageViewFrame() {
+		// Arrange
+		loadView()
+		let viewModel = prepareViewModel()
+		let frame = CGRect(x: 0, y: 0, width: viewModel.picture!.size.width, height: viewModel.picture!.size.height)
+		
+		// Act
+		target.displayApod(viewModel: viewModel)
+		let imageView = target.getImageViewFromScrollView()
+		
+		// Assert
+		XCTAssertEqual(imageView?.frame, frame)
+		
 	}
 	
 }

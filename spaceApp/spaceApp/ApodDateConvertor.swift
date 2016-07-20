@@ -34,7 +34,7 @@ struct ApodDateConvertor {
 			return nil
 		}
 		
-		guard let month = getMonthFromString(dateString: dateString) where (month >= january && month <= december) else {
+		guard let month = getMonthFromString(dateString: dateString), (month >= january && month <= december) else {
 			return nil
 		}
 
