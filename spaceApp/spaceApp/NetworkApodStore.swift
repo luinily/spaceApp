@@ -35,7 +35,7 @@ extension NetworkApodStore: ApodStore {
 	func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
 		let parameters = makeParameters()
 		
-		_networkTool.makeGetRequest(url: _requestURL, parameters: parameters)  {
+		_networkTool.makeGetRequest(url: _requestURL, parameters: parameters) {
 			data, error in
 			
 			guard error == nil else {

@@ -123,4 +123,3 @@ extension ApodViewController: UIScrollViewDelegate {
 		}
 	}
 }
-

@@ -51,18 +51,20 @@ class ApodConfigurator {
 		viewController.router = router
 	}
 	
-	private func configureInteractor(presenter: ApodPresenter) -> ApodInteractor {
-		let initializer = getInitializer()
+	private func configureInteractor(presenter: ApodPresenter) -> ApodInteractor? {
+		guard let initializer = getInitializer() else {
+			return nil
+		}
+		
 		let apodStore = initializer.createApodStore()
 		let worker = ApodWorker(apodStore: apodStore)
 		let interactor = ApodInteractor(apodWorker: worker)
 		interactor.output = presenter
-		
 		return interactor
 	}
 	
-	private func getInitializer() -> Initializer {
-		let appDelegate = UIApplication.shared().delegate as! AppDelegate
-		return appDelegate.initializer
+	private func getInitializer() -> Initializer? {
+		let appDelegate = UIApplication.shared().delegate as? AppDelegate
+		return appDelegate?.initializer
 	}
 }

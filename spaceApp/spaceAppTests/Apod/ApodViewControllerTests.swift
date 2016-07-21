@@ -16,6 +16,7 @@ class ApodViewControllerTests: XCTestCase {
 	// MARK: Subject under test
 	var target: ApodViewController!
 	var window: UIWindow!
+	var outputSpy: MockApodViewControllerOutput!
 }
 
 // MARK: Test lifecycle
@@ -24,6 +25,8 @@ extension ApodViewControllerTests {
 		super.setUp()
 		window = UIWindow()
 		setupApodViewController()
+		outputSpy = MockApodViewControllerOutput()
+		target.output = outputSpy
 	}
 	
 	override func tearDown() {
@@ -37,7 +40,9 @@ extension ApodViewControllerTests {
 	func setupApodViewController() {
 		let bundle = Bundle.main
 		let storyboard = UIStoryboard(name: "Main", bundle: bundle)
-		target = storyboard.instantiateViewController(withIdentifier: "ApodViewController") as! ApodViewController
+		if let viewController = storyboard.instantiateViewController(withIdentifier: "ApodViewController") as? ApodViewController {
+			target = viewController
+		}
 	}
 	
 	func loadView() {
@@ -69,8 +74,6 @@ extension ApodViewControllerTests {
 extension ApodViewControllerTests {
 	func test_viewDidLoad_fetchTodaysApodIsCalled() {
 		// Arrange
-		let outputSpy = MockApodViewControllerOutput()
-		target.output = outputSpy
 		
 		// Act
 		loadView()
@@ -153,22 +156,28 @@ extension ApodViewControllerTests {
 		target.displayApod(viewModel: viewModel)
 		
 		// Assert
-		XCTAssertEqual(target.imageScrollView.contentSize, viewModel.picture?.size)
+		let width = viewModel.picture!.size.width * target.imageScrollView.zoomScale
+		let height = viewModel.picture!.size.height * target.imageScrollView.zoomScale
+		XCTAssertEqual(target.imageScrollView.contentSize.height, height)
+		XCTAssertEqual(target.imageScrollView.contentSize.width, width)
 	}
 	
 	func test_displayApod_SetsImageViewFrame() {
 		// Arrange
 		loadView()
 		let viewModel = prepareViewModel()
-		let frame = CGRect(x: 0, y: 0, width: viewModel.picture!.size.width, height: viewModel.picture!.size.height)
+		
 		
 		// Act
 		target.displayApod(viewModel: viewModel)
 		let imageView = target.getImageViewFromScrollView()
 		
 		// Assert
-		XCTAssertEqual(imageView?.frame, frame)
-		
+		let width = viewModel.picture!.size.width * target.imageScrollView.zoomScale
+		let height = viewModel.picture!.size.height * target.imageScrollView.zoomScale
+
+		XCTAssertEqualWithAccuracy((imageView?.frame.width)!, width, accuracy: 0.0001)
+		XCTAssertEqualWithAccuracy((imageView?.frame.height)!, height, accuracy: 0.0001)
 	}
 	
 	func test_displayApod_SetsScrollViewMinimumZoomScale() {
@@ -204,4 +213,3 @@ extension ApodViewControllerTests {
 	}
 	
 }
-

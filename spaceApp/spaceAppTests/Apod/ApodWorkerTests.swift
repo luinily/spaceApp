@@ -107,4 +107,3 @@ extension ApodWorkerTests {
 		XCTAssertTrue(didReturnError)
 	}
 }
-

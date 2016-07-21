@@ -137,4 +137,3 @@ extension ApodPresenterTests {
 		XCTAssertNotEqual(mockOutput.viewModel.picture?.size, CGSize.zero)
 	}
 }
-
