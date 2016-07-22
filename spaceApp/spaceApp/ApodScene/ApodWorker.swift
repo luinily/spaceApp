@@ -21,10 +21,16 @@ class ApodWorker {
 	
 	func fetchTodayAPOD(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
 		// NOTE: Do the work
-		_apodStore.fetchTodaysPicture {
+		_apodStore.fetchTodaysPicture() {
 			data, error in
 			completionHandler(apodData: data, error: error)
-			
+		}
+	}
+	
+	func fetchRandomApod(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
+		_apodStore.fetchPictureForRandomDate() {
+			data, error in
+			completionHandler(apodData: data, error: error)
 		}
 	}
 }

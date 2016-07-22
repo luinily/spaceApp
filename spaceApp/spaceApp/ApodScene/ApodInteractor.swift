@@ -13,6 +13,7 @@ import UIKit
 
 protocol ApodInteractorInput {
 	func fetchTodayApod(request: TodayApodRequest)
+	func fetchRandomApod(request: RandomApodRequest)
 }
 
 protocol ApodInteractorOutput {
@@ -31,27 +32,27 @@ class ApodInteractor: ApodInteractorInput {
 	// MARK: Business logic
 	func fetchTodayApod(request: TodayApodRequest) {
 		_apodWorker.fetchTodayAPOD() {
-			data, error in
-			if let data = data {
-				let response = ApodResponse(apodData: data)
-				self.output.presentApod(response: response)
-			}
-			
-			if let error = error {
-				let response = ApodErrorResponse(error: error)
-				self.output.presentError(response: response)
-			}
+			apodData, error in
+			self.handleFetchResults(apodData: apodData, error: error)
 		}
 	}
-//	func doSomething(request: ApodRequest) {
-//		// NOTE: Create some Worker to do the work
-//		
-//		worker = ApodWorker()
-//		worker.doSomeWork()
-//		
-//		// NOTE: Pass the result to the Presenter
-//		
-//		let response = ApodResponse()
-//		output.presentSomething(response)
-//	}
+
+	func fetchRandomApod(request: RandomApodRequest) {
+		_apodWorker.fetchRandomApod() {
+			apodData, error in
+			self.handleFetchResults(apodData: apodData, error: error)
+		}
+	}
+	
+	private func handleFetchResults(apodData: ApodData?, error: NSError?) {
+		if let apodData = apodData {
+			let response = ApodResponse(apodData: apodData)
+			self.output.presentApod(response: response)
+		}
+		
+		if let error = error {
+			let response = ApodErrorResponse(error: error)
+			self.output.presentError(response: response)
+		}
+	}
 }

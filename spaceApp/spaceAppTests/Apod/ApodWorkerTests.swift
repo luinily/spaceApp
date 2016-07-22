@@ -42,12 +42,24 @@ extension ApodWorkerTests {
 extension ApodWorkerTests {
 	class MockApodStore: ApodStore {
 		var fetchTodaysPictureCalled = false
-		
+		var fetchPictureForRandomDateCalled = false
 		var shouldReturnData = true
 		
 		func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
 			fetchTodaysPictureCalled = true
+			handleCompletionHandler(completionHandler: completionHandler)
+		}
+		
+		func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {
 			
+		}
+		
+		func fetchPictureForRandomDate(completionHandler: ApodCompletionHandler) {
+			fetchPictureForRandomDateCalled = true
+			handleCompletionHandler(completionHandler: completionHandler)
+		}
+		
+		func handleCompletionHandler(completionHandler: ApodCompletionHandler) {
 			if shouldReturnData {
 				let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
 				completionHandler(pictureData: apodData, error: nil)
@@ -55,10 +67,6 @@ extension ApodWorkerTests {
 				let error = NSError(domain: "", code: 0, userInfo: nil)
 				completionHandler(pictureData: nil, error: error)
 			}
-		}
-		
-		func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {
-			
 		}
 	}
 }
@@ -99,6 +107,48 @@ extension ApodWorkerTests {
 		
 		// Act
 		target.fetchTodayAPOD() {
+			_, error in
+			didReturnError = error != nil
+		}
+		
+		// Assert
+		XCTAssertTrue(didReturnError)
+	}
+	
+	func test_fetchRandomAPOD_callsStoreFetchTodaysPicture() {
+		// Arrange
+		
+		// Act
+		target.fetchRandomApod() {
+			_, _ in
+			
+		}
+		
+		// Assert
+		XCTAssertTrue(mockStore.fetchPictureForRandomDateCalled)
+	}
+	
+	func test_fetchRandomAPOD_passesTheData() {
+		// Arrange
+		var didReturnData = false
+		
+		// Act
+		target.fetchRandomApod() {
+			data, _ in
+			didReturnData = data != nil
+		}
+		
+		// Assert
+		XCTAssertTrue(didReturnData)
+	}
+	
+	func test_fetchRandomApod_passesTheError() {
+		// Arrange
+		mockStore.shouldReturnData = false
+		var didReturnError = false
+		
+		// Act
+		target.fetchRandomApod() {
 			_, error in
 			didReturnError = error != nil
 		}

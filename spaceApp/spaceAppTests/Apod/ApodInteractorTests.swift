@@ -52,10 +52,15 @@ extension ApodInteractorTests {
 		func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
 			
 		}
+		
+		func fetchPictureForRandomDate(completionHandler: ApodCompletionHandler) {
+			
+		}
 	}
 	
 	class MockApodWorker: ApodWorker {
 		var fetchTodayApodCalled = false
+		var fetchRandomApodCalled = false
 		
 		var shouldReturnData = true
 		init() {
@@ -64,6 +69,15 @@ extension ApodInteractorTests {
 		
 		override func fetchTodayAPOD(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
 			fetchTodayApodCalled = true
+			handleCompletionHandler(completionHandler: completionHandler)
+		}
+		
+		override func fetchRandomApod(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
+			fetchRandomApodCalled = true
+			handleCompletionHandler(completionHandler: completionHandler)
+		}
+		
+		private func handleCompletionHandler(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
 			if shouldReturnData {
 				let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
 				completionHandler(apodData: apodData, error: nil)
@@ -119,6 +133,40 @@ extension ApodInteractorTests {
 		
 		// Act
 		target.fetchTodayApod(request: request)
+		
+		// Assert
+		XCTAssertTrue(mochOutput.presentErrorCalled)
+	}
+	
+	func test_fetchRandomApod_callsWorkerFetchRamdomApod() {
+		// Arrange
+		let request = RandomApodRequest()
+		
+		// Act
+		target.fetchRandomApod(request: request)
+		
+		// Assert
+		XCTAssertTrue(mochApodWorker.fetchRandomApodCalled)
+	}
+	
+	func test_fetchRandomApod_callsOutputPresentApod() {
+		// Arrange
+		let request = RandomApodRequest()
+		
+		// Act
+		target.fetchRandomApod(request: request)
+		
+		// Assert
+		XCTAssertTrue(mochOutput.presentOutputCalled)
+	}
+	
+	func test_fetchRandomApod_callsOutputPresentError() {
+		// Arrange
+		let request = RandomApodRequest()
+		mochApodWorker.shouldReturnData = false
+		
+		// Act
+		target.fetchRandomApod(request: request)
 		
 		// Assert
 		XCTAssertTrue(mochOutput.presentErrorCalled)

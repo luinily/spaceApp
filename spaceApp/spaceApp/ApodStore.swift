@@ -13,4 +13,5 @@ typealias ApodCompletionHandler = (pictureData: ApodData?, error: NSError?) -> V
 protocol ApodStore {
 	func fetchTodaysPicture(completionHandler: ApodCompletionHandler)
 	func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler)
+	func fetchPictureForRandomDate(completionHandler: ApodCompletionHandler)
 }

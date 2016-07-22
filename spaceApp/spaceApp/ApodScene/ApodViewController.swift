@@ -17,15 +17,20 @@ protocol ApodViewControllerInput {
 
 protocol ApodViewControllerOutput {
 	func fetchTodayApod(request: TodayApodRequest)
+	func fetchRandomApod(request: RandomApodRequest)
 }
 
 class ApodViewController: UIViewController, ApodViewControllerInput {
 	var output: ApodViewControllerOutput!
 	var router: ApodRouter!
+	var refreshControl: UIRefreshControl!
 	
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var explanationTextView: UITextView!
 	@IBOutlet weak var imageScrollView: UIScrollView!
+	@IBOutlet weak var refreshScrollView: UIScrollView!
+	
+	
 	
 	// MARK: Object lifecycle
 	override func awakeFromNib() {
@@ -39,6 +44,7 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 		super.viewDidLoad()
 		fetchTodaysApod()
 		imageScrollView.delegate = self
+		setupRefreshControl()
 	}
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -61,6 +67,10 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 		explanationTextView.text = viewModel.explanation
 		if let picture = viewModel.picture {
 			setPicture(picture: picture)
+		}
+		
+		if refreshControl.isRefreshing {
+			refreshControl.endRefreshing()
 		}
 	}
 	
@@ -93,6 +103,12 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 		}
 	}
 	
+	private func setupRefreshControl() {
+		refreshControl = UIRefreshControl()
+		refreshScrollView.refreshControl = refreshControl
+		refreshControl.addTarget(self, action: #selector(ApodViewController.onRefreshPull), for: .valueChanged)
+	}
+	
 	func getImageViewFromScrollView() -> UIImageView? {
 		//ScrollView contains 2 UIImageView for the scrolls, ours is the third one
 		if imageScrollView.subviews.count == 3 {
@@ -103,6 +119,10 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 			return views.first as? UIImageView
 		}
 		return nil
+	}
+	
+	func onRefreshPull() {
+		output.fetchRandomApod(request: RandomApodRequest())
 	}
 }
 

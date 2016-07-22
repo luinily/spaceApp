@@ -19,40 +19,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ar1-z4-cvO">
-                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TYk-Vg-bWI">
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ar1-z4-cvO">
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="Bh6-vX-8Z2"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="nNC-jT-ehx">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="425" id="LKh-jx-Msn"/>
+                                        </constraints>
+                                    </scrollView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8cV-rt-aK8">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="bKY-wu-UzR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="Bh6-vX-8Z2"/>
+                                    <constraint firstItem="Ar1-z4-cvO" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" constant="8" id="Bxc-zV-bVq"/>
+                                    <constraint firstItem="nNC-jT-ehx" firstAttribute="top" secondItem="TYk-Vg-bWI" secondAttribute="top" id="GIq-vp-qo4"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ar1-z4-cvO" secondAttribute="bottom" constant="16" id="H35-Ct-T16"/>
+                                    <constraint firstItem="8cV-rt-aK8" firstAttribute="top" secondItem="nNC-jT-ehx" secondAttribute="bottom" constant="8" id="MHi-Eh-qNz"/>
+                                    <constraint firstItem="Ar1-z4-cvO" firstAttribute="top" secondItem="8cV-rt-aK8" secondAttribute="bottom" constant="8" id="ZV6-4q-3in"/>
+                                    <constraint firstAttribute="trailing" secondItem="nNC-jT-ehx" secondAttribute="trailing" id="idX-D2-AcA"/>
+                                    <constraint firstAttribute="trailing" secondItem="8cV-rt-aK8" secondAttribute="trailing" id="jfK-WN-lad"/>
+                                    <constraint firstItem="nNC-jT-ehx" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" id="uqu-sm-L2x"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ar1-z4-cvO" secondAttribute="trailing" constant="8" id="vSY-jy-lBM"/>
+                                    <constraint firstItem="nNC-jT-ehx" firstAttribute="centerX" secondItem="TYk-Vg-bWI" secondAttribute="centerX" id="va8-Pa-ZQh"/>
+                                    <constraint firstItem="8cV-rt-aK8" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" id="wmZ-U4-0hx"/>
                                 </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8cV-rt-aK8">
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="nNC-jT-ehx"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ar1-z4-cvO" firstAttribute="top" secondItem="8cV-rt-aK8" secondAttribute="bottom" constant="8" id="15Q-SH-jL2"/>
-                            <constraint firstItem="nNC-jT-ehx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1H6-LZ-87h"/>
-                            <constraint firstItem="Ar1-z4-cvO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1ba-b5-0xd"/>
-                            <constraint firstItem="8cV-rt-aK8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NPS-Wj-O6L"/>
-                            <constraint firstItem="8cV-rt-aK8" firstAttribute="top" secondItem="nNC-jT-ehx" secondAttribute="bottom" constant="8" id="T2j-CR-F19"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8cV-rt-aK8" secondAttribute="trailing" id="TL6-mU-eGD"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ar1-z4-cvO" secondAttribute="trailing" id="XGb-Js-6gL"/>
-                            <constraint firstItem="nNC-jT-ehx" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="YWK-Yh-S9T"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ar1-z4-cvO" secondAttribute="bottom" id="llp-4V-VDn"/>
-                            <constraint firstAttribute="trailing" secondItem="nNC-jT-ehx" secondAttribute="trailing" id="rZK-20-Fii"/>
+                            <constraint firstItem="TYk-Vg-bWI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1Hh-Oh-ZMq"/>
+                            <constraint firstItem="TYk-Vg-bWI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="20" id="EwM-ud-JGy"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TYk-Vg-bWI" secondAttribute="bottom" id="Vhw-kX-e6m"/>
+                            <constraint firstItem="TYk-Vg-bWI" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="WLr-Is-OZm"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="explanationTextView" destination="Ar1-z4-cvO" id="ye8-PU-jfM"/>
                         <outlet property="imageScrollView" destination="nNC-jT-ehx" id="1uh-U4-Zrx"/>
+                        <outlet property="refreshScrollView" destination="TYk-Vg-bWI" id="kCA-NY-Twb"/>
                         <outlet property="titleLabel" destination="8cV-rt-aK8" id="w1J-2f-Jdy"/>
                     </connections>
                 </viewController>

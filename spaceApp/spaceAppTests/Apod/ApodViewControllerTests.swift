@@ -64,8 +64,14 @@ extension ApodViewControllerTests {
 extension ApodViewControllerTests {
 	class MockApodViewControllerOutput: ApodViewControllerOutput {
 		var fetchTodayApodCalled = false
+		var fetchRandomApodCalled = false
+		
 		func fetchTodayApod(request: TodayApodRequest) {
 			fetchTodayApodCalled = true
+		}
+		
+		func fetchRandomApod(request: RandomApodRequest) {
+			fetchRandomApodCalled = true
 		}
 	}
 }
@@ -97,6 +103,36 @@ extension ApodViewControllerTests {
 		XCTAssertTrue(delegate === target)
 	}
 	
+	func test_viewDidLoad_RefreshControlIsCreated() {
+		// Arrange
+		
+		// Act
+		loadView()
+		
+		// Assert
+		XCTAssertNotNil(target.refreshControl)
+	}
+	
+	func test_viewDidLoad_RefreshIsSetToRefreshScrollView() {
+		// Arrange
+		
+		// Act
+		loadView()
+		
+		// Assert
+		XCTAssertTrue(target.refreshScrollView.refreshControl === target.refreshControl)
+	}
+	
+	func test_viewDidLoad_RefreshControlHasATarget() {
+		// Arrange
+		
+		// Act
+		loadView()
+		
+		// Assert
+		XCTAssertEqual(target.refreshControl.allTargets().count, 1)
+	}
+
 	func test_displayApod_TitleIsDisplayed() {
 		// Arrange
 		loadView()
@@ -211,5 +247,17 @@ extension ApodViewControllerTests {
 		// Assert
 		XCTAssertEqual(target.imageScrollView.zoomScale, target.imageScrollView.minimumZoomScale)
 	}
+	
+	func test_onRefreshPull_CallsOutput_fetchRandomApod() {
+		// Arrange
+		loadView()
+		
+		// Act
+		target.onRefreshPull()
+		
+		// Assert
+		XCTAssertTrue(outputSpy.fetchRandomApodCalled)
+	}
+	
 	
 }

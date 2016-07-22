@@ -14,6 +14,10 @@ import UIKit
 struct TodayApodRequest {
 }
 
+struct RandomApodRequest {
+	
+}
+
 struct ApodResponse {
 	var apodData: ApodData
 }

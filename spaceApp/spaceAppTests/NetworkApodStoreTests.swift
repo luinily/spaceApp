@@ -24,7 +24,8 @@ extension NetworkApodStoreTests {
 	override func setUp() {
 		mockNetworkTool = MockNetworkTool()
 		dataConvertor = MockDataConvertor()
-		target = NetworkApodStore(requestURL: requestURL, apiKey: apiKey, networkTool: mockNetworkTool, dataConvertor: dataConvertor)
+		let url = URL(string: requestURL)!
+		target = NetworkApodStore(requestURl: url, oldestPossibleDate: dateFor1900_01_01(), apiKey: apiKey, networkTool: mockNetworkTool, dataConvertor: dataConvertor)
 	}
 	
 	override func tearDown() {
@@ -35,15 +36,25 @@ extension NetworkApodStoreTests {
 // MARK: Test setup
 extension NetworkApodStoreTests {
 	func dateFor2016_07_16() -> Date {
-		let calendar = Calendar(identifier: .gregorian)
 		var components = DateComponents()
 		components.day = 16
 		components.month = 07
 		components.year = 2016
 		components.hour = 0
 		components.minute = 0
-		return calendar!.date(from: components)!
+		return Calendar.current.date(from: components)!
 	}
+	
+	func dateFor1900_01_01() -> Date {
+		var components = DateComponents()
+		components.day = 01
+		components.month = 01
+		components.year = 1900
+		components.hour = 0
+		components.minute = 0
+		return Calendar.current.date(from: components)!
+	}
+
 }
 
 // MARK: Test doubles
@@ -328,4 +339,151 @@ extension NetworkApodStoreTests {
 		// Assert
 		XCTAssertNotNil(error)
 	}
+	
+	func test_fetchPictureForRandomDate_callsMakeGetRequest_True() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureForRandomDate() {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		XCTAssertTrue(mockNetworkTool.makeGetRequestCalled)
+	}
+	
+	func test_fetchPictureForRandomDate_urlIsCorrect() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureForRandomDate() {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		XCTAssertEqual(mockNetworkTool.requestURL, requestURL)
+	}
+	
+	func test_fetchPictureForRandomDate_keyIsCorrect() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureForRandomDate() {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		XCTAssertEqual(mockNetworkTool.key, apiKey)
+	}
+	
+	func test_fetchPictureForRandomDate_hasKeyParameter() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureForRandomDate() {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		if let parameters = mockNetworkTool.requestParameters {
+			XCTAssertEqual(parameters["api_key"], apiKey)
+		} else {
+			XCTAssert(false) //should never be called
+		}
+	}
+	
+	func test_fetchPictureForRandomDate_hasHDParameterAtTrue() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureForRandomDate() {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		if let parameters = mockNetworkTool.requestParameters {
+			XCTAssertEqual(parameters["hd"], "true")
+		} else {
+			XCTAssert(false) //should never be called
+		}
+	}
+	
+	func test_fetchPictureForRandomDate_WhenGotData_AskToConverterToApodData() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureForRandomDate() {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		// Assert
+		XCTAssertTrue(dataConvertor.convertDataToApodDataHasBeenCalled)
+	}
+	
+	func test_fetchPictureForRandomDate_WhenGotData_CallsCompletionHandler() {
+		// Arrange
+		var completionHandlerHasBeenCalled = false
+		// Act
+		
+		target.fetchPictureForRandomDate() {
+			pictureData, error in
+			completionHandlerHasBeenCalled = true
+		}
+		
+		// Assert
+		XCTAssertTrue(completionHandlerHasBeenCalled)
+	}
+	
+	func test_fetchPictureForRandomDate_WhenGotData_CallsCompletionHandlerWithApodData() {
+		// Arrange
+		var apodData: ApodData? = nil
+		// Act
+		
+		target.fetchPictureForRandomDate() {
+			pictureData, error in
+			apodData = pictureData
+		}
+		
+		// Assert
+		XCTAssertNotNil(apodData)
+	}
+	
+	func test_fetchPictureForRandomDate_WhenHasError_CallsCompletionHandlerWithError() {
+		// Arrange
+		var error: NSError? = nil
+		mockNetworkTool.shouldReturnError = true
+		
+		// Act
+		target.fetchPictureForRandomDate() {
+			pictureData, fetchError in
+			error = fetchError
+		}
+		
+		// Assert
+		XCTAssertNotNil(error)
+	}
+	
+	func test_fetchPictureForRandomDate_dateParameterIsNotTheSameTwice() {
+		// Arrange
+		var previousDate: String? = nil
+		
+		for _ in 0 ... 100 {
+			// Act
+			target.fetchPictureForRandomDate() {
+				(pictureData: ApodData?, error: NSError?) in
+			}
+			
+			//Assert
+			if let parameters = mockNetworkTool.requestParameters {
+				let currentDate = parameters["date"]
+				if let previousDate = previousDate {
+					XCTAssertNotEqual(currentDate, previousDate)
+				}
+				previousDate = currentDate
+			} else {
+				XCTAssert(false) //should never be called
+			}
+		}
+	}
+	
+	//TODO : add a test to check date in range, might need to delete the previous test has it can fail if rand gives 2 times in a row the same number 
 }
