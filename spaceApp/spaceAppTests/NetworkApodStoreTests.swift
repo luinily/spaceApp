@@ -34,7 +34,16 @@ extension NetworkApodStoreTests {
 
 // MARK: Test setup
 extension NetworkApodStoreTests {
-	
+	func dateFor2016_07_16() -> Date {
+		let calendar = Calendar(identifier: .gregorian)
+		var components = DateComponents()
+		components.day = 16
+		components.month = 07
+		components.year = 2016
+		components.hour = 0
+		components.minute = 0
+		return calendar!.date(from: components)!
+	}
 }
 
 // MARK: Test doubles
@@ -196,7 +205,127 @@ extension NetworkApodStoreTests {
 		
 		// Assert
 		XCTAssertNotNil(error)
-		
 	}
 	
+	func test_fetchPictureFor_callsMakeGetRequest_True() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureFor(date: dateFor2016_07_16()) {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		XCTAssertTrue(mockNetworkTool.makeGetRequestCalled)
+	}
+	
+	func test_fetchPictureFor_urlIsCorrect() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureFor(date: dateFor2016_07_16()) {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		XCTAssertEqual(mockNetworkTool.requestURL, requestURL)
+	}
+	
+	func test_fetchPictureFor_keyIsCorrect() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureFor(date: dateFor2016_07_16()) {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		XCTAssertEqual(mockNetworkTool.key, apiKey)
+	}
+	
+	func test_fetchPictureFor_hasHDParameterAtTrue() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureFor(date: dateFor2016_07_16()) {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		if let parameters = mockNetworkTool.requestParameters {
+			XCTAssertEqual(parameters["hd"], "true")
+		} else {
+			XCTAssert(false) //should never be called
+		}
+	}
+	
+	func test_fetchPictureFor_hasValidDateParameter() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureFor(date: dateFor2016_07_16()) {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		
+		// Assert
+		if let parameters = mockNetworkTool.requestParameters {
+			XCTAssertEqual(parameters["date"], "2016-07-16")
+		} else {
+			XCTAssert(false) //should never be called
+		}
+	}
+	
+	func test_fetchPictureFor_WhenGotData_AskToConverterToApodData() {
+		// Arrange
+		
+		// Act
+		target.fetchPictureFor(date: dateFor2016_07_16()) {
+			(pictureData: ApodData?, error: NSError?) in
+		}
+		// Assert
+		XCTAssertTrue(dataConvertor.convertDataToApodDataHasBeenCalled)
+	}
+	
+	func test_fetchPictureFor_WhenGotData_CallsCompletionHandler() {
+		// Arrange
+		var completionHandlerHasBeenCalled = false
+		
+		// Act
+		target.fetchPictureFor(date: dateFor2016_07_16()) {
+			pictureData, error in
+			completionHandlerHasBeenCalled = true
+		}
+		
+		// Assert
+		XCTAssertTrue(completionHandlerHasBeenCalled)
+	}
+	
+	func test_fetchPictureFor_WhenGotData_CallsCompletionHandlerWithApodData() {
+		// Arrange
+		var apodData: ApodData? = nil
+		// Act
+		
+		target.fetchPictureFor(date: dateFor2016_07_16()) {
+			pictureData, error in
+			apodData = pictureData
+		}
+		
+		// Assert
+		XCTAssertNotNil(apodData)
+	}
+	
+	func test_fetchPictureFor_WhenHasError_CallsCompletionHandlerWithError() {
+		// Arrange
+		var error: NSError? = nil
+		mockNetworkTool.shouldReturnError = true
+		
+		// Act
+		target.fetchPictureFor(date: dateFor2016_07_16()) {
+			pictureData, fetchError in
+			error = fetchError
+		}
+		
+		// Assert
+		XCTAssertNotNil(error)
+	}
 }

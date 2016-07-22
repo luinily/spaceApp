@@ -37,18 +37,15 @@ extension NetworkApodStore: ApodStore {
 		
 		_networkTool.makeGetRequest(url: _requestURL, parameters: parameters) {
 			data, error in
-			
-			guard error == nil else {
-				completionHandler(pictureData: nil, error: error)
-				return
-			}
-			
-			guard let data = data else {
-				return
-			}
-			
-			let apodData = try? self._dataConvertor.convertDataToApodData(data: data)
-			completionHandler(pictureData: apodData, error: nil)
+			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
+		}
+	}
+	
+	func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {
+		let parameters = makeParameters(date: date)
+		_networkTool.makeGetRequest(url: _requestURL, parameters: parameters) {
+			data, error in
+			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
 		}
 	}
 	
@@ -56,9 +53,9 @@ extension NetworkApodStore: ApodStore {
 		var parameters = [String: String]()
 		parameters[_apiKeyParameterName] = _apiKey
 		parameters[_hdParameterName] = _hdParameterValue
-//		if let date = date {
-//			parameters[_dateParameterName] = makeDateParameter(date: date)
-//		}
+		if let date = date {
+			parameters[_dateParameterName] = makeDateParameter(date: date)
+		}
 		
 		return parameters
 	}
@@ -69,7 +66,17 @@ extension NetworkApodStore: ApodStore {
 		return formatter.string(from: date)
 	}
 	
-	func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {
+	private func handleFetchedResults(data: Data?, error: NSError?, completionHandler: ApodCompletionHandler) {
+		guard error == nil else {
+			completionHandler(pictureData: nil, error: error)
+			return
+		}
 		
+		guard let data = data else {
+			return
+		}
+		
+		let apodData = try? self._dataConvertor.convertDataToApodData(data: data)
+		completionHandler(pictureData: apodData, error: nil)
 	}
 }

@@ -13,20 +13,19 @@
 		8F766AAC1D39FE020024442F /* ApodDateConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F766AAB1D39FE020024442F /* ApodDateConvertor.swift */; };
 		8F766AAE1D39FE1B0024442F /* ApodDateConvertorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F766AAD1D39FE1B0024442F /* ApodDateConvertorTests.swift */; };
 		8F941DD81D363A9E00C56ACE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941DD71D363A9E00C56ACE /* AppDelegate.swift */; };
-		8F941DDA1D363A9E00C56ACE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941DD91D363A9E00C56ACE /* ViewController.swift */; };
 		8F941DDD1D363A9E00C56ACE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F941DDB1D363A9E00C56ACE /* Main.storyboard */; };
 		8F941DE01D363A9E00C56ACE /* spaceApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F941DDE1D363A9E00C56ACE /* spaceApp.xcdatamodeld */; };
 		8F941DE21D363A9E00C56ACE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F941DE11D363A9E00C56ACE /* Assets.xcassets */; };
 		8F941DE51D363A9E00C56ACE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F941DE31D363A9E00C56ACE /* LaunchScreen.storyboard */; };
 		8F941DFB1D363A9E00C56ACE /* spaceAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941DFA1D363A9E00C56ACE /* spaceAppUITests.swift */; };
-		8F941E091D366C6400C56ACE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F941E081D366C6400C56ACE /* Alamofire.framework */; };
-		8F941E0A1D366C6400C56ACE /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F941E081D366C6400C56ACE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8F941E0D1D3739F800C56ACE /* ApodStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E0C1D3739F800C56ACE /* ApodStore.swift */; };
 		8F941E111D373DBD00C56ACE /* NetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E101D373DBD00C56ACE /* NetworkTool.swift */; };
 		8F941E131D373E4100C56ACE /* AlamofireTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E121D373E4100C56ACE /* AlamofireTool.swift */; };
 		8F941E151D3742C400C56ACE /* ApodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E141D3742C400C56ACE /* ApodData.swift */; };
 		8F941E171D3743F300C56ACE /* NetworkApodStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E161D3743F300C56ACE /* NetworkApodStore.swift */; };
 		8F941E191D37486300C56ACE /* NetworkApodStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E181D37486300C56ACE /* NetworkApodStoreTests.swift */; };
+		8FAD050A1D408EE300E92486 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD05091D408EE300E92486 /* Alamofire.framework */; };
+		8FAD050B1D408EE300E92486 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD05091D408EE300E92486 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8FB2948E1D3B29B400E6C7A3 /* ApodConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294871D3B29B400E6C7A3 /* ApodConfigurator.swift */; };
 		8FB2948F1D3B29B400E6C7A3 /* ApodInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294881D3B29B400E6C7A3 /* ApodInteractor.swift */; };
 		8FB294901D3B29B400E6C7A3 /* ApodModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294891D3B29B400E6C7A3 /* ApodModels.swift */; };
@@ -60,13 +59,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8F941E0B1D366C6400C56ACE /* Embed Frameworks */ = {
+		8FAD05071D408EC400E92486 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8F941E0A1D366C6400C56ACE /* Alamofire.framework in Embed Frameworks */,
+				8FAD050B1D408EE300E92486 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,7 +80,6 @@
 		8F766AAD1D39FE1B0024442F /* ApodDateConvertorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApodDateConvertorTests.swift; sourceTree = "<group>"; };
 		8F941DD41D363A9E00C56ACE /* spaceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spaceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F941DD71D363A9E00C56ACE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8F941DD91D363A9E00C56ACE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8F941DDC1D363A9E00C56ACE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8F941DDF1D363A9E00C56ACE /* spaceApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = spaceApp.xcdatamodel; sourceTree = "<group>"; };
 		8F941DE11D363A9E00C56ACE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,13 +90,13 @@
 		8F941DF61D363A9E00C56ACE /* spaceAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = spaceAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F941DFA1D363A9E00C56ACE /* spaceAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spaceAppUITests.swift; sourceTree = "<group>"; };
 		8F941DFC1D363A9E00C56ACE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8F941E081D366C6400C56ACE /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Alamofire.framework; path = "/Users/yoann/Library/Developer/Xcode/DerivedData/spaceApp-bmyiuyvhkyhscmejhgsvaojatsje/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<absolute>"; };
 		8F941E0C1D3739F800C56ACE /* ApodStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApodStore.swift; sourceTree = "<group>"; };
 		8F941E101D373DBD00C56ACE /* NetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTool.swift; sourceTree = "<group>"; };
 		8F941E121D373E4100C56ACE /* AlamofireTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireTool.swift; sourceTree = "<group>"; };
 		8F941E141D3742C400C56ACE /* ApodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApodData.swift; sourceTree = "<group>"; };
 		8F941E161D3743F300C56ACE /* NetworkApodStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkApodStore.swift; sourceTree = "<group>"; };
 		8F941E181D37486300C56ACE /* NetworkApodStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkApodStoreTests.swift; path = spaceAppTests/NetworkApodStoreTests.swift; sourceTree = SOURCE_ROOT; };
+		8FAD05091D408EE300E92486 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Alamofire.framework; path = "/Users/yoann/Library/Developer/Xcode/DerivedData/spaceApp-cvfjiopmfxavzfcbnqypywvblowr/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<absolute>"; };
 		8FB294871D3B29B400E6C7A3 /* ApodConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodConfigurator.swift; path = ApodScene/ApodConfigurator.swift; sourceTree = "<group>"; };
 		8FB294881D3B29B400E6C7A3 /* ApodInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodInteractor.swift; path = ApodScene/ApodInteractor.swift; sourceTree = "<group>"; };
 		8FB294891D3B29B400E6C7A3 /* ApodModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodModels.swift; path = ApodScene/ApodModels.swift; sourceTree = "<group>"; };
@@ -119,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F941E091D366C6400C56ACE /* Alamofire.framework in Frameworks */,
+				8FAD050A1D408EE300E92486 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +141,7 @@
 		8F941DCB1D363A9E00C56ACE = {
 			isa = PBXGroup;
 			children = (
-				8F941E081D366C6400C56ACE /* Alamofire.framework */,
+				8FAD05091D408EE300E92486 /* Alamofire.framework */,
 				8F941DD61D363A9E00C56ACE /* spaceApp */,
 				8F941DEE1D363A9E00C56ACE /* spaceAppTests */,
 				8F941DF91D363A9E00C56ACE /* spaceAppUITests */,
@@ -175,7 +173,6 @@
 				8F941E0C1D3739F800C56ACE /* ApodStore.swift */,
 				8F941E141D3742C400C56ACE /* ApodData.swift */,
 				8F941DD71D363A9E00C56ACE /* AppDelegate.swift */,
-				8F941DD91D363A9E00C56ACE /* ViewController.swift */,
 				8FB294951D3B29BE00E6C7A3 /* ApodScene */,
 				8F941DDB1D363A9E00C56ACE /* Main.storyboard */,
 				8F941DE11D363A9E00C56ACE /* Assets.xcassets */,
@@ -242,8 +239,8 @@
 				8F941DD01D363A9E00C56ACE /* Sources */,
 				8F941DD11D363A9E00C56ACE /* Frameworks */,
 				8F941DD21D363A9E00C56ACE /* Resources */,
-				8F941E0B1D366C6400C56ACE /* Embed Frameworks */,
 				8F6D54DF1D4079720018773D /* ShellScript */,
+				8FAD05071D408EC400E92486 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -391,7 +388,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FB294921D3B29B400E6C7A3 /* ApodRouter.swift in Sources */,
-				8F941DDA1D363A9E00C56ACE /* ViewController.swift in Sources */,
 				8FB294901D3B29B400E6C7A3 /* ApodModels.swift in Sources */,
 				8F941E111D373DBD00C56ACE /* NetworkTool.swift in Sources */,
 				8FD5D2B51D3B7701007A5F3D /* Initializer.swift in Sources */,
@@ -564,6 +560,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = spaceApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -576,6 +573,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = spaceApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
