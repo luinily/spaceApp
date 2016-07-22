@@ -96,6 +96,7 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 	private func setImageView(picture: UIImage) {
 		if let imageView = getImageViewFromScrollView() {
 			imageView.image = picture
+			imageView.sizeToFit()
 		} else {
 			let imageView = UIImageView(image: picture)
 			imageView.restorationIdentifier = "imageView"
