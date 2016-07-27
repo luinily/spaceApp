@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F1CD6511D488661000AEF2F /* RandomDateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CD6501D488661000AEF2F /* RandomDateGenerator.swift */; };
+		8F1CD6531D4886B7000AEF2F /* RandomDateGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CD6521D4886B7000AEF2F /* RandomDateGeneratorTests.swift */; };
 		8F4387491D38D2EB00E21C3F /* DataToApodDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4387481D38D2EB00E21C3F /* DataToApodDataConverter.swift */; };
 		8F43874D1D39E24100E21C3F /* JsonToApodConvertorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F43874C1D39E24100E21C3F /* JsonToApodConvertorTests.swift */; };
 		8F43874F1D39E69800E21C3F /* JSonToApodConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F43874E1D39E69800E21C3F /* JSonToApodConvertor.swift */; };
@@ -73,6 +75,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8F1CD6501D488661000AEF2F /* RandomDateGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomDateGenerator.swift; sourceTree = "<group>"; };
+		8F1CD6521D4886B7000AEF2F /* RandomDateGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomDateGeneratorTests.swift; sourceTree = "<group>"; };
 		8F4387481D38D2EB00E21C3F /* DataToApodDataConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataToApodDataConverter.swift; sourceTree = "<group>"; };
 		8F43874C1D39E24100E21C3F /* JsonToApodConvertorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToApodConvertorTests.swift; sourceTree = "<group>"; };
 		8F43874E1D39E69800E21C3F /* JSonToApodConvertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSonToApodConvertor.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 				8F941E121D373E4100C56ACE /* AlamofireTool.swift */,
 				8F941E0C1D3739F800C56ACE /* ApodStore.swift */,
 				8F941E141D3742C400C56ACE /* ApodData.swift */,
+				8F1CD6501D488661000AEF2F /* RandomDateGenerator.swift */,
 				8F941DD71D363A9E00C56ACE /* AppDelegate.swift */,
 				8FB294951D3B29BE00E6C7A3 /* ApodScene */,
 				8F941DDB1D363A9E00C56ACE /* Main.storyboard */,
@@ -191,6 +196,7 @@
 				8FB2949E1D3B29F200E6C7A3 /* ApodScene */,
 				8F766AAD1D39FE1B0024442F /* ApodDateConvertorTests.swift */,
 				8F941DF11D363A9E00C56ACE /* Info.plist */,
+				8F1CD6521D4886B7000AEF2F /* RandomDateGeneratorTests.swift */,
 			);
 			path = spaceAppTests;
 			sourceTree = "<group>";
@@ -405,6 +411,7 @@
 				8F43874F1D39E69800E21C3F /* JSonToApodConvertor.swift in Sources */,
 				8FB294911D3B29B400E6C7A3 /* ApodPresenter.swift in Sources */,
 				8F941E151D3742C400C56ACE /* ApodData.swift in Sources */,
+				8F1CD6511D488661000AEF2F /* RandomDateGenerator.swift in Sources */,
 				8F4387491D38D2EB00E21C3F /* DataToApodDataConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +422,7 @@
 			files = (
 				8FB2949D1D3B29EE00E6C7A3 /* ApodWorkerTests.swift in Sources */,
 				8F766AAE1D39FE1B0024442F /* ApodDateConvertorTests.swift in Sources */,
+				8F1CD6531D4886B7000AEF2F /* RandomDateGeneratorTests.swift in Sources */,
 				8F941E191D37486300C56ACE /* NetworkApodStoreTests.swift in Sources */,
 				8FB2949B1D3B29EE00E6C7A3 /* ApodPresenterTests.swift in Sources */,
 				8FB2949A1D3B29EE00E6C7A3 /* ApodInteractorTests.swift in Sources */,

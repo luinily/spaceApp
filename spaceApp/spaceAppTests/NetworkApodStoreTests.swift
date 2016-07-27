@@ -25,7 +25,7 @@ extension NetworkApodStoreTests {
 		mockNetworkTool = MockNetworkTool()
 		dataConvertor = MockDataConvertor()
 		let url = URL(string: requestURL)!
-		target = NetworkApodStore(requestURl: url, oldestPossibleDate: dateFor1900_01_01(), apiKey: apiKey, networkTool: mockNetworkTool, dataConvertor: dataConvertor)
+		target = NetworkApodStore(requestURl: url, oldestPossibleDate: makeDate(for: "1900-01-01"), apiKey: apiKey, networkTool: mockNetworkTool, dataConvertor: dataConvertor)
 	}
 	
 	override func tearDown() {
@@ -35,26 +35,11 @@ extension NetworkApodStoreTests {
 
 // MARK: Test setup
 extension NetworkApodStoreTests {
-	func dateFor2016_07_16() -> Date {
-		var components = DateComponents()
-		components.day = 16
-		components.month = 07
-		components.year = 2016
-		components.hour = 0
-		components.minute = 0
-		return Calendar.current.date(from: components)!
+	func makeDate(for dateString: String) -> Date {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "yyyy-MM-dd"
+		return formatter.date(from: dateString)!
 	}
-	
-	func dateFor1900_01_01() -> Date {
-		var components = DateComponents()
-		components.day = 01
-		components.month = 01
-		components.year = 1900
-		components.hour = 0
-		components.minute = 0
-		return Calendar.current.date(from: components)!
-	}
-
 }
 
 // MARK: Test doubles
@@ -64,7 +49,7 @@ extension NetworkApodStoreTests {
 		var requestURL: String?
 		var key: String?
 		var requestParameters: [String: String]?
-		
+		var dateParameter: Date?
 		var shouldReturnError = false
 		
 		func makeGetRequest(url: URL, parameters: [String: String], completionHandler: RequestCompletionHandler) {
@@ -222,7 +207,7 @@ extension NetworkApodStoreTests {
 		// Arrange
 		
 		// Act
-		target.fetchPictureFor(date: dateFor2016_07_16()) {
+		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
 			(pictureData: ApodData?, error: NSError?) in
 		}
 		
@@ -234,7 +219,7 @@ extension NetworkApodStoreTests {
 		// Arrange
 		
 		// Act
-		target.fetchPictureFor(date: dateFor2016_07_16()) {
+		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
 			(pictureData: ApodData?, error: NSError?) in
 		}
 		
@@ -246,7 +231,7 @@ extension NetworkApodStoreTests {
 		// Arrange
 		
 		// Act
-		target.fetchPictureFor(date: dateFor2016_07_16()) {
+		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
 			(pictureData: ApodData?, error: NSError?) in
 		}
 		
@@ -258,7 +243,7 @@ extension NetworkApodStoreTests {
 		// Arrange
 		
 		// Act
-		target.fetchPictureFor(date: dateFor2016_07_16()) {
+		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
 			(pictureData: ApodData?, error: NSError?) in
 		}
 		
@@ -274,7 +259,7 @@ extension NetworkApodStoreTests {
 		// Arrange
 		
 		// Act
-		target.fetchPictureFor(date: dateFor2016_07_16()) {
+		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
 			(pictureData: ApodData?, error: NSError?) in
 		}
 		
@@ -290,7 +275,7 @@ extension NetworkApodStoreTests {
 		// Arrange
 		
 		// Act
-		target.fetchPictureFor(date: dateFor2016_07_16()) {
+		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
 			(pictureData: ApodData?, error: NSError?) in
 		}
 		// Assert
@@ -302,7 +287,7 @@ extension NetworkApodStoreTests {
 		var completionHandlerHasBeenCalled = false
 		
 		// Act
-		target.fetchPictureFor(date: dateFor2016_07_16()) {
+		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
 			pictureData, error in
 			completionHandlerHasBeenCalled = true
 		}
@@ -316,7 +301,7 @@ extension NetworkApodStoreTests {
 		var apodData: ApodData? = nil
 		// Act
 		
-		target.fetchPictureFor(date: dateFor2016_07_16()) {
+		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
 			pictureData, error in
 			apodData = pictureData
 		}
@@ -331,7 +316,7 @@ extension NetworkApodStoreTests {
 		mockNetworkTool.shouldReturnError = true
 		
 		// Act
-		target.fetchPictureFor(date: dateFor2016_07_16()) {
+		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
 			pictureData, fetchError in
 			error = fetchError
 		}
@@ -462,28 +447,4 @@ extension NetworkApodStoreTests {
 		XCTAssertNotNil(error)
 	}
 	
-	func test_fetchPictureForRandomDate_dateParameterIsNotTheSameTwice() {
-		// Arrange
-		var previousDate: String? = nil
-		
-		for _ in 0 ... 100 {
-			// Act
-			target.fetchPictureForRandomDate() {
-				(pictureData: ApodData?, error: NSError?) in
-			}
-			
-			//Assert
-			if let parameters = mockNetworkTool.requestParameters {
-				let currentDate = parameters["date"]
-				if let previousDate = previousDate {
-					XCTAssertNotEqual(currentDate, previousDate)
-				}
-				previousDate = currentDate
-			} else {
-				XCTAssert(false) //should never be called
-			}
-		}
-	}
-	
-	//TODO : add a test to check date in range, might need to delete the previous test has it can fail if rand gives 2 times in a row the same number 
 }

@@ -48,12 +48,18 @@ extension NetworkApodStore: ApodStore {
 	}
 	
 	func fetchPictureForRandomDate(completionHandler: ApodCompletionHandler) {
-		let date = makeRamdomDate()
+		let date = generateRandomDate()
 		let parameters = makeParameters(date: date)
 		_networkTool.makeGetRequest(url: _requestURL, parameters: parameters) {
 			data, error in
 			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
 		}
+	}
+	
+	private func generateRandomDate() -> Date {
+		let today = Date()
+		let randomDateGenerator = RandomDateGenerator(lowerBound: _oldestDatePossible, higherBound: today)
+		return randomDateGenerator.generateDate()
 	}
 	
 	private func makeParameters(date: Date? = nil) -> [String: String] {
@@ -87,39 +93,7 @@ extension NetworkApodStore: ApodStore {
 		completionHandler(pictureData: apodData, error: nil)
 	}
 	
-	private func makeRamdomDate() -> Date {
-		let today = Date()
-		
-		var components = DateComponents()
-		components.year = makeRamdomComponent(unit: .year, lowerBoundDate: _oldestDatePossible, higherBoundDate: today)
-		components.month = makeRandomNumber(lowerBound: 0, higherBound: 12)
-		components.day = makeRandomDay(components: components)
-		components.hour = 0
-		components.minute = 0
-		
-		if let date = Calendar.current.date(from: components) {
-			return date
-		}
-		return today
-	}
-	
-	private func makeRamdomComponent(unit: Calendar.Unit, lowerBoundDate: Date, higherBoundDate: Date) -> Int {
-		let lowerBoundComponent = Calendar.current.component(unit, from: lowerBoundDate)
-		let higherBoundComponent = Calendar.current.component(unit, from: higherBoundDate)
-		return makeRandomNumber(lowerBound: lowerBoundComponent, higherBound: higherBoundComponent)
-	}
-	
-	private func makeRandomDay(components: DateComponents) -> Int {
-		if let date = Calendar.current.date(from: components) {
-			let range = Calendar.current.range(of: .day, in: .month, for: date)
-			return makeRandomNumber(lowerBound: 1, higherBound: range.length)
-		}
-		return 28 //will not give any invalid day
-	}
 
-	private func makeRandomNumber(lowerBound: Int, higherBound: Int) -> Int {
-		let upperBound = higherBound - lowerBound
-		let randomNumber = Int(arc4random_uniform(UInt32(upperBound)))
-		return randomNumber + lowerBound
-	}
+
+	
 }
