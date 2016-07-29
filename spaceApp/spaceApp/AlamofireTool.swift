@@ -15,11 +15,11 @@ struct AlamofireTool: NetworkTool {
 		let validatedRequest = request.validate()
 		validatedRequest.responseJSON {
 			response in
-			print("http body: ")
-			print(response.request?.httpBody)
 			if response.result.isSuccess {
 				completionHandler(data: response.data, error: nil)
 			} else {
+				print(response.result.error?.localizedDescription)
+				print(response.request.debugDescription)
 				completionHandler(data: nil, error: response.result.error)
 			}
 		}
