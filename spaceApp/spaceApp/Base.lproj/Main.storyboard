@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TYk-Vg-bWI">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYk-Vg-bWI">
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ar1-z4-cvO">
                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -45,7 +45,7 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Ar1-z4-cvO" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" constant="8" id="Bxc-zV-bVq"/>
+                                    <constraint firstItem="Ar1-z4-cvO" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" id="Bxc-zV-bVq"/>
                                     <constraint firstItem="nNC-jT-ehx" firstAttribute="top" secondItem="TYk-Vg-bWI" secondAttribute="top" id="GIq-vp-qo4"/>
                                     <constraint firstAttribute="bottom" secondItem="Ar1-z4-cvO" secondAttribute="bottom" constant="16" id="H35-Ct-T16"/>
                                     <constraint firstItem="8cV-rt-aK8" firstAttribute="top" secondItem="nNC-jT-ehx" secondAttribute="bottom" constant="8" id="MHi-Eh-qNz"/>
@@ -53,7 +53,7 @@
                                     <constraint firstAttribute="trailing" secondItem="nNC-jT-ehx" secondAttribute="trailing" id="idX-D2-AcA"/>
                                     <constraint firstAttribute="trailing" secondItem="8cV-rt-aK8" secondAttribute="trailing" id="jfK-WN-lad"/>
                                     <constraint firstItem="nNC-jT-ehx" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" id="uqu-sm-L2x"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ar1-z4-cvO" secondAttribute="trailing" constant="8" id="vSY-jy-lBM"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ar1-z4-cvO" secondAttribute="trailing" id="vSY-jy-lBM"/>
                                     <constraint firstItem="nNC-jT-ehx" firstAttribute="centerX" secondItem="TYk-Vg-bWI" secondAttribute="centerX" id="va8-Pa-ZQh"/>
                                     <constraint firstItem="8cV-rt-aK8" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" id="wmZ-U4-0hx"/>
                                 </constraints>
