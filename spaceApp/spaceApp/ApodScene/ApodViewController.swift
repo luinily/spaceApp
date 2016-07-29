@@ -13,6 +13,7 @@ import UIKit
 
 protocol ApodViewControllerInput {
 	func displayApod(viewModel: ApodViewModel)
+	func displayApodError(viewModel: ApodErrorViewModel)
 }
 
 protocol ApodViewControllerOutput {
@@ -20,7 +21,7 @@ protocol ApodViewControllerOutput {
 	func fetchRandomApod(request: RandomApodRequest)
 }
 
-class ApodViewController: UIViewController, ApodViewControllerInput {
+class ApodViewController: UIViewController {
 	var output: ApodViewControllerOutput!
 	var router: ApodRouter!
 	var refreshControl: UIRefreshControl!
@@ -61,7 +62,30 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 	}
 	
 	// MARK: Display logic
+	private func setupRefreshControl() {
+		refreshControl = UIRefreshControl()
+		refreshScrollView.refreshControl = refreshControl
+		refreshControl.addTarget(self, action: #selector(ApodViewController.onRefreshPull), for: .valueChanged)
+	}
 	
+	func getImageViewFromScrollView() -> UIImageView? {
+		//ScrollView contains 2 UIImageView for the scrolls, ours is the third one
+		if imageScrollView.subviews.count == 3 {
+			let views = imageScrollView.subviews.filter() {
+					view in
+					return view.restorationIdentifier == "imageView"
+				}
+			return views.first as? UIImageView
+		}
+		return nil
+	}
+	
+	func onRefreshPull() {
+		output.fetchRandomApod(request: RandomApodRequest())
+	}
+}
+
+extension ApodViewController: ApodViewControllerInput {
 	func displayApod(viewModel: ApodViewModel) {
 		titleLabel.text = viewModel.title
 		explanationTextView.text = viewModel.explanation
@@ -104,26 +128,8 @@ class ApodViewController: UIViewController, ApodViewControllerInput {
 		}
 	}
 	
-	private func setupRefreshControl() {
-		refreshControl = UIRefreshControl()
-		refreshScrollView.refreshControl = refreshControl
-		refreshControl.addTarget(self, action: #selector(ApodViewController.onRefreshPull), for: .valueChanged)
-	}
-	
-	func getImageViewFromScrollView() -> UIImageView? {
-		//ScrollView contains 2 UIImageView for the scrolls, ours is the third one
-		if imageScrollView.subviews.count == 3 {
-			let views = imageScrollView.subviews.filter() {
-					view in
-					return view.restorationIdentifier == "imageView"
-				}
-			return views.first as? UIImageView
-		}
-		return nil
-	}
-	
-	func onRefreshPull() {
-		output.fetchRandomApod(request: RandomApodRequest())
+	func displayApodError(viewModel: ApodErrorViewModel) {
+		
 	}
 }
 

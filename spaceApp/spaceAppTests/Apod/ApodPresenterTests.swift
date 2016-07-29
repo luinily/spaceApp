@@ -54,11 +54,19 @@ extension ApodPresenterTests {
 extension ApodPresenterTests {
 	class MockOutput: ApodPresenterOutput {
 		var displayApodCalled = false
-		var viewModel: ApodViewModel!
+		var apodViewModel: ApodViewModel?
+		
+		var displayApodErrorCalled = false
+		var errorViewModel: ApodErrorViewModel?
 		
 		func displayApod(viewModel: ApodViewModel) {
 			displayApodCalled = true
-			self.viewModel = viewModel
+			self.apodViewModel = viewModel
+		}
+		
+		func displayApodError(viewModel: ApodErrorViewModel) {
+			displayApodErrorCalled = true
+			errorViewModel = viewModel
 		}
 	}
 }
@@ -78,6 +86,7 @@ extension ApodPresenterTests {
 	}
 	
 	func test_presentApod_viewModelContainsTitle() {
+		// Arrange
 		let title = "title"
 		let apodData = ApodData(title: title, url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
 		let response = ApodResponse(apodData: apodData)
@@ -86,10 +95,11 @@ extension ApodPresenterTests {
 		target.presentApod(response: response)
 		
 		// Assert
-		XCTAssertEqual(mockOutput.viewModel.title, title)
+		XCTAssertEqual(mockOutput.apodViewModel?.title, title)
 	}
 	
 	func test_presentApod_viewModelContainsFormatedDate() {
+		// Arrange
 		let date = makeDate(year: 2016, month: 07, day: 18)
 		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: date, explanation: "", copyright: "")
 		let response = ApodResponse(apodData: apodData)
@@ -98,10 +108,11 @@ extension ApodPresenterTests {
 		target.presentApod(response: response)
 		
 		// Assert
-		XCTAssertEqual(mockOutput.viewModel.date, "2016年07月18日")
+		XCTAssertEqual(mockOutput.apodViewModel?.date, "2016年07月18日")
 	}
 	
 	func test_presentApod_viewModelContainsExplaination() {
+		// Arrange
 		let explanation = "explanation"
 		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: explanation, copyright: "")
 		let response = ApodResponse(apodData: apodData)
@@ -110,10 +121,11 @@ extension ApodPresenterTests {
 		target.presentApod(response: response)
 		
 		// Assert
-		XCTAssertEqual(mockOutput.viewModel.explanation, explanation)
+		XCTAssertEqual(mockOutput.apodViewModel?.explanation, explanation)
 	}
 	
 	func test_presentApod_viewModelContainsCopyright() {
+		// Arrange
 		let copyright = "copyright"
 		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: copyright)
 		let response = ApodResponse(apodData: apodData)
@@ -122,10 +134,11 @@ extension ApodPresenterTests {
 		target.presentApod(response: response)
 		
 		// Assert
-		XCTAssertEqual(mockOutput.viewModel.copyright, copyright)
+		XCTAssertEqual(mockOutput.apodViewModel?.copyright, copyright)
 	}
 	
 	func test_presentApod_viewModelContainsUIImage() {
+		// Arrange
 		let url = URL(string: "http://apod.nasa.gov/apod/image/1607/NGC2736NBbicolor_1250_Jurasevich1024c.jpg")!
 		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: url, date: Date(), explanation: "", copyright: "")
 		let response = ApodResponse(apodData: apodData)
@@ -134,6 +147,37 @@ extension ApodPresenterTests {
 		target.presentApod(response: response)
 		
 		// Assert
-		XCTAssertNotEqual(mockOutput.viewModel.picture?.size, CGSize.zero)
+		XCTAssertNotEqual(mockOutput.apodViewModel?.picture?.size, CGSize.zero)
+	}
+	
+	func test_presentError_DisplayApodErrorCalled() {
+		// Arrange
+		var userInfo = [NSObject: AnyObject]()
+		userInfo[NSLocalizedDescriptionKey] = "Error"
+		let error = NSError(domain: "World", code: 200, userInfo: userInfo)
+		
+		let response = ApodErrorResponse(error: error)
+		
+		// Act
+		target.presentError(response: response)
+		
+		// Assert
+		XCTAssertTrue(mockOutput.displayApodErrorCalled)
+	}
+	
+	func test_presentError_ViewModelContainsLocalizedDescription() {
+		// Arrange
+		let errorMessage = "Error"
+		var userInfo = [NSObject: AnyObject]()
+		userInfo[NSLocalizedDescriptionKey] = errorMessage
+		let error = NSError(domain: "World", code: 200, userInfo: userInfo)
+		
+		let response = ApodErrorResponse(error: error)
+		
+		// Act
+		target.presentError(response: response)
+		
+		// Assert
+		XCTAssertEqual(mockOutput.errorViewModel?.errorMessage, errorMessage)
 	}
 }

@@ -18,6 +18,7 @@ protocol ApodPresenterInput {
 
 protocol ApodPresenterOutput: class {
 	func displayApod(viewModel: ApodViewModel)
+	func displayApodError(viewModel: ApodErrorViewModel)
 }
 
 class ApodPresenter: ApodPresenterInput {
@@ -56,7 +57,8 @@ class ApodPresenter: ApodPresenterInput {
 	}
 	
 	func presentError(response: ApodErrorResponse) {
-		
+		let viewModel = ApodErrorViewModel(errorMessage: response.error.localizedDescription)
+		output.displayApodError(viewModel: viewModel)
 	}
 	
 }

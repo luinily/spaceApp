@@ -33,3 +33,7 @@ struct ApodViewModel {
 	var explanation: String
 	var copyright: String
 }
+
+struct ApodErrorViewModel {
+	var errorMessage: String
+}
