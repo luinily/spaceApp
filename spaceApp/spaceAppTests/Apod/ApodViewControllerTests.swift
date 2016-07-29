@@ -50,13 +50,17 @@ extension ApodViewControllerTests {
 		RunLoop.current.run(until: Date())
 	}
 	
-	func prepareViewModel() -> ApodViewModel {
+	func prepareViewModel() -> ApodDataViewModel {
 		let title = "Title"
-		let picture = UIImage(imageLiteralResourceName: "UnitTestImage")
 		let date = "2016年07月19日"
 		let explanation = "explanation"
 		let copyright = "copyright"
-		return ApodViewModel(title: title, picture: picture, date: date, explanation: explanation, copyright: copyright)
+		return ApodDataViewModel(title: title, date: date, explanation: explanation, copyright: copyright)
+	}
+	
+	func prepareImageViewModel() -> ApodImageViewModel {
+		let picture = UIImage(imageLiteralResourceName: "UnitTestImage")
+		return ApodImageViewModel(picture: picture)
 	}
 }
 
@@ -159,39 +163,55 @@ extension ApodViewControllerTests {
 		XCTAssertEqual(target.explanationTextView.text, viewModel.explanation)
 	}
 	
-	func test_displayApod_ScrollViewHasSubview() {
+	func test_displayApod_RemovesImage() {
 		// Arrange
 		loadView()
-		let viewModel = prepareViewModel()
+		let imageViewModel = prepareImageViewModel()
+		target.displayImage(viewModel: imageViewModel)
+		XCTAssertEqual(target.imageScrollView.subviews.count, 3)
 		
 		// Act
+		let viewModel = prepareViewModel()
 		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertEqual(target.imageScrollView.subviews.count, 2)
+	}
+	
+	//MARK: displayImage
+	func test_displayImage_ScrollViewHasSubview() {
+		// Arrange
+		loadView()
+		let viewModel = prepareImageViewModel()
+		
+		// Act
+		target.displayImage(viewModel: viewModel)
 		
 		// Assert
 		XCTAssertFalse(target.imageScrollView.subviews.isEmpty)
 	}
 	
-	func test_displayApod_ScrollViewSubviewsDoNotAddup() {
+	func test_displayImage_ScrollViewSubviewsDoNotAddup() {
 		// Arrange
 		loadView()
-		let viewModel = prepareViewModel()
+		let viewModel = prepareImageViewModel()
 		
 		// Act
-		target.displayApod(viewModel: viewModel)
-		target.displayApod(viewModel: viewModel)
+		target.displayImage(viewModel: viewModel)
+		target.displayImage(viewModel: viewModel)
 		
 		// Assert
 		XCTAssertEqual(target.imageScrollView.subviews.count, 3)
 		//the scroll views contains 2 views for the sliders and our view making it 3
 	}
 	
-	func test_displayApod_ScrollViewContentsSizeSetToImageSize() {
+	func test_displayImage_ScrollViewContentsSizeSetToImageSize() {
 		// Arrange
 		loadView()
-		let viewModel = prepareViewModel()
+		let viewModel = prepareImageViewModel()
 		
 		// Act
-		target.displayApod(viewModel: viewModel)
+		target.displayImage(viewModel: viewModel)
 		
 		// Assert
 		let width = viewModel.picture!.size.width * target.imageScrollView.zoomScale
@@ -200,32 +220,32 @@ extension ApodViewControllerTests {
 		XCTAssertEqual(target.imageScrollView.contentSize.width, width)
 	}
 	
-	func test_displayApod_SetsImageViewFrame() {
+	func test_displayImage_SetsImageViewFrame() {
 		// Arrange
 		loadView()
-		let viewModel = prepareViewModel()
+		let viewModel = prepareImageViewModel()
 		
 		
 		// Act
-		target.displayApod(viewModel: viewModel)
+		target.displayImage(viewModel: viewModel)
 		let imageView = target.getImageViewFromScrollView()
 		
 		// Assert
 		let width = viewModel.picture!.size.width * target.imageScrollView.zoomScale
 		let height = viewModel.picture!.size.height * target.imageScrollView.zoomScale
-
+		
 		XCTAssertEqualWithAccuracy((imageView?.frame.width)!, width, accuracy: 0.0001)
 		XCTAssertEqualWithAccuracy((imageView?.frame.height)!, height, accuracy: 0.0001)
 	}
 	
-	func test_displayApod_SetsScrollViewMinimumZoomScale() {
+	func test_displayImage_SetsScrollViewMinimumZoomScale() {
 		// Arrange
 		loadView()
-		let viewModel = prepareViewModel()
+		let viewModel = prepareImageViewModel()
 		let scale = calculateMinimumZoomScale(imageScrollView: target.imageScrollView, picture: viewModel.picture!)
 		
 		// Act
-		target.displayApod(viewModel: viewModel)
+		target.displayImage(viewModel: viewModel)
 		
 		// Assert
 		XCTAssertEqual(target.imageScrollView.minimumZoomScale, scale)
@@ -238,13 +258,13 @@ extension ApodViewControllerTests {
 		return min(minWidthScale, minHeightScale)
 	}
 	
-	func test_displayApod_SetsScrollViewScaleToMinimumZoomScale() {
+	func test_displayImage_SetsScrollViewScaleToMinimumZoomScale() {
 		// Arrange
 		loadView()
-		let viewModel = prepareViewModel()
+		let viewModel = prepareImageViewModel()
 		
 		// Act
-		target.displayApod(viewModel: viewModel)
+		target.displayImage(viewModel: viewModel)
 		
 		// Assert
 		XCTAssertEqual(target.imageScrollView.zoomScale, target.imageScrollView.minimumZoomScale)

@@ -17,8 +17,9 @@ protocol ApodPresenterInput {
 }
 
 protocol ApodPresenterOutput: class {
-	func displayApod(viewModel: ApodViewModel)
+	func displayApod(viewModel: ApodDataViewModel)
 	func displayApodError(viewModel: ApodErrorViewModel)
+	func displayImage(viewModel: ApodImageViewModel)
 }
 
 class ApodPresenter: ApodPresenterInput {
@@ -27,19 +28,29 @@ class ApodPresenter: ApodPresenterInput {
 	// MARK: Presentation logic
 	
 	func presentApod(response: ApodResponse) {
-		let viewModel = makeApodViewModel(apodData: response.apodData) 
+		let apodViewModel = makeApodViewModel(apodData: response.apodData)
+		output.displayApod(viewModel: apodViewModel)
 		
-		output.displayApod(viewModel: viewModel)
+		DispatchQueue.global(attributes: .qosUserInitiated).async {
+			let imageViewModel = self.makeApodImageViewModel(apodData: response.apodData)
+			DispatchQueue.main.async {
+				self.output.displayImage(viewModel: imageViewModel)
+			}
+		}
 	}
 	
-	private func makeApodViewModel(apodData: ApodData) -> ApodViewModel {
+	private func makeApodViewModel(apodData: ApodData) -> ApodDataViewModel {
 		let title = apodData.title
 		let date = dateToString(date: apodData.date)
 		let explanation = apodData.explanation
 		let copyright = apodData.copyright
-		let picture = loadImage(url: apodData.hdUrl)
 		
-		return ApodViewModel(title: title, picture: picture, date: date, explanation: explanation, copyright: copyright)
+		return ApodDataViewModel(title: title, date: date, explanation: explanation, copyright: copyright)
+	}
+	
+	private func makeApodImageViewModel(apodData: ApodData) -> ApodImageViewModel {
+		let picture = loadImage(url: apodData.hdUrl)
+		return ApodImageViewModel(picture: picture)
 	}
 	
 	private func dateToString(date: Date) -> String {

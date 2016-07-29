@@ -54,12 +54,15 @@ extension ApodPresenterTests {
 extension ApodPresenterTests {
 	class MockOutput: ApodPresenterOutput {
 		var displayApodCalled = false
-		var apodViewModel: ApodViewModel?
+		var apodViewModel: ApodDataViewModel? = nil
 		
 		var displayApodErrorCalled = false
-		var errorViewModel: ApodErrorViewModel?
+		var errorViewModel: ApodErrorViewModel? = nil
 		
-		func displayApod(viewModel: ApodViewModel) {
+		var displayImageCalled = false
+		var imageViewModel: ApodImageViewModel? = nil
+		
+		func displayApod(viewModel: ApodDataViewModel) {
 			displayApodCalled = true
 			self.apodViewModel = viewModel
 		}
@@ -67,6 +70,11 @@ extension ApodPresenterTests {
 		func displayApodError(viewModel: ApodErrorViewModel) {
 			displayApodErrorCalled = true
 			errorViewModel = viewModel
+		}
+		
+		func displayImage(viewModel: ApodImageViewModel) {
+			displayImageCalled = true
+			imageViewModel = viewModel
 		}
 	}
 }
@@ -137,18 +145,30 @@ extension ApodPresenterTests {
 		XCTAssertEqual(mockOutput.apodViewModel?.copyright, copyright)
 	}
 	
-	func test_presentApod_viewModelContainsUIImage() {
-		// Arrange
-		let url = URL(string: "http://apod.nasa.gov/apod/image/1607/NGC2736NBbicolor_1250_Jurasevich1024c.jpg")!
-		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: url, date: Date(), explanation: "", copyright: "")
-		let response = ApodResponse(apodData: apodData)
-		
-		// Act
-		target.presentApod(response: response)
-		
-		// Assert
-		XCTAssertNotEqual(mockOutput.apodViewModel?.picture?.size, CGSize.zero)
-	}
+//	func test_presentApod_displayImageIsCalled() {
+//		// Arrange
+//		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
+//		let response = ApodResponse(apodData: apodData)
+//		
+//		// Act
+//		target.presentApod(response: response)
+//		
+//		// Assert
+//		XCTAssertTrue(mockOutput.displayImageCalled)
+//	}
+//	
+//	func test_presentApod_viewModelContainsUIImage() {
+//		// Arrange
+//		let url = URL(string: "http://apod.nasa.gov/apod/image/1607/NGC2736NBbicolor_1250_Jurasevich1024c.jpg")!
+//		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: url, date: Date(), explanation: "", copyright: "")
+//		let response = ApodResponse(apodData: apodData)
+//		
+//		// Act
+//		target.presentApod(response: response)
+//		
+//		// Assert
+//		XCTAssertNotNil(mockOutput.imageViewModel?.picture)
+//	}
 	
 	func test_presentError_DisplayApodErrorCalled() {
 		// Arrange

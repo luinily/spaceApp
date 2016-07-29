@@ -12,7 +12,8 @@
 import UIKit
 
 protocol ApodViewControllerInput {
-	func displayApod(viewModel: ApodViewModel)
+	func displayApod(viewModel: ApodDataViewModel)
+	func displayImage(viewModel: ApodImageViewModel)
 	func displayApodError(viewModel: ApodErrorViewModel)
 }
 
@@ -61,6 +62,10 @@ class ApodViewController: UIViewController {
 		output.fetchTodayApod(request: request)
 	}
 	
+	func onRefreshPull() {
+		output.fetchRandomApod(request: RandomApodRequest())
+	}
+	
 	// MARK: Display logic
 	private func setupRefreshControl() {
 		refreshControl = UIRefreshControl()
@@ -80,15 +85,22 @@ class ApodViewController: UIViewController {
 		return nil
 	}
 	
-	func onRefreshPull() {
-		output.fetchRandomApod(request: RandomApodRequest())
-	}
+	
 }
 
 extension ApodViewController: ApodViewControllerInput {
-	func displayApod(viewModel: ApodViewModel) {
+	func displayApod(viewModel: ApodDataViewModel) {
 		titleLabel.text = viewModel.title
 		explanationTextView.text = viewModel.explanation
+		removeImageView()
+	}
+	
+	private func removeImageView() {
+		let subview = getImageViewFromScrollView()
+		subview?.removeFromSuperview()
+	}
+	
+	func displayImage(viewModel: ApodImageViewModel) {
 		if let picture = viewModel.picture {
 			setPicture(picture: picture)
 		}

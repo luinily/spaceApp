@@ -26,12 +26,15 @@ struct ApodErrorResponse {
 	var error: NSError
 }
 
-struct ApodViewModel {
+struct ApodDataViewModel {
 	var title: String
-	var picture: UIImage?
 	var date: String
 	var explanation: String
 	var copyright: String
+}
+
+struct ApodImageViewModel {
+	var picture: UIImage?
 }
 
 struct ApodErrorViewModel {

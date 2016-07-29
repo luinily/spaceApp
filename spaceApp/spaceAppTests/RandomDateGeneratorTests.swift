@@ -69,7 +69,6 @@ extension RandomDateGeneratorTests {
 			let currentDate = target.generateDate()
 			
 			//Assert
-			
 			if let previousDate = previousDate {
 				if let previousPreviousDate = previousPreviousDate {
 					let currentSameThanPrevious = currentDate == previousDate
@@ -81,5 +80,4 @@ extension RandomDateGeneratorTests {
 			previousDate = currentDate
 		}
 	}
-
 }
