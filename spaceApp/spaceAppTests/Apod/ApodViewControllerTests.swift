@@ -78,6 +78,7 @@ extension ApodViewControllerTests {
 
 // MARK: Tests
 extension ApodViewControllerTests {
+	//MARK: ViewDidLoad
 	func test_viewDidLoad_fetchTodaysApodIsCalled() {
 		// Arrange
 		
@@ -133,6 +134,7 @@ extension ApodViewControllerTests {
 		XCTAssertEqual(target.refreshControl.allTargets().count, 1)
 	}
 
+	//MARK: displayApod
 	func test_displayApod_TitleIsDisplayed() {
 		// Arrange
 		loadView()
@@ -248,6 +250,22 @@ extension ApodViewControllerTests {
 		XCTAssertEqual(target.imageScrollView.zoomScale, target.imageScrollView.minimumZoomScale)
 	}
 	
+	//MARK: displayError
+	func test_displayError_StopsTheRefreshControl() {
+		// Arrange
+		loadView()
+		let viewModel = ApodErrorViewModel(errorMessage: "Error Message")
+		target.refreshControl.beginRefreshing()
+		
+		// Act
+		target.displayApodError(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertFalse(target.refreshControl.isRefreshing)
+	}
+	
+	
+	//MARK: onRefreshPull
 	func test_onRefreshPull_CallsOutput_fetchRandomApod() {
 		// Arrange
 		loadView()

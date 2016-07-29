@@ -129,7 +129,13 @@ extension ApodViewController: ApodViewControllerInput {
 	}
 	
 	func displayApodError(viewModel: ApodErrorViewModel) {
+		let alert = UIAlertController(title: "Alert", message: viewModel.errorMessage, preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+		self.present(alert, animated: true, completion: nil)
 		
+		if refreshControl.isRefreshing {
+			refreshControl.endRefreshing()
+		}
 	}
 }
 
