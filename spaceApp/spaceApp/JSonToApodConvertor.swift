@@ -14,10 +14,7 @@ enum JSonToApodConvertorError: ErrorProtocol {
 	case dateNotInJson
 	case couldNotConvertDateStringToDate
 	case explanationNotInJson
-	case hdUrlNotInJson
 	case urlNotInJSon
-	case canNotMakeURLFromHdUrl
-	case canNotMakeURLFromUrl
 	case titleNotInJson
 }
 
@@ -56,27 +53,25 @@ struct JsonToApodConvertor: DataToApodDataConverter {
 			throw JSonToApodConvertorError.explanationNotInJson
 		}
 
-		guard let hdurlString = json["hdurl"] as? String else {
-			throw JSonToApodConvertorError.hdUrlNotInJson
+		guard let normalUrl = getURL(from: json, forTag: "url") else {
+			throw JSonToApodConvertorError.urlNotInJSon
 		}
 		
-		guard let hdUrl = URL(string: hdurlString) else {
-			throw JSonToApodConvertorError.canNotMakeURLFromHdUrl
-		}
+		let hdUrl = getURL(from: json, forTag: "hdurl")
 		
 		guard let title = json["title"] as? String else {
 			throw JSonToApodConvertorError.titleNotInJson
 		}
 		
-		guard let urlString = json["url"] as? String else {
-			throw JSonToApodConvertorError.urlNotInJSon
+		return ApodData(title: title, url: normalUrl, hdUrl: hdUrl, date: date, explanation: explanation, copyright: copyright)
+	}
+	
+	private func getURL(from json: [String: AnyObject], forTag tag: String) -> URL? {
+		guard let urlString = json[tag] as? String else {
+			return nil
 		}
 		
-		guard let url = URL(string: urlString) else {
-			throw JSonToApodConvertorError.canNotMakeURLFromUrl
-		}
-		
-		return ApodData(title: title, url: url, hdUrl: hdUrl, date: date, explanation: explanation, copyright: copyright)
+		return URL(string: urlString)
 	}
 	
 }

@@ -49,7 +49,13 @@ class ApodPresenter: ApodPresenterInput {
 	}
 	
 	private func makeApodImageViewModel(apodData: ApodData) -> ApodImageViewModel {
-		let picture = loadImage(url: apodData.hdUrl)
+		let picture: UIImage?
+		if let url = apodData.hdUrl {
+			picture = loadImage(url: url)
+		} else {
+			picture = loadImage(url: apodData.url)
+		}
+		
 		return ApodImageViewModel(picture: picture)
 	}
 	

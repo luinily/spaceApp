@@ -11,7 +11,7 @@ import Foundation
 struct ApodData {
 	var title: String
 	var url: URL
-	var hdUrl: URL
+	var hdUrl: URL?
 	var date: Date
 	var explanation: String
 	var copyright: String

@@ -59,11 +59,13 @@ class ApodViewController: UIViewController {
 		// NOTE: Ask the Interactor to do some work
 		
 		let request = TodayApodRequest()
+		UIApplication.shared().isNetworkActivityIndicatorVisible = true
 		output.fetchTodayApod(request: request)
 	}
 	
 	func onRefreshPull() {
 		output.fetchRandomApod(request: RandomApodRequest())
+		UIApplication.shared().isNetworkActivityIndicatorVisible = true
 	}
 	
 	// MARK: Display logic
@@ -105,6 +107,7 @@ extension ApodViewController: ApodViewControllerInput {
 			setPicture(picture: picture)
 		}
 		
+		UIApplication.shared().isNetworkActivityIndicatorVisible = false
 		if refreshControl.isRefreshing {
 			refreshControl.endRefreshing()
 		}
