@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum JSonToApodConvertorError: ErrorProtocol {
+enum JSonToApodConvertorError: Error {
 	case couldNotConvertDataToJson
 	case dataWasNotJsonDictionaryData
 	case dateNotInJson

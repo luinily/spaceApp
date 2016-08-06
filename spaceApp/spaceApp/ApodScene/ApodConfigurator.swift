@@ -64,7 +64,7 @@ class ApodConfigurator {
 	}
 	
 	private func getInitializer() -> Initializer? {
-		let appDelegate = UIApplication.shared().delegate as? AppDelegate
+		let appDelegate = UIApplication.shared.delegate as? AppDelegate
 		return appDelegate?.initializer
 	}
 }

@@ -31,7 +31,7 @@ class ApodPresenter: ApodPresenterInput {
 		let apodViewModel = makeApodViewModel(apodData: response.apodData)
 		output.displayApod(viewModel: apodViewModel)
 		
-		DispatchQueue.global(attributes: .qosUserInitiated).async {
+		DispatchQueue.global(qos: .userInitiated).async {
 			let imageViewModel = self.makeApodImageViewModel(apodData: response.apodData)
 			DispatchQueue.main.async {
 				self.output.displayImage(viewModel: imageViewModel)

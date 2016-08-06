@@ -74,19 +74,21 @@ struct RandomDateGenerator {
 		} else {
 			if let date = makeDate(year: year, month: month, day: 1) {
 				let range = Calendar.current.range(of: .day, in: .month, for: date)
-				return range.length
-			} else {
-				return 28
+				if let range = range {
+					return range.upperBound
+				}
 			}
+			
+			return 28
 		}
 		
 	}
-	private func isLowerBound(unit: Calendar.Unit, value: Int) -> Bool {
+	private func isLowerBound(unit: Calendar.Component, value: Int) -> Bool {
 		let higherBound = Calendar.current.component(unit, from: self.higherBound)
 		return value == higherBound
 	}
 	
-	private func isHigherBound(unit: Calendar.Unit, value: Int) -> Bool {
+	private func isHigherBound(unit: Calendar.Component, value: Int) -> Bool {
 		let lowerBound = Calendar.current.component(unit, from: self.lowerBound)
 		return value == lowerBound
 	}

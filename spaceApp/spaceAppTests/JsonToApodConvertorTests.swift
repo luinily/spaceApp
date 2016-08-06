@@ -49,7 +49,7 @@ extension JsonToApodConvertorTests {
 		components.year = 2016
 		components.hour = 0
 		components.minute = 0
-		return calendar!.date(from: components)!
+		return calendar.date(from: components)!
 	}
 }
 

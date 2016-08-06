@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F0149021D5332D200466851 /* PictureDownloadWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0149011D5332D200466851 /* PictureDownloadWorker.swift */; };
+		8F0149041D53335300466851 /* PictureDownloadWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0149031D53335300466851 /* PictureDownloadWorkerTests.swift */; };
 		8F1CD6511D488661000AEF2F /* RandomDateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CD6501D488661000AEF2F /* RandomDateGenerator.swift */; };
 		8F1CD6531D4886B7000AEF2F /* RandomDateGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CD6521D4886B7000AEF2F /* RandomDateGeneratorTests.swift */; };
 		8F4387491D38D2EB00E21C3F /* DataToApodDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4387481D38D2EB00E21C3F /* DataToApodDataConverter.swift */; };
@@ -26,6 +28,8 @@
 		8F941E151D3742C400C56ACE /* ApodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E141D3742C400C56ACE /* ApodData.swift */; };
 		8F941E171D3743F300C56ACE /* NetworkApodStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E161D3743F300C56ACE /* NetworkApodStore.swift */; };
 		8F941E191D37486300C56ACE /* NetworkApodStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E181D37486300C56ACE /* NetworkApodStoreTests.swift */; };
+		8F9D06B31D4E9968003C7127 /* AlamofirePictureDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9D06B21D4E9968003C7127 /* AlamofirePictureDownloader.swift */; };
+		8F9D06B51D4EB8F5003C7127 /* PictureDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9D06B41D4EB8F5003C7127 /* PictureDownloader.swift */; };
 		8FAD050A1D408EE300E92486 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD05091D408EE300E92486 /* Alamofire.framework */; };
 		8FAD050B1D408EE300E92486 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD05091D408EE300E92486 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8FB2948E1D3B29B400E6C7A3 /* ApodConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294871D3B29B400E6C7A3 /* ApodConfigurator.swift */; };
@@ -75,6 +79,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8F0149011D5332D200466851 /* PictureDownloadWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDownloadWorker.swift; sourceTree = "<group>"; };
+		8F0149031D53335300466851 /* PictureDownloadWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDownloadWorkerTests.swift; sourceTree = "<group>"; };
 		8F1CD6501D488661000AEF2F /* RandomDateGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomDateGenerator.swift; sourceTree = "<group>"; };
 		8F1CD6521D4886B7000AEF2F /* RandomDateGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomDateGeneratorTests.swift; sourceTree = "<group>"; };
 		8F4387481D38D2EB00E21C3F /* DataToApodDataConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataToApodDataConverter.swift; sourceTree = "<group>"; };
@@ -100,6 +106,8 @@
 		8F941E141D3742C400C56ACE /* ApodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApodData.swift; sourceTree = "<group>"; };
 		8F941E161D3743F300C56ACE /* NetworkApodStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkApodStore.swift; sourceTree = "<group>"; };
 		8F941E181D37486300C56ACE /* NetworkApodStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkApodStoreTests.swift; path = spaceAppTests/NetworkApodStoreTests.swift; sourceTree = SOURCE_ROOT; };
+		8F9D06B21D4E9968003C7127 /* AlamofirePictureDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofirePictureDownloader.swift; sourceTree = "<group>"; };
+		8F9D06B41D4EB8F5003C7127 /* PictureDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDownloader.swift; sourceTree = "<group>"; };
 		8FAD05091D408EE300E92486 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Alamofire.framework; path = "/Users/yoann/Library/Developer/Xcode/DerivedData/spaceApp-cvfjiopmfxavzfcbnqypywvblowr/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<absolute>"; };
 		8FB294871D3B29B400E6C7A3 /* ApodConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodConfigurator.swift; path = ApodScene/ApodConfigurator.swift; sourceTree = "<group>"; };
 		8FB294881D3B29B400E6C7A3 /* ApodInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodInteractor.swift; path = ApodScene/ApodInteractor.swift; sourceTree = "<group>"; };
@@ -178,6 +186,8 @@
 				8F941E141D3742C400C56ACE /* ApodData.swift */,
 				8F1CD6501D488661000AEF2F /* RandomDateGenerator.swift */,
 				8F941DD71D363A9E00C56ACE /* AppDelegate.swift */,
+				8F9D06B21D4E9968003C7127 /* AlamofirePictureDownloader.swift */,
+				8F9D06B41D4EB8F5003C7127 /* PictureDownloader.swift */,
 				8FB294951D3B29BE00E6C7A3 /* ApodScene */,
 				8F941DDB1D363A9E00C56ACE /* Main.storyboard */,
 				8F941DE11D363A9E00C56ACE /* Assets.xcassets */,
@@ -219,6 +229,7 @@
 				8FB2948A1D3B29B400E6C7A3 /* ApodPresenter.swift */,
 				8FB2948B1D3B29B400E6C7A3 /* ApodRouter.swift */,
 				8FB2948C1D3B29B400E6C7A3 /* ApodViewController.swift */,
+				8F0149011D5332D200466851 /* PictureDownloadWorker.swift */,
 				8FB2948D1D3B29B400E6C7A3 /* ApodWorker.swift */,
 			);
 			name = ApodScene;
@@ -230,6 +241,7 @@
 				8FB294961D3B29EE00E6C7A3 /* ApodInteractorTests.swift */,
 				8FB294971D3B29EE00E6C7A3 /* ApodPresenterTests.swift */,
 				8FB294981D3B29EE00E6C7A3 /* ApodViewControllerTests.swift */,
+				8F0149031D53335300466851 /* PictureDownloadWorkerTests.swift */,
 				8FB294991D3B29EE00E6C7A3 /* ApodWorkerTests.swift */,
 			);
 			name = ApodScene;
@@ -261,9 +273,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F941E021D363A9E00C56ACE /* Build configuration list for PBXNativeTarget "spaceAppTests" */;
 			buildPhases = (
+				696CDB0E1683C0ED047F4D21 /* [CP] Check Pods Manifest.lock */,
 				8F941DE71D363A9E00C56ACE /* Sources */,
 				8F941DE81D363A9E00C56ACE /* Frameworks */,
 				8F941DE91D363A9E00C56ACE /* Resources */,
+				866EF70B9472A40F7B68A447 /* [CP] Embed Pods Frameworks */,
+				09223C26BA082231DDE14A01 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -279,9 +294,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F941E051D363A9E00C56ACE /* Build configuration list for PBXNativeTarget "spaceAppUITests" */;
 			buildPhases = (
+				54D6C8D847B47891F1CE3E8F /* [CP] Check Pods Manifest.lock */,
 				8F941DF21D363A9E00C56ACE /* Sources */,
 				8F941DF31D363A9E00C56ACE /* Frameworks */,
 				8F941DF41D363A9E00C56ACE /* Resources */,
+				A7DF797043C71EA062D66B4B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -373,6 +390,66 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		09223C26BA082231DDE14A01 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-spaceAppTests/Pods-spaceAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		54D6C8D847B47891F1CE3E8F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		696CDB0E1683C0ED047F4D21 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		866EF70B9472A40F7B68A447 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-spaceAppTests/Pods-spaceAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8F6D54DF1D4079720018773D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -386,6 +463,21 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
+		A7DF797043C71EA062D66B4B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-spaceAppUITests/Pods-spaceAppUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -393,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F0149021D5332D200466851 /* PictureDownloadWorker.swift in Sources */,
 				8FB294921D3B29B400E6C7A3 /* ApodRouter.swift in Sources */,
 				8FB294901D3B29B400E6C7A3 /* ApodModels.swift in Sources */,
 				8F941E111D373DBD00C56ACE /* NetworkTool.swift in Sources */,
@@ -406,8 +499,10 @@
 				8FB2948F1D3B29B400E6C7A3 /* ApodInteractor.swift in Sources */,
 				8F941DD81D363A9E00C56ACE /* AppDelegate.swift in Sources */,
 				8F941E0D1D3739F800C56ACE /* ApodStore.swift in Sources */,
+				8F9D06B51D4EB8F5003C7127 /* PictureDownloader.swift in Sources */,
 				8F941E131D373E4100C56ACE /* AlamofireTool.swift in Sources */,
 				8FB2948E1D3B29B400E6C7A3 /* ApodConfigurator.swift in Sources */,
+				8F9D06B31D4E9968003C7127 /* AlamofirePictureDownloader.swift in Sources */,
 				8F43874F1D39E69800E21C3F /* JSonToApodConvertor.swift in Sources */,
 				8FB294911D3B29B400E6C7A3 /* ApodPresenter.swift in Sources */,
 				8F941E151D3742C400C56ACE /* ApodData.swift in Sources */,
@@ -421,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FB2949D1D3B29EE00E6C7A3 /* ApodWorkerTests.swift in Sources */,
+				8F0149041D53335300466851 /* PictureDownloadWorkerTests.swift in Sources */,
 				8F766AAE1D39FE1B0024442F /* ApodDateConvertorTests.swift in Sources */,
 				8F1CD6531D4886B7000AEF2F /* RandomDateGeneratorTests.swift in Sources */,
 				8F941E191D37486300C56ACE /* NetworkApodStoreTests.swift in Sources */,
@@ -569,7 +665,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = spaceApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -582,7 +678,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = spaceApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -594,7 +690,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = spaceAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -607,7 +703,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = spaceAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

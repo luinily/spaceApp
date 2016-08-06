@@ -49,7 +49,7 @@ class ApodViewController: UIViewController {
 		setupRefreshControl()
 	}
 	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+	override var preferredStatusBarStyle: UIStatusBarStyle {
 		return .lightContent
 	}
 	
@@ -59,13 +59,13 @@ class ApodViewController: UIViewController {
 		// NOTE: Ask the Interactor to do some work
 		
 		let request = TodayApodRequest()
-		UIApplication.shared().isNetworkActivityIndicatorVisible = true
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 		output.fetchTodayApod(request: request)
 	}
 	
 	func onRefreshPull() {
 		output.fetchRandomApod(request: RandomApodRequest())
-		UIApplication.shared().isNetworkActivityIndicatorVisible = true
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 	}
 	
 	// MARK: Display logic
@@ -107,7 +107,7 @@ extension ApodViewController: ApodViewControllerInput {
 			setPicture(picture: picture)
 		}
 		
-		UIApplication.shared().isNetworkActivityIndicatorVisible = false
+		UIApplication.shared.isNetworkActivityIndicatorVisible = false
 		if refreshControl.isRefreshing {
 			refreshControl.endRefreshing()
 		}
@@ -146,6 +146,7 @@ extension ApodViewController: ApodViewControllerInput {
 	func displayApodError(viewModel: ApodErrorViewModel) {
 		presentAlert(errorMessage: viewModel.errorMessage)
 		
+		UIApplication.shared.isNetworkActivityIndicatorVisible = false
 		if refreshControl.isRefreshing {
 			refreshControl.endRefreshing()
 		}
@@ -156,6 +157,7 @@ extension ApodViewController: ApodViewControllerInput {
 		alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
 		self.present(alert, animated: true, completion: nil)
 	}
+	
 }
 
 extension ApodViewController: UIScrollViewDelegate {
