@@ -9,6 +9,6 @@
 import Foundation
 import UIKit
 
-protocol PictureDonwloader {
+protocol PictureDownloader {
 	func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void)
 }

@@ -273,12 +273,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F941E021D363A9E00C56ACE /* Build configuration list for PBXNativeTarget "spaceAppTests" */;
 			buildPhases = (
-				696CDB0E1683C0ED047F4D21 /* [CP] Check Pods Manifest.lock */,
 				8F941DE71D363A9E00C56ACE /* Sources */,
 				8F941DE81D363A9E00C56ACE /* Frameworks */,
 				8F941DE91D363A9E00C56ACE /* Resources */,
-				866EF70B9472A40F7B68A447 /* [CP] Embed Pods Frameworks */,
-				09223C26BA082231DDE14A01 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -294,11 +291,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F941E051D363A9E00C56ACE /* Build configuration list for PBXNativeTarget "spaceAppUITests" */;
 			buildPhases = (
-				54D6C8D847B47891F1CE3E8F /* [CP] Check Pods Manifest.lock */,
 				8F941DF21D363A9E00C56ACE /* Sources */,
 				8F941DF31D363A9E00C56ACE /* Frameworks */,
 				8F941DF41D363A9E00C56ACE /* Resources */,
-				A7DF797043C71EA062D66B4B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -390,66 +385,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		09223C26BA082231DDE14A01 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-spaceAppTests/Pods-spaceAppTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		54D6C8D847B47891F1CE3E8F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		696CDB0E1683C0ED047F4D21 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		866EF70B9472A40F7B68A447 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-spaceAppTests/Pods-spaceAppTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8F6D54DF1D4079720018773D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -462,21 +397,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		A7DF797043C71EA062D66B4B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-spaceAppUITests/Pods-spaceAppUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

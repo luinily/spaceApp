@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 class PictureDownloadWorker {
-	private let _downloader: PictureDonwloader
+	private let _downloader: PictureDownloader
 	
-	init(downloader: PictureDonwloader) {
+	init(downloader: PictureDownloader) {
 		_downloader = downloader
 	}
 	

@@ -135,7 +135,7 @@ extension ApodViewControllerTests {
 		loadView()
 		
 		// Assert
-		XCTAssertEqual(target.refreshControl.allTargets().count, 1)
+		XCTAssertEqual(target.refreshControl.allTargets.count, 1)
 	}
 
 	//MARK: displayApod
