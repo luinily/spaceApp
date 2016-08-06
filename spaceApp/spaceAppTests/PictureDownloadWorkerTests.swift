@@ -49,7 +49,7 @@ extension PictureDownloadWorkerTests {
 		// Arrange
 		
 		// Act
-		target.downolad(url: URL(string: "")!, progressHandler: {_ in}, completionHandler: {_, _ in})
+		target.downolad(url: URL(string: "http://www.google.com")!, progressHandler: {_ in}, completionHandler: {_, _ in})
 		
 		// Assert
 		XCTAssertTrue(downloader.downloadCalled)

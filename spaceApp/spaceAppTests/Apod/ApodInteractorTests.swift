@@ -79,7 +79,7 @@ extension ApodInteractorTests {
 		
 		private func handleCompletionHandler(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
 			if shouldReturnData {
-				let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
+				let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: "")
 				completionHandler(apodData: apodData, error: nil)
 			} else {
 				let error = NSError(domain: "", code: 0, userInfo: nil)

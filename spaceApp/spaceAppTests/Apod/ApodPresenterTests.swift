@@ -83,7 +83,7 @@ extension ApodPresenterTests {
 extension ApodPresenterTests {
 	func test_presentApod_callsDisplayAPOD() {
 		// Arrange
-		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
+		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: "")
 		let response = ApodResponse(apodData: apodData)
 		
 		// Act
@@ -96,7 +96,7 @@ extension ApodPresenterTests {
 	func test_presentApod_viewModelContainsTitle() {
 		// Arrange
 		let title = "title"
-		let apodData = ApodData(title: title, url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
+		let apodData = ApodData(title: title, url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: "")
 		let response = ApodResponse(apodData: apodData)
 		
 		// Act
@@ -109,7 +109,7 @@ extension ApodPresenterTests {
 	func test_presentApod_viewModelContainsFormatedDate() {
 		// Arrange
 		let date = makeDate(year: 2016, month: 07, day: 18)
-		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: date, explanation: "", copyright: "")
+		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: date, explanation: "", copyright: "")
 		let response = ApodResponse(apodData: apodData)
 		
 		// Act
@@ -122,7 +122,7 @@ extension ApodPresenterTests {
 	func test_presentApod_viewModelContainsExplaination() {
 		// Arrange
 		let explanation = "explanation"
-		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: explanation, copyright: "")
+		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: explanation, copyright: "")
 		let response = ApodResponse(apodData: apodData)
 		
 		// Act
@@ -135,7 +135,7 @@ extension ApodPresenterTests {
 	func test_presentApod_viewModelContainsCopyright() {
 		// Arrange
 		let copyright = "copyright"
-		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: copyright)
+		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: copyright)
 		let response = ApodResponse(apodData: apodData)
 		
 		// Act
@@ -147,7 +147,7 @@ extension ApodPresenterTests {
 	
 //	func test_presentApod_displayImageIsCalled() {
 //		// Arrange
-//		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
+//		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
 //		let response = ApodResponse(apodData: apodData)
 //		
 //		// Act
@@ -160,7 +160,7 @@ extension ApodPresenterTests {
 //	func test_presentApod_viewModelContainsUIImage() {
 //		// Arrange
 //		let url = URL(string: "http://apod.nasa.gov/apod/image/1607/NGC2736NBbicolor_1250_Jurasevich1024c.jpg")!
-//		let apodData = ApodData(title: "", url: URL(string: "")!, hdUrl: url, date: Date(), explanation: "", copyright: "")
+//		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: url, date: Date(), explanation: "", copyright: "")
 //		let response = ApodResponse(apodData: apodData)
 //		
 //		// Act

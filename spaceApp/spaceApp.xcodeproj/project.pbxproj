@@ -30,8 +30,8 @@
 		8F941E191D37486300C56ACE /* NetworkApodStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E181D37486300C56ACE /* NetworkApodStoreTests.swift */; };
 		8F9D06B31D4E9968003C7127 /* AlamofirePictureDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9D06B21D4E9968003C7127 /* AlamofirePictureDownloader.swift */; };
 		8F9D06B51D4EB8F5003C7127 /* PictureDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9D06B41D4EB8F5003C7127 /* PictureDownloader.swift */; };
-		8FAD050A1D408EE300E92486 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD05091D408EE300E92486 /* Alamofire.framework */; };
-		8FAD050B1D408EE300E92486 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD05091D408EE300E92486 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8FA652E11D55F4E200A32514 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD05091D408EE300E92486 /* Alamofire.framework */; };
+		8FA652E21D55F4E200A32514 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD05091D408EE300E92486 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8FB2948E1D3B29B400E6C7A3 /* ApodConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294871D3B29B400E6C7A3 /* ApodConfigurator.swift */; };
 		8FB2948F1D3B29B400E6C7A3 /* ApodInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294881D3B29B400E6C7A3 /* ApodInteractor.swift */; };
 		8FB294901D3B29B400E6C7A3 /* ApodModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294891D3B29B400E6C7A3 /* ApodModels.swift */; };
@@ -65,13 +65,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8FAD05071D408EC400E92486 /* Embed Frameworks */ = {
+		8FA652E31D55F4E300A32514 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8FAD050B1D408EE300E92486 /* Alamofire.framework in Embed Frameworks */,
+				8FA652E21D55F4E200A32514 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,7 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FAD050A1D408EE300E92486 /* Alamofire.framework in Frameworks */,
+				8FA652E11D55F4E200A32514 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +258,7 @@
 				8F941DD11D363A9E00C56ACE /* Frameworks */,
 				8F941DD21D363A9E00C56ACE /* Resources */,
 				8F6D54DF1D4079720018773D /* ShellScript */,
-				8FAD05071D408EC400E92486 /* Embed Frameworks */,
+				8FA652E31D55F4E300A32514 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -585,7 +585,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = spaceApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -598,7 +598,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = spaceApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
