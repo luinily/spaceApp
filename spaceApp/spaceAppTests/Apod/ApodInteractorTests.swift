@@ -16,6 +16,7 @@ class ApodInteractorTests: XCTestCase {
 	// MARK: Subject under test
 	var target: ApodInteractor!
 	var mochApodWorker: MockApodWorker!
+	var mockPictureDownloadWorker: MockPictureDownloaderWorker!
 	var mochOutput: MockOutput!
 }
 
@@ -35,7 +36,8 @@ extension ApodInteractorTests {
 extension ApodInteractorTests {
 	func setupApodInteractor() {
 		mochApodWorker = MockApodWorker()
-		target = ApodInteractor(apodWorker: mochApodWorker)
+		mockPictureDownloadWorker = MockPictureDownloaderWorker()
+		target = ApodInteractor(apodWorker: mochApodWorker, pictureDownloadWorker: mockPictureDownloadWorker)
 		
 		mochOutput = MockOutput()
 		target.output = mochOutput
@@ -63,6 +65,7 @@ extension ApodInteractorTests {
 		var fetchRandomApodCalled = false
 		
 		var shouldReturnData = true
+		var shouldReturnHdUrl = true
 		init() {
 			super.init(apodStore: MockApodStore())
 		}
@@ -79,12 +82,35 @@ extension ApodInteractorTests {
 		
 		private func handleCompletionHandler(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
 			if shouldReturnData {
-				let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: "")
-				completionHandler(apodData: apodData, error: nil)
+				if shouldReturnHdUrl {
+					let apodData = ApodData(title: "", url: URL(string: "http://www.url.com")!, hdUrl: URL(string: "http://www.hdurl.com")!, date: Date(), explanation: "", copyright: "")
+					completionHandler(apodData: apodData, error: nil)
+				} else {
+					let apodData = ApodData(title: "", url: URL(string: "http://www.url.com")!, hdUrl: nil, date: Date(), explanation: "", copyright: "")
+					completionHandler(apodData: apodData, error: nil)
+				}
 			} else {
 				let error = NSError(domain: "", code: 0, userInfo: nil)
 				completionHandler(apodData: nil, error: error)
 			}
+		}
+	}
+	
+	class MockPictureDownloadWorker: PictureDownloader {
+		func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
+			
+		}
+	}
+	class MockPictureDownloaderWorker: PictureDownloadWorker {
+		var downloadCalled = false
+		var url: URL?
+		init() {
+			super.init(downloader: MockPictureDownloadWorker())
+		}
+		
+		override func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
+			downloadCalled = true
+			self.url = url
 		}
 	}
 	
@@ -104,7 +130,7 @@ extension ApodInteractorTests {
 
 // MARK: Tests
 extension ApodInteractorTests {
-	func test_fetchTodayApod_callsWorkerFetchTodayApod() {
+	func test_fetchTodayApod_callsApodWorkerFetchTodayApod() {
 		// Arrange
 		let request = TodayApodRequest()
 		
@@ -136,6 +162,45 @@ extension ApodInteractorTests {
 		
 		// Assert
 		XCTAssertTrue(mochOutput.presentErrorCalled)
+	}
+	
+	func test_fetchTodayApod_callPictureDownloadsWorkerDownload() {
+		// Arrange
+		let request = TodayApodRequest()
+		
+		// Act
+		target.fetchTodayApod(request: request)
+		
+		// Assert
+		XCTAssertTrue(mockPictureDownloadWorker.downloadCalled)
+	}
+	
+	func test_fetchTodayApod_usesHdUrlWhenThereIsOne() {
+		// Arrange
+		let request = TodayApodRequest()
+		let url = URL(string: "http://www.hdurl.com")!
+		
+		mochApodWorker.shouldReturnHdUrl = true
+		
+		// Act
+		target.fetchTodayApod(request: request)
+		
+		// Assert
+		XCTAssertEqual(mockPictureDownloadWorker.url, url)
+	}
+	
+	func test_fetchTodayApod_usesURLWhenThereIsNoHdUrl() {
+		// Arrange
+		let request = TodayApodRequest()
+		let url = URL(string: "http://www.url.com")!
+		
+		mochApodWorker.shouldReturnHdUrl = false
+		
+		// Act
+		target.fetchTodayApod(request: request)
+		
+		// Assert
+		XCTAssertEqual(mockPictureDownloadWorker.url, url)
 	}
 	
 	func test_fetchRandomApod_callsWorkerFetchRamdomApod() {
@@ -171,4 +236,5 @@ extension ApodInteractorTests {
 		// Assert
 		XCTAssertTrue(mochOutput.presentErrorCalled)
 	}
+	
 }

@@ -36,9 +36,14 @@ extension PictureDownloadWorkerTests {
 extension PictureDownloadWorkerTests {
 	class MockPictureDownloadWorker: PictureDownloader {
 		var downloadCalled = false
+		var url: URL?
+		var progressRatio = 1.0
+		
 		func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
 			downloadCalled = true
-			
+			self.url = url
+			progressHandler(progressRatio: progressRatio)
+			completionHandler(picture: nil, error: nil)
 		}
 	}
 }
@@ -53,5 +58,48 @@ extension PictureDownloadWorkerTests {
 		
 		// Assert
 		XCTAssertTrue(downloader.downloadCalled)
+	}
+	
+	func test_download_passesURL() {
+		// Arrange
+		let url = URL(string: "http://www.google.com")!
+		
+		// Act
+		target.downolad(url: url, progressHandler: {_ in}, completionHandler: {_, _ in})
+		
+		// Assert
+		XCTAssertEqual(url, downloader.url)
+	}
+
+	func test_download_passesProgressHandler() {
+		// Arrange
+		var progressHandlerCalled = false
+		// Act
+		target.downolad(url: URL(string: "http://www.google.com")!,
+		                progressHandler: {
+							_ in
+							progressHandlerCalled = true
+						},
+		                completionHandler: {_, _ in}
+		)
+		
+		// Assert
+		XCTAssertTrue(progressHandlerCalled)
+	}
+	
+	func test_download_passesCompletionHandler() {
+		// Arrange
+		var completionHandlerCalled = false
+		// Act
+		target.downolad(url: URL(string: "http://www.google.com")!,
+		                progressHandler: { _ in },
+		                completionHandler: {
+							_, _ in
+							completionHandlerCalled = true
+						}
+		)
+		
+		// Assert
+		XCTAssertTrue(completionHandlerCalled)
 	}
 }

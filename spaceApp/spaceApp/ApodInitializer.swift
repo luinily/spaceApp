@@ -38,4 +38,8 @@ struct ApodInitializer: Initializer {
 		components.minute = 0
 		return Calendar.current.date(from: components)!
 	}
+	
+	func createPictureDownloader() -> PictureDownloader {
+		return AlamofirePictureDownloader()
+	}
 }

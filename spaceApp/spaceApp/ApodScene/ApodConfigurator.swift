@@ -56,11 +56,22 @@ class ApodConfigurator {
 			return nil
 		}
 		
-		let apodStore = initializer.createApodStore()
-		let worker = ApodWorker(apodStore: apodStore)
-		let interactor = ApodInteractor(apodWorker: worker)
+		let apodWorker = createApodWorker(initializer: initializer)
+		let pictureDownloadWorker = createPictureDownloadWorker(initializer: initializer)
+		
+		let interactor = ApodInteractor(apodWorker: apodWorker, pictureDownloadWorker: pictureDownloadWorker)
 		interactor.output = presenter
 		return interactor
+	}
+	
+	private func createApodWorker(initializer: Initializer) -> ApodWorker {
+		let apodStore = initializer.createApodStore()
+		return ApodWorker(apodStore: apodStore)
+	}
+	
+	private func createPictureDownloadWorker(initializer: Initializer) -> PictureDownloadWorker {
+		let pictureDownloader = initializer.createPictureDownloader()
+		return PictureDownloadWorker(downloader: pictureDownloader)
 	}
 	
 	private func getInitializer() -> Initializer? {

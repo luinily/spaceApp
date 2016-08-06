@@ -24,9 +24,11 @@ protocol ApodInteractorOutput {
 class ApodInteractor: ApodInteractorInput {
 	var output: ApodInteractorOutput!
 	private var _apodWorker: ApodWorker
+	private var _pictureDownloadWorker: PictureDownloadWorker
 	
-	init(apodWorker: ApodWorker) {
+	init(apodWorker: ApodWorker, pictureDownloadWorker: PictureDownloadWorker) {
 		_apodWorker = apodWorker
+		_pictureDownloadWorker = pictureDownloadWorker
 	}
 	
 	// MARK: Business logic
@@ -48,6 +50,16 @@ class ApodInteractor: ApodInteractorInput {
 		if let apodData = apodData {
 			let response = ApodResponse(apodData: apodData)
 			self.output.presentApod(response: response)
+			
+			let url: URL
+			if let hdUrl = apodData.hdUrl {
+				url = hdUrl
+			} else {
+				url = apodData.url
+			}
+			
+			_pictureDownloadWorker.downolad(url: url, progressHandler: {_ in}, completionHandler: {_,_ in})
+			
 		}
 		
 		if let error = error {

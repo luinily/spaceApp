@@ -12,4 +12,5 @@ protocol Initializer {
 	func createApodNetworkTool() -> NetworkTool
 	func createDataToApodConverter() -> DataToApodDataConverter
 	func createApodStore() -> ApodStore
+	func createPictureDownloader() -> PictureDownloader
 }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Alamofire
 
-class AlamofirePictureDownloader {
+class AlamofirePictureDownloader: PictureDownloader {
 	func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
 		download(url: url) {
 			progressRatio, fileURL, error in
