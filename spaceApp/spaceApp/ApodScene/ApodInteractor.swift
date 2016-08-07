@@ -48,16 +48,24 @@ class ApodInteractor: ApodInteractorInput {
 	
 	private func handleFetchResults(apodData: ApodData?, error: NSError?) {
 		if let apodData = apodData {
-			let response = ApodResponse(apodData: apodData)
-			self.output.presentApod(response: response)
-			
-			downloadPicture(apodData: apodData)
+			handleApodData(apodData: apodData)
 		}
 		
 		if let error = error {
-			let response = ApodErrorResponse(error: error)
-			self.output.presentError(response: response)
+			handleError(error: error)
 		}
+	}
+	
+	private func handleApodData(apodData: ApodData) {
+		let response = ApodResponse(apodData: apodData)
+		self.output.presentApod(response: response)
+		
+		downloadPicture(apodData: apodData)
+	}
+	
+	private func handleError(error: NSError) {
+		let response = ApodErrorResponse(error: error)
+		self.output.presentError(response: response)
 	}
 	
 	private func downloadPicture(apodData: ApodData) {
