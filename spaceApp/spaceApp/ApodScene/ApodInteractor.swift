@@ -51,20 +51,26 @@ class ApodInteractor: ApodInteractorInput {
 			let response = ApodResponse(apodData: apodData)
 			self.output.presentApod(response: response)
 			
-			let url: URL
-			if let hdUrl = apodData.hdUrl {
-				url = hdUrl
-			} else {
-				url = apodData.url
-			}
-			
-			_pictureDownloadWorker.downolad(url: url, progressHandler: {_ in}, completionHandler: {_,_ in})
-			
+			downloadPicture(apodData: apodData)
 		}
 		
 		if let error = error {
 			let response = ApodErrorResponse(error: error)
 			self.output.presentError(response: response)
+		}
+	}
+	
+	private func downloadPicture(apodData: ApodData) {
+		let url = getValidURL(apodData: apodData)
+
+		_pictureDownloadWorker.downolad(url: url, progressHandler: {_ in}, completionHandler: {_, _ in})
+	}
+	
+	private func getValidURL(apodData: ApodData) -> URL {
+		if let hdUrl = apodData.hdUrl {
+			return hdUrl
+		} else {
+			return apodData.url
 		}
 	}
 }
