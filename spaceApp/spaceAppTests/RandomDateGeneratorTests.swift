@@ -45,7 +45,7 @@ extension RandomDateGeneratorTests {
 		let higherBound =  makeDate(for: "2000-12-31")
 		
 		let target = RandomDateGenerator(lowerBound: lowerBound, higherBound:higherBound)
-		for _ in 0 ... 100000 {
+		for _ in 0 ... 10000 {
 			// Act
 			let date = target.generateDate()
 			
@@ -64,7 +64,7 @@ extension RandomDateGeneratorTests {
 		var previousDate: Date? = nil
 		var previousPreviousDate: Date? = nil
 		
-		for _ in 0 ... 100000 {
+		for _ in 0 ... 10000 {
 			// Act
 			let currentDate = target.generateDate()
 			
