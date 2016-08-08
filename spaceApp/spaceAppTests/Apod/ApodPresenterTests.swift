@@ -76,6 +76,10 @@ extension ApodPresenterTests {
 			displayImageCalled = true
 			imageViewModel = viewModel
 		}
+		
+		func displayProgress(viewModel: ApodPictureDownloadProgressViewModel) {
+			
+		}
 	}
 }
 

@@ -104,6 +104,9 @@ extension ApodInteractorTests {
 	class MockPictureDownloaderWorker: PictureDownloadWorker {
 		var downloadCalled = false
 		var url: URL?
+		var progressHandler: ((progressRatio: Double) -> Void)!
+		var completionHandler: ((picture: UIImage?, error: NSError?) -> Void)!
+		
 		init() {
 			super.init(downloader: MockPictureDownloadWorker())
 		}
@@ -111,12 +114,17 @@ extension ApodInteractorTests {
 		override func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
 			downloadCalled = true
 			self.url = url
+			self.progressHandler = progressHandler
+			self.completionHandler = completionHandler
 		}
 	}
 	
 	class MockOutput: ApodInteractorOutput {
 		var presentOutputCalled = false
 		var presentErrorCalled = false
+		var presentPictureDownloadProgressCalled = false
+		var downloadProgressRatio = 0.0
+		var presentPictureCalled = false
 		
 		func presentApod(response: ApodResponse) {
 			presentOutputCalled = true
@@ -125,11 +133,21 @@ extension ApodInteractorTests {
 		func presentError(response: ApodErrorResponse) {
 			presentErrorCalled = true
 		}
+		
+		func presentPictureDownloadProgress(response: ApodPictureDownloadProgressResponse) {
+			presentPictureDownloadProgressCalled = true
+			downloadProgressRatio = response.progressRatio
+		}
+		
+		func presentPicture(response: ApodPictureResponse) {
+			presentPictureCalled = true
+		}
 	}
 }
 
 // MARK: Tests
 extension ApodInteractorTests {
+	// MARK: fetchTodayApod
 	func test_fetchTodayApod_callsApodWorkerFetchTodayApod() {
 		// Arrange
 		let request = TodayApodRequest()
@@ -164,6 +182,7 @@ extension ApodInteractorTests {
 		XCTAssertTrue(mochOutput.presentErrorCalled)
 	}
 	
+	// MARK: pictureDownload
 	func test_fetchTodayApod_callPictureDownloadsWorkerDownload() {
 		// Arrange
 		let request = TodayApodRequest()
@@ -203,6 +222,57 @@ extension ApodInteractorTests {
 		XCTAssertEqual(mockPictureDownloadWorker.url, url)
 	}
 	
+	func test_fetchTodayApod_pictureDownload_progressHandlerCallsOutputPresentImageDownloadProgress() {
+		// Arrange
+		let request = TodayApodRequest()
+		
+		// Act
+		target.fetchTodayApod(request: request)
+		mockPictureDownloadWorker.progressHandler(progressRatio : 0.5)
+		
+		// Assert
+		XCTAssertTrue(mochOutput.presentPictureDownloadProgressCalled)
+	}
+	
+	func test_fetchTodayApod_pictureDownload_outputGetsProgressRatio() {
+		// Arrange
+		let request = TodayApodRequest()
+		let progressRatio = 0.543
+		
+		// Act
+		target.fetchTodayApod(request: request)
+		mockPictureDownloadWorker.progressHandler(progressRatio : progressRatio)
+		
+		// Assert
+		XCTAssertEqual(mochOutput.downloadProgressRatio, progressRatio)
+	}
+	
+	func test_fetchTodayApod_pictureDownload_completionHandlerCallsOutputPresentPicture() {
+		// Arrange
+		let request = TodayApodRequest()
+		
+		// Act
+		target.fetchTodayApod(request: request)
+		mockPictureDownloadWorker.completionHandler(picture: UIImage(), error: nil)
+		
+		// Assert
+		XCTAssertTrue(mochOutput.presentPictureCalled)
+	}
+	
+	func test_fetchTodayApod_pictureDownload_completionHandlerCallsOutputPresentError() {
+		// Arrange
+		let request = TodayApodRequest()
+		let error = NSError(domain: "", code: 0, userInfo: nil)
+		
+		// Act
+		target.fetchTodayApod(request: request)
+		mockPictureDownloadWorker.completionHandler(picture: nil, error: error)
+		
+		// Assert
+		XCTAssertTrue(mochOutput.presentErrorCalled)
+	}
+	
+	// MARK: fetchRandomApod
 	func test_fetchRandomApod_callsWorkerFetchRamdomApod() {
 		// Arrange
 		let request = RandomApodRequest()

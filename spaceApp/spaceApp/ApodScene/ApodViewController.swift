@@ -15,6 +15,7 @@ protocol ApodViewControllerInput {
 	func displayApod(viewModel: ApodDataViewModel)
 	func displayImage(viewModel: ApodImageViewModel)
 	func displayApodError(viewModel: ApodErrorViewModel)
+	func displayProgress(viewModel: ApodPictureDownloadProgressViewModel)
 }
 
 protocol ApodViewControllerOutput {
@@ -31,6 +32,7 @@ class ApodViewController: UIViewController {
 	@IBOutlet weak var explanationTextView: UITextView!
 	@IBOutlet weak var imageScrollView: UIScrollView!
 	@IBOutlet weak var refreshScrollView: UIScrollView!
+	@IBOutlet weak var progressView: UIProgressView!
 	
 	
 	
@@ -47,6 +49,7 @@ class ApodViewController: UIViewController {
 		fetchTodaysApod()
 		imageScrollView.delegate = self
 		setupRefreshControl()
+		setupProgressView()
 	}
 	
 	override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -75,6 +78,10 @@ class ApodViewController: UIViewController {
 		refreshControl.addTarget(self, action: #selector(ApodViewController.onRefreshPull), for: .valueChanged)
 	}
 	
+	private func setupProgressView() {
+		progressView.isHidden = true
+	}
+	
 	func getImageViewFromScrollView() -> UIImageView? {
 		//ScrollView contains 2 UIImageView for the scrolls, ours is the third one
 		if imageScrollView.subviews.count == 3 {
@@ -95,6 +102,12 @@ extension ApodViewController: ApodViewControllerInput {
 		titleLabel.text = viewModel.title
 		explanationTextView.text = viewModel.explanation
 		removeImageView()
+		
+		progressView.progress = 0
+		progressView.isHidden = false
+		if refreshControl.isRefreshing {
+			refreshControl.endRefreshing()
+		}
 	}
 	
 	private func removeImageView() {
@@ -106,11 +119,9 @@ extension ApodViewController: ApodViewControllerInput {
 		if let picture = viewModel.picture {
 			setPicture(picture: picture)
 		}
-		
+		progressView.isHidden = true
 		UIApplication.shared.isNetworkActivityIndicatorVisible = false
-		if refreshControl.isRefreshing {
-			refreshControl.endRefreshing()
-		}
+		
 	}
 	
 	private func setPicture(picture: UIImage) {
@@ -158,6 +169,9 @@ extension ApodViewController: ApodViewControllerInput {
 		self.present(alert, animated: true, completion: nil)
 	}
 	
+	func displayProgress(viewModel: ApodPictureDownloadProgressViewModel) {
+		progressView.setProgress(viewModel.progressRatio, animated: true)
+	}
 }
 
 extension ApodViewController: UIScrollViewDelegate {

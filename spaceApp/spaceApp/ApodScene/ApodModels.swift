@@ -26,6 +26,14 @@ struct ApodErrorResponse {
 	var error: NSError
 }
 
+struct ApodPictureDownloadProgressResponse {
+	var progressRatio: Double
+}
+
+struct ApodPictureResponse {
+	var picture: UIImage
+}
+
 struct ApodDataViewModel {
 	var title: String
 	var date: String
@@ -35,6 +43,10 @@ struct ApodDataViewModel {
 
 struct ApodImageViewModel {
 	var picture: UIImage?
+}
+
+struct ApodPictureDownloadProgressViewModel {
+	var progressRatio: Float
 }
 
 struct ApodErrorViewModel {

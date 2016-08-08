@@ -19,6 +19,8 @@ protocol ApodInteractorInput {
 protocol ApodInteractorOutput {
 	func presentApod(response: ApodResponse)
 	func presentError(response: ApodErrorResponse)
+	func presentPictureDownloadProgress(response: ApodPictureDownloadProgressResponse)
+	func presentPicture(response: ApodPictureResponse)
 }
 
 class ApodInteractor: ApodInteractorInput {
@@ -71,7 +73,7 @@ class ApodInteractor: ApodInteractorInput {
 	private func downloadPicture(apodData: ApodData) {
 		let url = getValidURL(apodData: apodData)
 
-		_pictureDownloadWorker.downolad(url: url, progressHandler: {_ in}, completionHandler: {_, _ in})
+		_pictureDownloadWorker.downolad(url: url, progressHandler: handleDownloadProgress, completionHandler: handleDownloadCompletion)
 	}
 	
 	private func getValidURL(apodData: ApodData) -> URL {
@@ -79,6 +81,22 @@ class ApodInteractor: ApodInteractorInput {
 			return hdUrl
 		} else {
 			return apodData.url
+		}
+	}
+	
+	private func handleDownloadProgress(progress: Double) {
+		let response = ApodPictureDownloadProgressResponse(progressRatio: progress)
+		output.presentPictureDownloadProgress(response: response)
+	}
+	
+	private func handleDownloadCompletion(picture: UIImage?, error: NSError?) {
+		if let picture = picture {
+			let response = ApodPictureResponse(picture: picture)
+			output.presentPicture(response: response)
+		}
+		
+		if let error = error {
+			handleError(error: error)
 		}
 	}
 }

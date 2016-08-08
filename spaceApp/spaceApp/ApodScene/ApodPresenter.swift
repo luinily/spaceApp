@@ -14,12 +14,15 @@ import UIKit
 protocol ApodPresenterInput {
 	func presentApod(response: ApodResponse)
 	func presentError(response: ApodErrorResponse)
+	func presentPictureDownloadProgress(response: ApodPictureDownloadProgressResponse)
+	func presentPicture(response: ApodPictureResponse)
 }
 
 protocol ApodPresenterOutput: class {
 	func displayApod(viewModel: ApodDataViewModel)
 	func displayApodError(viewModel: ApodErrorViewModel)
 	func displayImage(viewModel: ApodImageViewModel)
+	func displayProgress(viewModel: ApodPictureDownloadProgressViewModel)
 }
 
 class ApodPresenter: ApodPresenterInput {
@@ -31,12 +34,12 @@ class ApodPresenter: ApodPresenterInput {
 		let apodViewModel = makeApodViewModel(apodData: response.apodData)
 		output.displayApod(viewModel: apodViewModel)
 		
-		DispatchQueue.global(qos: .userInitiated).async {
-			let imageViewModel = self.makeApodImageViewModel(apodData: response.apodData)
-			DispatchQueue.main.async {
-				self.output.displayImage(viewModel: imageViewModel)
-			}
-		}
+		//		DispatchQueue.global(qos: .userInitiated).async {
+		//	let imageViewModel = self.makeApodImageViewModel(apodData: response.apodData)
+		//		DispatchQueue.main.async {
+		//			self.output.displayImage(viewModel: imageViewModel)
+		//		}
+		//}
 	}
 	
 	private func makeApodViewModel(apodData: ApodData) -> ApodDataViewModel {
@@ -76,6 +79,16 @@ class ApodPresenter: ApodPresenterInput {
 	func presentError(response: ApodErrorResponse) {
 		let viewModel = ApodErrorViewModel(errorMessage: response.error.localizedDescription)
 		output.displayApodError(viewModel: viewModel)
+	}
+	
+	func presentPictureDownloadProgress(response: ApodPictureDownloadProgressResponse) {
+		let viewModel = ApodPictureDownloadProgressViewModel(progressRatio: Float(response.progressRatio))
+		output.displayProgress(viewModel: viewModel)
+	}
+	
+	func presentPicture(response: ApodPictureResponse) {
+		let viewModel = ApodImageViewModel(picture: response.picture)
+		output.displayImage(viewModel: viewModel)
 	}
 	
 }
