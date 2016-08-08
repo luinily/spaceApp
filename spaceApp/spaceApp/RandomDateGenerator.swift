@@ -54,22 +54,22 @@ struct RandomDateGenerator {
 	}
 	
 	private func makeRandomDay(forMonth month: Int, ofYear year: Int) -> Int {
-		let lowerBound = getLowerBoundDay(forMonth: month)
+		let lowerBound = getLowerBoundDay(forMonth: month, ofYear: year)
 		let higherBound = getHigherBoundDay(forMonth: month, ofYear: year)
 		
 		return makeRandomNumber(lowerBound: lowerBound, higherBound: higherBound)
 	}
 	
-	private func getLowerBoundDay(forMonth month: Int) -> Int {
-		if isLowerBound(unit: .month, value: month) {
-			return Calendar.current.component(.month, from: self.lowerBound)
+	private func getLowerBoundDay(forMonth month: Int, ofYear year: Int) -> Int {
+		if isLowerBound(unit: .year, value: year) && isLowerBound(unit: .month, value: month) {
+			return Calendar.current.component(.day, from: self.lowerBound)
 		} else {
 			return 1
 		}
 	}
 	
 	private func getHigherBoundDay(forMonth month: Int, ofYear year: Int) -> Int {
-		if isHigherBound(unit: .month, value: month) {
+		if isHigherBound(unit: .year, value: year) && isHigherBound(unit: .month, value: month) {
 			return Calendar.current.component(.day, from: self.higherBound)
 		} else {
 			if let date = makeDate(year: year, month: month, day: 1) {
@@ -83,12 +83,12 @@ struct RandomDateGenerator {
 		}
 		
 	}
-	private func isLowerBound(unit: Calendar.Component, value: Int) -> Bool {
+	private func isHigherBound(unit: Calendar.Component, value: Int) -> Bool {
 		let higherBound = Calendar.current.component(unit, from: self.higherBound)
 		return value == higherBound
 	}
 	
-	private func isHigherBound(unit: Calendar.Component, value: Int) -> Bool {
+	private func isLowerBound(unit: Calendar.Component, value: Int) -> Bool {
 		let lowerBound = Calendar.current.component(unit, from: self.lowerBound)
 		return value == lowerBound
 	}

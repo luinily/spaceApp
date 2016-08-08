@@ -41,8 +41,8 @@ extension RandomDateGeneratorTests {
 extension RandomDateGeneratorTests {
 	func test_generateDate_dateWithingBounds() {
 		// Arrange
-		let lowerBound = makeDate(for: "1900-01-01")
-		let higherBound =  makeDate(for: "2000-12-31")
+		let lowerBound = makeDate(for: "1900-06-15")
+		let higherBound =  makeDate(for: "2000-09-23")
 		
 		let target = RandomDateGenerator(lowerBound: lowerBound, higherBound:higherBound)
 		for _ in 0 ... 10000 {
@@ -57,8 +57,8 @@ extension RandomDateGeneratorTests {
 	
 	func test_generateDate_dateParameterVaries() {
 		// Arrange
-		let lowerBound = makeDate(for: "1900-01-01")
-		let higherBound =  makeDate(for: "2000-12-31")
+		let lowerBound = makeDate(for: "1900-06-15")
+		let higherBound =  makeDate(for: "2000-09-23")
 		let target = RandomDateGenerator(lowerBound: lowerBound, higherBound:higherBound)
 		
 		var previousDate: Date? = nil
