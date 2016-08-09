@@ -97,7 +97,7 @@ extension ApodInteractorTests {
 	}
 	
 	class MockPictureDownloadWorker: PictureDownloader {
-		func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
+		func download(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
 			
 		}
 	}

@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 
 class AlamofirePictureDownloader: PictureDownloader {
-	func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
+	func download(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
 		download(url: url) {
 			progressRatio, fileURL, error in
 			if let progressRatio = progressRatio {

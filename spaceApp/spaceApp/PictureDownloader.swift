@@ -10,5 +10,5 @@ import Foundation
 import UIKit
 
 protocol PictureDownloader {
-	func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void)
+	func download(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void)
 }

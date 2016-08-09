@@ -39,7 +39,7 @@ extension PictureDownloadWorkerTests {
 		var url: URL?
 		var progressRatio = 1.0
 		
-		func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
+		func download(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
 			downloadCalled = true
 			self.url = url
 			progressHandler(progressRatio: progressRatio)
