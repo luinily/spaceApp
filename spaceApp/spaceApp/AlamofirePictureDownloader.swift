@@ -28,23 +28,47 @@ class AlamofirePictureDownloader: PictureDownloader {
 	
 	private func download(url: URL, completionHandler: (progressRatio: Double?, fileURL: URL?, error: NSError?) -> Void) {
 		
-		Alamofire.download(.GET, url.absoluteString, destination: getFileDestination).progress {
+		var didCancel = false
+		
+		let request = Alamofire.download(.GET, url.urlString, destination: getFileDestination)
+		
+		request.progress() {
 			bytesRead, totalBytesRead, totalBytesExpectedToRead in
 			
+			guard totalBytesExpectedToRead > 0 else {
+				request.cancel()
+				didCancel = true
+				return
+			}
+			
 			DispatchQueue.main.async {
-				let ratio = Double(totalBytesRead) / Double(totalBytesExpectedToRead)
+				let ratio = max(Double(totalBytesRead) / Double(totalBytesExpectedToRead), 0)
 				completionHandler(progressRatio: ratio, fileURL: nil, error: nil)
 			}
-			}.response {
-				_, response, _, error in
-				if let error = error {
-					print("Failed with error: \(error)")
-					completionHandler(progressRatio: nil, fileURL: nil, error: error)
-				} else if let response = response {
-					let fileURL = self.getFileURL(from: response)
-					completionHandler(progressRatio: nil, fileURL: fileURL, error: nil)
-				}
 		}
+		
+		request.response() {
+			_, response, _, error in
+			if didCancel {
+				let error = self.makeCancelError()
+				completionHandler(progressRatio: nil, fileURL: nil, error: error)
+			} else if let error = error {
+				print("Failed with error: \(error)")
+				completionHandler(progressRatio: nil, fileURL: nil, error: error)
+			} else if let response = response {
+				let fileURL = self.getFileURL(from: response)
+				completionHandler(progressRatio: nil, fileURL: fileURL, error: nil)
+			}
+		}
+	}
+	
+	
+	private func makeCancelError() -> NSError {
+		var userInfo = [NSObject: AnyObject]()
+		userInfo[NSLocalizedDescriptionKey] = "Invalid Data"
+		
+		let error = NSError(domain: "World", code: 200, userInfo: userInfo)
+		return error
 	}
 	
 	private func getFileDestination(temporaryURL: URL, response: HTTPURLResponse) -> URL {
