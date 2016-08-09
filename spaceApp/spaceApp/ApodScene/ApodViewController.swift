@@ -157,6 +157,7 @@ extension ApodViewController: ApodViewControllerInput {
 	func displayApodError(viewModel: ApodErrorViewModel) {
 		presentAlert(errorMessage: viewModel.errorMessage)
 		
+		progressView.isHidden = true
 		UIApplication.shared.isNetworkActivityIndicatorVisible = false
 		if refreshControl.isRefreshing {
 			refreshControl.endRefreshing()
