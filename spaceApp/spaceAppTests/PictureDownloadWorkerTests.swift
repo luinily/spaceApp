@@ -39,17 +39,33 @@ extension PictureDownloadWorkerTests {
 		var url: URL?
 		var progressRatio = 1.0
 		
+		var cancelCurrentDownloadCalled = false
+		
 		func download(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
 			downloadCalled = true
 			self.url = url
 			progressHandler(progressRatio: progressRatio)
 			completionHandler(picture: nil, error: nil)
 		}
+		
+		func cancelCurrentDownload() {
+			cancelCurrentDownloadCalled = true
+		}
 	}
 }
 
 // MARK: Tests
 extension PictureDownloadWorkerTests {
+	func test_download_callsDonwloaderCancelCurrentDonwload() {
+		// Arrange
+		
+		// Act
+		target.downolad(url: URL(string: "http://www.google.com")!, progressHandler: {_ in}, completionHandler: {_, _ in})
+		
+		// Assert
+		XCTAssertTrue(downloader.cancelCurrentDownloadCalled)
+	}
+	
 	func test_download_callsDownloaderDownload() {
 		// Arrange
 		

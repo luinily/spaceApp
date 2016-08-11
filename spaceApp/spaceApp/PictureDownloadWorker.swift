@@ -17,6 +17,7 @@ class PictureDownloadWorker {
 	}
 	
 	func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
+		_downloader.cancelCurrentDownload()
 		_downloader.download(url: url, progressHandler: progressHandler, completionHandler: completionHandler)
 	}
 }

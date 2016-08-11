@@ -11,4 +11,6 @@ import UIKit
 
 protocol PictureDownloader {
 	func download(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void)
+	
+	func cancelCurrentDownload()
 }

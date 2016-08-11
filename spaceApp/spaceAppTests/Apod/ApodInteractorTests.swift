@@ -100,6 +100,10 @@ extension ApodInteractorTests {
 		func download(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
 			
 		}
+		
+		func cancelCurrentDownload() {
+			
+		}
 	}
 	class MockPictureDownloaderWorker: PictureDownloadWorker {
 		var downloadCalled = false
@@ -181,7 +185,7 @@ extension ApodInteractorTests {
 		// Assert
 		XCTAssertTrue(mochOutput.presentErrorCalled)
 	}
-	
+
 	// MARK: pictureDownload
 	func test_fetchTodayApod_callPictureDownloadsWorkerDownload() {
 		// Arrange
@@ -271,6 +275,7 @@ extension ApodInteractorTests {
 		// Assert
 		XCTAssertTrue(mochOutput.presentErrorCalled)
 	}
+	
 	
 	// MARK: fetchRandomApod
 	func test_fetchRandomApod_callsWorkerFetchRamdomApod() {
