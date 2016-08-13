@@ -62,6 +62,9 @@ extension ApodPresenterTests {
 		var displayImageCalled = false
 		var imageViewModel: ApodImageViewModel? = nil
 		
+		var displayProgressCalled = false
+		var progress: Float = 0
+		
 		func displayApod(viewModel: ApodDataViewModel) {
 			displayApodCalled = true
 			self.apodViewModel = viewModel
@@ -78,7 +81,8 @@ extension ApodPresenterTests {
 		}
 		
 		func displayProgress(viewModel: ApodPictureDownloadProgressViewModel) {
-			
+			displayProgressCalled = true
+			progress = viewModel.progressRatio
 		}
 	}
 }
@@ -149,31 +153,6 @@ extension ApodPresenterTests {
 		XCTAssertEqual(mockOutput.apodViewModel?.copyright, copyright)
 	}
 	
-//	func test_presentApod_displayImageIsCalled() {
-//		// Arrange
-//		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "")!, date: Date(), explanation: "", copyright: "")
-//		let response = ApodResponse(apodData: apodData)
-//		
-//		// Act
-//		target.presentApod(response: response)
-//		
-//		// Assert
-//		XCTAssertTrue(mockOutput.displayImageCalled)
-//	}
-//	
-//	func test_presentApod_viewModelContainsUIImage() {
-//		// Arrange
-//		let url = URL(string: "http://apod.nasa.gov/apod/image/1607/NGC2736NBbicolor_1250_Jurasevich1024c.jpg")!
-//		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: url, date: Date(), explanation: "", copyright: "")
-//		let response = ApodResponse(apodData: apodData)
-//		
-//		// Act
-//		target.presentApod(response: response)
-//		
-//		// Assert
-//		XCTAssertNotNil(mockOutput.imageViewModel?.picture)
-//	}
-	
 	func test_presentError_DisplayApodErrorCalled() {
 		// Arrange
 		var userInfo = [NSObject: AnyObject]()
@@ -203,5 +182,28 @@ extension ApodPresenterTests {
 		
 		// Assert
 		XCTAssertEqual(mockOutput.errorViewModel?.errorMessage, errorMessage)
+	}
+	
+	func test_presentPictureDownloadProgress_displayProgressIsCalled() {
+		// Arrange
+		let response = ApodPictureDownloadProgressResponse(progressRatio: 0.5)
+		
+		// Act
+		target.presentPictureDownloadProgress(response: response)
+		
+		// Assert
+		XCTAssertTrue(mockOutput.displayProgressCalled)
+	}
+	
+	func test_presentPictureDownloadProgress_displayProgressValueIsOk() {
+		// Arrange
+		let progressRatio = 0.123
+		let response = ApodPictureDownloadProgressResponse(progressRatio: progressRatio)
+		
+		// Act
+		target.presentPictureDownloadProgress(response: response)
+		
+		// Assert
+		XCTAssertEqual(mockOutput.progress, Float(progressRatio))
 	}
 }

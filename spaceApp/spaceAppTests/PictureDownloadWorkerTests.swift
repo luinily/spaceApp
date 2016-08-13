@@ -60,7 +60,7 @@ extension PictureDownloadWorkerTests {
 		// Arrange
 		
 		// Act
-		target.downolad(url: URL(string: "http://www.google.com")!, progressHandler: {_ in}, completionHandler: {_, _ in})
+		target.downolad(url: URL(string: "http://www.test.com")!, progressHandler: {_ in}, completionHandler: {_, _ in})
 		
 		// Assert
 		XCTAssertTrue(downloader.cancelCurrentDownloadCalled)
@@ -70,7 +70,7 @@ extension PictureDownloadWorkerTests {
 		// Arrange
 		
 		// Act
-		target.downolad(url: URL(string: "http://www.google.com")!, progressHandler: {_ in}, completionHandler: {_, _ in})
+		target.downolad(url: URL(string: "http://www.test.com")!, progressHandler: {_ in}, completionHandler: {_, _ in})
 		
 		// Assert
 		XCTAssertTrue(downloader.downloadCalled)
@@ -78,7 +78,7 @@ extension PictureDownloadWorkerTests {
 	
 	func test_download_passesURL() {
 		// Arrange
-		let url = URL(string: "http://www.google.com")!
+		let url = URL(string: "http://www.test.com")!
 		
 		// Act
 		target.downolad(url: url, progressHandler: {_ in}, completionHandler: {_, _ in})
@@ -91,7 +91,7 @@ extension PictureDownloadWorkerTests {
 		// Arrange
 		var progressHandlerCalled = false
 		// Act
-		target.downolad(url: URL(string: "http://www.google.com")!,
+		target.downolad(url: URL(string: "http://www.test.com")!,
 		                progressHandler: {
 							_ in
 							progressHandlerCalled = true
@@ -107,7 +107,7 @@ extension PictureDownloadWorkerTests {
 		// Arrange
 		var completionHandlerCalled = false
 		// Act
-		target.downolad(url: URL(string: "http://www.google.com")!,
+		target.downolad(url: URL(string: "http://www.test.com")!,
 		                progressHandler: { _ in },
 		                completionHandler: {
 							_, _ in

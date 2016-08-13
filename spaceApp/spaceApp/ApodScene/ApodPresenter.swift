@@ -28,6 +28,7 @@ protocol ApodPresenterOutput: class {
 class ApodPresenter: ApodPresenterInput {
 	weak var output: ApodPresenterOutput!
 	
+	private let dateFormat = "yyyy年MM月dd日"
 	// MARK: Presentation logic
 	
 	func presentApod(response: ApodResponse) {
@@ -44,41 +45,25 @@ class ApodPresenter: ApodPresenterInput {
 		return ApodDataViewModel(title: title, date: date, explanation: explanation, copyright: copyright)
 	}
 	
-	private func makeApodImageViewModel(apodData: ApodData) -> ApodImageViewModel {
-		let picture: UIImage?
-		if let url = apodData.hdUrl {
-			picture = loadImage(url: url)
-		} else {
-			picture = loadImage(url: apodData.url)
-		}
-		
-		return ApodImageViewModel(picture: picture)
-	}
-	
 	private func dateToString(date: Date) -> String {
 		let formatter = DateFormatter()
-		formatter.dateFormat = "yyyy年MM月dd日"
+		formatter.dateFormat = dateFormat
 		return formatter.string(from: date)
 	}
 	
-	private func loadImage(url: URL) -> UIImage? {
-		guard let data = try? Data(contentsOf: url) else {
-			return nil
-		}
-		
-		return UIImage(data: data)
-	}
-	
+	// MARK: - presentError
 	func presentError(response: ApodErrorResponse) {
 		let viewModel = ApodErrorViewModel(errorMessage: response.error.localizedDescription)
 		output.displayApodError(viewModel: viewModel)
 	}
 	
+	// MARK: - presentPictureDownloadProgress
 	func presentPictureDownloadProgress(response: ApodPictureDownloadProgressResponse) {
 		let viewModel = ApodPictureDownloadProgressViewModel(progressRatio: Float(response.progressRatio))
 		output.displayProgress(viewModel: viewModel)
 	}
 	
+	// MARK: - presentPicture
 	func presentPicture(response: ApodPictureResponse) {
 		let viewModel = ApodImageViewModel(picture: response.picture)
 		output.displayImage(viewModel: viewModel)
