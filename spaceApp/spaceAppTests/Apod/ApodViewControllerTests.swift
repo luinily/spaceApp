@@ -82,7 +82,7 @@ extension ApodViewControllerTests {
 
 // MARK: Tests
 extension ApodViewControllerTests {
-	//MARK: ViewDidLoad
+	//MARK: - ViewDidLoad
 	func test_viewDidLoad_fetchTodaysApodIsCalled() {
 		// Arrange
 		
@@ -138,7 +138,7 @@ extension ApodViewControllerTests {
 		XCTAssertEqual(target.refreshControl.allTargets.count, 1)
 	}
 
-	//MARK: displayApod
+	//MARK: - displayApod
 	func test_displayApod_TitleIsDisplayed() {
 		// Arrange
 		loadView()
@@ -169,16 +169,58 @@ extension ApodViewControllerTests {
 		let imageViewModel = prepareImageViewModel()
 		target.displayImage(viewModel: imageViewModel)
 		XCTAssertEqual(target.imageScrollView.subviews.count, 3)
+		let viewModel = prepareViewModel()
 		
 		// Act
-		let viewModel = prepareViewModel()
 		target.displayApod(viewModel: viewModel)
 		
 		// Assert
 		XCTAssertEqual(target.imageScrollView.subviews.count, 2)
 	}
 	
-	//MARK: displayImage
+	func test_displayApod_displaysProgressView() {
+		// Arrange
+		loadView()
+		target.progressView.isHidden = true
+		let viewModel = prepareViewModel()
+		
+		// Act
+		
+		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertFalse(target.progressView.isHidden)
+	}
+	
+	func test_displayApod_setsProgressviewProgressTo0() {
+		// Arrange
+		loadView()
+		target.progressView.progress = 1
+		let viewModel = prepareViewModel()
+		
+		// Act
+		
+		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertEqual(target.progressView.progress, 0)
+	}
+	
+	func test_displayApod_endsRefreshControlRefreshing() {
+		// Arrange
+		loadView()
+		target.refreshControl.beginRefreshing()
+		let viewModel = prepareViewModel()
+		
+		// Act
+		
+		target.displayApod(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertFalse(target.refreshControl.isRefreshing)
+	}
+	
+	//MARK: - displayImage
 	func test_displayImage_ScrollViewHasSubview() {
 		// Arrange
 		loadView()
@@ -270,7 +312,33 @@ extension ApodViewControllerTests {
 		XCTAssertEqual(target.imageScrollView.zoomScale, target.imageScrollView.minimumZoomScale)
 	}
 	
-	//MARK: displayError
+	func test_displayImage_hiddesProgressView() {
+		// Arrange
+		loadView()
+		let viewModel = prepareImageViewModel()
+		target.progressView.isHidden = false
+		
+		// Act
+		target.displayImage(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertTrue(target.progressView.isHidden)
+	}
+	
+	func test_displayImage_hiddesNetworkActivityIndicator() {
+		// Arrange
+		loadView()
+		let viewModel = prepareImageViewModel()
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		
+		// Act
+		target.displayImage(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertFalse(UIApplication.shared.isNetworkActivityIndicatorVisible)
+	}
+	
+	//MARK: - displayError
 	func test_displayError_StopsTheRefreshControl() {
 		// Arrange
 		loadView()
@@ -284,8 +352,33 @@ extension ApodViewControllerTests {
 		XCTAssertFalse(target.refreshControl.isRefreshing)
 	}
 	
+	func test_displayError_HidesProgressView() {
+		// Arrange
+		loadView()
+		let viewModel = ApodErrorViewModel(errorMessage: "Error Message")
+		target.progressView.isHidden = false
+		
+		// Act
+		target.displayApodError(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertTrue(target.progressView.isHidden)
+	}
 	
-	//MARK: onRefreshPull
+	func test_displayError_HidesDownloadIndicator() {
+		// Arrange
+		loadView()
+		let viewModel = ApodErrorViewModel(errorMessage: "Error Message")
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		
+		// Act
+		target.displayApodError(viewModel: viewModel)
+		
+		// Assert
+		XCTAssertFalse(UIApplication.shared.isNetworkActivityIndicatorVisible)
+	}
+	
+	//MARK: - onRefreshPull
 	func test_onRefreshPull_CallsOutput_fetchRandomApod() {
 		// Arrange
 		loadView()

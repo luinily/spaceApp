@@ -206,4 +206,30 @@ extension ApodPresenterTests {
 		// Assert
 		XCTAssertEqual(mockOutput.progress, Float(progressRatio))
 	}
+	
+	func test_presentPicture_displayImageIsCalled() {
+		// Arrange
+		let picture = UIImage(imageLiteralResourceName: "UnitTestImage")
+		let response = ApodPictureResponse(picture: picture)
+		
+		// Act
+		target.presentPicture(response: response)
+		
+		// Assert
+		XCTAssertTrue(mockOutput.displayImageCalled)
+	}
+	
+	func test_presentPicture_imageIsPassed() {
+		// Arrange
+		let picture = UIImage(imageLiteralResourceName: "UnitTestImage")
+		let response = ApodPictureResponse(picture: picture)
+		
+		// Act
+		target.presentPicture(response: response)
+		
+		// Assert
+		XCTAssertEqual(mockOutput.imageViewModel?.picture, picture)
+	}
+
+	
 }
