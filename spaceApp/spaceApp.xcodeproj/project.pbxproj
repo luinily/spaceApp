@@ -181,12 +181,11 @@
 				8FD5D2B41D3B7701007A5F3D /* Initializer.swift */,
 				8FD5D2B01D3B755B007A5F3D /* ApodInitializer.swift */,
 				8F4387481D38D2EB00E21C3F /* DataToApodDataConverter.swift */,
-				8F941E121D373E4100C56ACE /* AlamofireTool.swift */,
+				8FA69B991D61ACCB00BEF38A /* Alamofire */,
 				8F941E0C1D3739F800C56ACE /* ApodStore.swift */,
 				8F941E141D3742C400C56ACE /* ApodData.swift */,
 				8F1CD6501D488661000AEF2F /* RandomDateGenerator.swift */,
 				8F941DD71D363A9E00C56ACE /* AppDelegate.swift */,
-				8F9D06B21D4E9968003C7127 /* AlamofirePictureDownloader.swift */,
 				8F9D06B41D4EB8F5003C7127 /* PictureDownloader.swift */,
 				8FB294951D3B29BE00E6C7A3 /* ApodScene */,
 				8F941DDB1D363A9E00C56ACE /* Main.storyboard */,
@@ -218,6 +217,15 @@
 				8F941DFC1D363A9E00C56ACE /* Info.plist */,
 			);
 			path = spaceAppUITests;
+			sourceTree = "<group>";
+		};
+		8FA69B991D61ACCB00BEF38A /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				8F941E121D373E4100C56ACE /* AlamofireTool.swift */,
+				8F9D06B21D4E9968003C7127 /* AlamofirePictureDownloader.swift */,
+			);
+			name = Alamofire;
 			sourceTree = "<group>";
 		};
 		8FB294951D3B29BE00E6C7A3 /* ApodScene */ = {

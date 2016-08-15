@@ -102,12 +102,15 @@ extension ApodViewController: ApodViewControllerInput {
 		titleLabel.text = viewModel.title
 		explanationTextView.text = viewModel.explanation
 		removeImageView()
-		
-		progressView.progress = 0
-		progressView.isHidden = false
+		startProgressView()
 		if refreshControl.isRefreshing {
 			refreshControl.endRefreshing()
 		}
+	}
+	
+	private func startProgressView() {
+		progressView.progress = 0
+		progressView.isHidden = false
 	}
 	
 	private func removeImageView() {
