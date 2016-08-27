@@ -14,11 +14,11 @@ import UIKit
 class ApodWorker {
 	private var _apodStore: ApodStore
 	// MARK: Business Logic
-	
+
 	init(apodStore: ApodStore) {
 		_apodStore = apodStore
 	}
-	
+
 	func fetchTodayAPOD(completionHandler: @escaping (ApodData?, Error?) -> Void) {
 		// NOTE: Do the work
 		_apodStore.fetchTodaysPicture() {
@@ -26,7 +26,7 @@ class ApodWorker {
 			completionHandler(data, error)
 		}
 	}
-	
+
 	func fetchRandomApod(completionHandler: @escaping (ApodData?, Error?) -> Void) {
 		_apodStore.fetchPictureForRandomDate() {
 			data, error in

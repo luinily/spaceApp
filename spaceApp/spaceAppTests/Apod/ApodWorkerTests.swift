@@ -24,7 +24,7 @@ extension ApodWorkerTests {
 		super.setUp()
 		setupApodWorker()
 	}
-	
+
 	override func tearDown() {
 		super.tearDown()
 	}
@@ -44,21 +44,21 @@ extension ApodWorkerTests {
 		var fetchTodaysPictureCalled = false
 		var fetchPictureForRandomDateCalled = false
 		var shouldReturnData = true
-		
+
 		func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
 			fetchTodaysPictureCalled = true
 			handleCompletionHandler(completionHandler: completionHandler)
 		}
-		
+
 		func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {
-			
+
 		}
-		
+
 		func fetchPictureForRandomDate(completionHandler: ApodCompletionHandler) {
 			fetchPictureForRandomDateCalled = true
 			handleCompletionHandler(completionHandler: completionHandler)
 		}
-		
+
 		func handleCompletionHandler(completionHandler: ApodCompletionHandler) {
 			if shouldReturnData {
 				let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: "")
@@ -75,84 +75,84 @@ extension ApodWorkerTests {
 extension ApodWorkerTests {
 	func test_fetchTodayAPOD_callsStoreFetchTodaysPicture() {
 		// Arrange
-	
+
 		// Act
 		target.fetchTodayAPOD() {
 			_, _ in
-			
+
 		}
-		
+
 		// Assert
 		XCTAssertTrue(mockStore.fetchTodaysPictureCalled)
 	}
-	
+
 	func test_fetchTodayAPOD_passesTheData() {
 		// Arrange
 		var didReturnData = false
-		
+
 		// Act
 		target.fetchTodayAPOD() {
 			data, _ in
 			didReturnData = data != nil
 		}
-		
+
 		// Assert
 		XCTAssertTrue(didReturnData)
 	}
-	
+
 	func test_fetchTodayApod_passesTheError() {
 		// Arrange
 		mockStore.shouldReturnData = false
 		var didReturnError = false
-		
+
 		// Act
 		target.fetchTodayAPOD() {
 			_, error in
 			didReturnError = error != nil
 		}
-		
+
 		// Assert
 		XCTAssertTrue(didReturnError)
 	}
-	
+
 	func test_fetchRandomAPOD_callsStoreFetchTodaysPicture() {
 		// Arrange
-		
+
 		// Act
 		target.fetchRandomApod() {
 			_, _ in
-			
+
 		}
-		
+
 		// Assert
 		XCTAssertTrue(mockStore.fetchPictureForRandomDateCalled)
 	}
-	
+
 	func test_fetchRandomAPOD_passesTheData() {
 		// Arrange
 		var didReturnData = false
-		
+
 		// Act
 		target.fetchRandomApod() {
 			data, _ in
 			didReturnData = data != nil
 		}
-		
+
 		// Assert
 		XCTAssertTrue(didReturnData)
 	}
-	
+
 	func test_fetchRandomApod_passesTheError() {
 		// Arrange
 		mockStore.shouldReturnData = false
 		var didReturnError = false
-		
+
 		// Act
 		target.fetchRandomApod() {
 			_, error in
 			didReturnError = error != nil
 		}
-		
+
 		// Assert
 		XCTAssertTrue(didReturnError)
 	}

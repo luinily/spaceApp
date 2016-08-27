@@ -15,7 +15,7 @@ struct TodayApodRequest {
 }
 
 struct RandomApodRequest {
-	
+
 }
 
 struct ApodResponse {

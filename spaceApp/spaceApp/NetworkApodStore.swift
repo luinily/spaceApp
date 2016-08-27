@@ -19,7 +19,7 @@ struct NetworkApodStore {
 	fileprivate let apiKey: String
 	fileprivate let networkTool: NetworkTool
 	fileprivate let dataConvertor: DataToApodDataConverter
-	
+
 	init?(requestURl: URL, oldestPossibleDate: Date, apiKey: String, networkTool: NetworkTool, dataConvertor: DataToApodDataConverter) {
 		self.requestURL = requestURl
 		self.oldestDatePossible = oldestPossibleDate
@@ -32,13 +32,13 @@ struct NetworkApodStore {
 extension NetworkApodStore: ApodStore {
 	func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
 		let parameters = makeParameters()
-		
+
 		networkTool.makeGetRequest(url: requestURL, parameters: parameters) {
 			data, error in
 			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
 		}
 	}
-	
+
 	func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {
 		let parameters = makeParameters(date: date)
 		networkTool.makeGetRequest(url: requestURL, parameters: parameters) {
@@ -46,7 +46,7 @@ extension NetworkApodStore: ApodStore {
 			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
 		}
 	}
-	
+
 	func fetchPictureForRandomDate(completionHandler: ApodCompletionHandler) {
 		let date = generateRandomDate()
 		let parameters = makeParameters(date: date)
@@ -55,13 +55,13 @@ extension NetworkApodStore: ApodStore {
 			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
 		}
 	}
-	
+
 	private func generateRandomDate() -> Date {
 		let today = Date()
 		let randomDateGenerator = RandomDateGenerator(lowerBound: oldestDatePossible, higherBound: today)
 		return randomDateGenerator.generateDate()
 	}
-	
+
 	private func makeParameters(date: Date? = nil) -> [String: String] {
 		var parameters = [String: String]()
 		parameters[apiKeyParameterName] = apiKey
@@ -69,31 +69,31 @@ extension NetworkApodStore: ApodStore {
 		if let date = date {
 			parameters[dateParameterName] = makeDateParameter(date: date)
 		}
-		
+
 		return parameters
 	}
-	
+
 	private func makeDateParameter(date: Date) -> String {
 		let formatter = DateFormatter()
 		formatter.dateFormat = dateParameterFormat
 		return formatter.string(from: date)
 	}
-	
+
 	private func handleFetchedResults(data: Data?, error: Error?, completionHandler: ApodCompletionHandler) {
 		guard error == nil else {
 			completionHandler(nil, error)
 			return
 		}
-		
+
 		guard let data = data else {
 			return
 		}
-		
+
 		let apodData = try? self.dataConvertor.convertDataToApodData(data: data)
 		completionHandler(apodData, nil)
 	}
-	
 
 
-	
+
+
 }

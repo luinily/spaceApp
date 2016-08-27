@@ -27,12 +27,12 @@ class ApodInteractor: ApodInteractorInput {
 	var output: ApodInteractorOutput!
 	private var _apodWorker: ApodWorker
 	private var _pictureDownloadWorker: PictureDownloadWorker
-	
+
 	init(apodWorker: ApodWorker, pictureDownloadWorker: PictureDownloadWorker) {
 		_apodWorker = apodWorker
 		_pictureDownloadWorker = pictureDownloadWorker
 	}
-	
+
 	// MARK: Business logic
 	func fetchTodayApod(request: TodayApodRequest) {
 		_apodWorker.fetchTodayAPOD() {
@@ -47,35 +47,35 @@ class ApodInteractor: ApodInteractorInput {
 			self.handleFetchResults(apodData: apodData, error: error)
 		}
 	}
-	
+
 	private func handleFetchResults(apodData: ApodData?, error: Error?) {
 		if let apodData = apodData {
 			handleApodData(apodData: apodData)
 		}
-		
+
 		if let error = error {
 			handleError(error: error)
 		}
 	}
-	
+
 	private func handleApodData(apodData: ApodData) {
 		let response = ApodResponse(apodData: apodData)
 		self.output.presentApod(response: response)
-		
+
 		downloadPicture(apodData: apodData)
 	}
-	
+
 	private func handleError(error: Error) {
 		let response = ApodErrorResponse(error: error)
 		self.output.presentError(response: response)
 	}
-	
+
 	private func downloadPicture(apodData: ApodData) {
 		let url = getValidURL(apodData: apodData)
 
 		_pictureDownloadWorker.downolad(url: url, progressHandler: handleDownloadProgress, completionHandler: handleDownloadCompletion)
 	}
-	
+
 	private func getValidURL(apodData: ApodData) -> URL {
 		if let hdUrl = apodData.hdUrl {
 			return hdUrl
@@ -83,18 +83,18 @@ class ApodInteractor: ApodInteractorInput {
 			return apodData.url
 		}
 	}
-	
+
 	private func handleDownloadProgress(progress: Double) {
 		let response = ApodPictureDownloadProgressResponse(progressRatio: progress)
 		output.presentPictureDownloadProgress(response: response)
 	}
-	
+
 	private func handleDownloadCompletion(picture: UIImage?, error: Error?) {
 		if let picture = picture {
 			let response = ApodPictureResponse(picture: picture)
 			output.presentPicture(response: response)
 		}
-		
+
 		if let error = error {
 			handleError(error: error)
 		}

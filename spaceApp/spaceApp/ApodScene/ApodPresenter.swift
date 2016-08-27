@@ -27,46 +27,46 @@ protocol ApodPresenterOutput: class {
 
 class ApodPresenter: ApodPresenterInput {
 	weak var output: ApodPresenterOutput!
-	
+
 	private let dateFormat = "yyyy年MM月dd日"
 	// MARK: Presentation logic
-	
+
 	func presentApod(response: ApodResponse) {
 		let apodViewModel = makeApodViewModel(apodData: response.apodData)
 		output.displayApod(viewModel: apodViewModel)
 	}
-	
+
 	private func makeApodViewModel(apodData: ApodData) -> ApodDataViewModel {
 		let title = apodData.title
 		let date = dateToString(date: apodData.date)
 		let explanation = apodData.explanation
 		let copyright = apodData.copyright
-		
+
 		return ApodDataViewModel(title: title, date: date, explanation: explanation, copyright: copyright)
 	}
-	
+
 	private func dateToString(date: Date) -> String {
 		let formatter = DateFormatter()
 		formatter.dateFormat = dateFormat
 		return formatter.string(from: date)
 	}
-	
+
 	// MARK: - presentError
 	func presentError(response: ApodErrorResponse) {
 		let viewModel = ApodErrorViewModel(errorMessage: response.error.localizedDescription)
 		output.displayApodError(viewModel: viewModel)
 	}
-	
+
 	// MARK: - presentPictureDownloadProgress
 	func presentPictureDownloadProgress(response: ApodPictureDownloadProgressResponse) {
 		let viewModel = ApodPictureDownloadProgressViewModel(progressRatio: Float(response.progressRatio))
 		output.displayProgress(viewModel: viewModel)
 	}
-	
+
 	// MARK: - presentPicture
 	func presentPicture(response: ApodPictureResponse) {
 		let viewModel = ApodImageViewModel(picture: response.picture)
 		output.displayImage(viewModel: viewModel)
 	}
-	
+
 }

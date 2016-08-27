@@ -21,15 +21,15 @@ extension PictureDownloadWorkerTests {
 		downloader = MockPictureDownloadWorker()
 		target = PictureDownloadWorker(downloader: downloader)
 	}
-	
+
 	override func tearDown() {
-		
+
 	}
 }
 
 // MARK: Test setup
 extension PictureDownloadWorkerTests {
-	
+
 }
 
 // MARK: Test doubles
@@ -38,16 +38,16 @@ extension PictureDownloadWorkerTests {
 		var downloadCalled = false
 		var url: URL?
 		var progressRatio = 1.0
-		
+
 		var cancelCurrentDownloadCalled = false
-		
+
 		func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, Error?) -> Void) {
 			downloadCalled = true
 			self.url = url
 			progressHandler(progressRatio)
 			completionHandler(nil, nil)
 		}
-		
+
 		func cancelCurrentDownload() {
 			cancelCurrentDownloadCalled = true
 		}
@@ -58,31 +58,31 @@ extension PictureDownloadWorkerTests {
 extension PictureDownloadWorkerTests {
 	func test_download_callsDonwloaderCancelCurrentDonwload() {
 		// Arrange
-		
+
 		// Act
 		target.downolad(url: URL(string: "http://www.test.com")!, progressHandler: {_ in}, completionHandler: {_, _ in})
-		
+
 		// Assert
 		XCTAssertTrue(downloader.cancelCurrentDownloadCalled)
 	}
-	
+
 	func test_download_callsDownloaderDownload() {
 		// Arrange
-		
+
 		// Act
 		target.downolad(url: URL(string: "http://www.test.com")!, progressHandler: {_ in}, completionHandler: {_, _ in})
-		
+
 		// Assert
 		XCTAssertTrue(downloader.downloadCalled)
 	}
-	
+
 	func test_download_passesURL() {
 		// Arrange
 		let url = URL(string: "http://www.test.com")!
-		
+
 		// Act
 		target.downolad(url: url, progressHandler: {_ in}, completionHandler: {_, _ in})
-		
+
 		// Assert
 		XCTAssertEqual(url, downloader.url)
 	}
@@ -95,14 +95,14 @@ extension PictureDownloadWorkerTests {
 		                progressHandler: {
 							_ in
 							progressHandlerCalled = true
-						},
+			},
 		                completionHandler: {_, _ in}
 		)
-		
+
 		// Assert
 		XCTAssertTrue(progressHandlerCalled)
 	}
-	
+
 	func test_download_passesCompletionHandler() {
 		// Arrange
 		var completionHandlerCalled = false
@@ -112,9 +112,9 @@ extension PictureDownloadWorkerTests {
 		                completionHandler: {
 							_, _ in
 							completionHandlerCalled = true
-						}
+			}
 		)
-		
+
 		// Assert
 		XCTAssertTrue(completionHandlerCalled)
 	}

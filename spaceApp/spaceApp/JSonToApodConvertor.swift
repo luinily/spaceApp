@@ -19,7 +19,7 @@ enum JSonToApodConvertorError: Error {
 }
 
 struct JsonToApodConvertor: DataToApodDataConverter {
-	
+
 	func convertDataToApodData(data: Data) throws -> ApodData {
 		var json: Any
 		do {
@@ -27,24 +27,24 @@ struct JsonToApodConvertor: DataToApodDataConverter {
 		} catch {
 			throw JSonToApodConvertorError.couldNotConvertDataToJson
 		}
-		
+
 		guard let jsonDic = json as? [String: AnyObject] else {
 			throw JSonToApodConvertorError.dataWasNotJsonDictionaryData
 		}
-		
+
 		return try convertJsonToApod(json: jsonDic)
 	}
-	
+
 	private func convertJsonToApod(json: [String: AnyObject]) throws -> ApodData {
 		var copyright = ""
 		if let copyrightString = json["copyright"] as? String {
 			copyright = copyrightString
 		}
-		
+
 		guard let dateString = json["date"] as? String else {
 			throw JSonToApodConvertorError.dateNotInJson
 		}
-		
+
 		guard let date = ApodDateConvertor().dateFromString(dateString: dateString) else {
 			throw JSonToApodConvertorError.couldNotConvertDateStringToDate
 		}
@@ -56,22 +56,22 @@ struct JsonToApodConvertor: DataToApodDataConverter {
 		guard let normalUrl = getURL(from: json, forTag: "url") else {
 			throw JSonToApodConvertorError.urlNotInJSon
 		}
-		
+
 		let hdUrl = getURL(from: json, forTag: "hdurl")
-		
+
 		guard let title = json["title"] as? String else {
 			throw JSonToApodConvertorError.titleNotInJson
 		}
-		
+
 		return ApodData(title: title, url: normalUrl, hdUrl: hdUrl, date: date, explanation: explanation, copyright: copyright)
 	}
-	
+
 	private func getURL(from json: [String: AnyObject], forTag tag: String) -> URL? {
 		guard let urlString = json[tag] as? String else {
 			return nil
 		}
-		
+
 		return URL(string: urlString)
 	}
-	
+
 }

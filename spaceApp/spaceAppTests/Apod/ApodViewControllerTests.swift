@@ -28,7 +28,7 @@ extension ApodViewControllerTests {
 		outputSpy = MockApodViewControllerOutput()
 		target.output = outputSpy
 	}
-	
+
 	override func tearDown() {
 		window = nil
 		super.tearDown()
@@ -44,12 +44,12 @@ extension ApodViewControllerTests {
 			target = viewController
 		}
 	}
-	
+
 	func loadView() {
 		window.addSubview(target.view)
 		RunLoop.current.run(until: Date())
 	}
-	
+
 	func prepareViewModel() -> ApodDataViewModel {
 		let title = "Title"
 		let date = "2016年07月19日"
@@ -57,7 +57,7 @@ extension ApodViewControllerTests {
 		let copyright = "copyright"
 		return ApodDataViewModel(title: title, date: date, explanation: explanation, copyright: copyright)
 	}
-	
+
 	func prepareImageViewModel() -> ApodImageViewModel {
 		let picture = UIImage(imageLiteralResourceName: "UnitTestImage")
 		return ApodImageViewModel(picture: picture)
@@ -69,11 +69,11 @@ extension ApodViewControllerTests {
 	class MockApodViewControllerOutput: ApodViewControllerOutput {
 		var fetchTodayApodCalled = false
 		var fetchRandomApodCalled = false
-		
+
 		func fetchTodayApod(request: TodayApodRequest) {
 			fetchTodayApodCalled = true
 		}
-		
+
 		func fetchRandomApod(request: RandomApodRequest) {
 			fetchRandomApodCalled = true
 		}
@@ -85,55 +85,55 @@ extension ApodViewControllerTests {
 	//MARK: - ViewDidLoad
 	func test_viewDidLoad_fetchTodaysApodIsCalled() {
 		// Arrange
-		
+
 		// Act
 		loadView()
-		
+
 		// Assert
 		XCTAssertTrue(outputSpy.fetchTodayApodCalled)
 	}
-	
+
 	func test_viewDidLoad_ViewControllerIsScrollViewDelegate() {
 		// Arrange
-		
+
 		// Act
 		loadView()
-		
+
 		// Assert
 		guard let delegate = target.imageScrollView.delegate else {
 			XCTAssert(false)
 			return
 		}
-		
+
 		XCTAssertTrue(delegate === target)
 	}
-	
+
 	func test_viewDidLoad_RefreshControlIsCreated() {
 		// Arrange
-		
+
 		// Act
 		loadView()
-		
+
 		// Assert
 		XCTAssertNotNil(target.refreshControl)
 	}
-	
+
 	func test_viewDidLoad_RefreshIsSetToRefreshScrollView() {
 		// Arrange
-		
+
 		// Act
 		loadView()
-		
+
 		// Assert
 		XCTAssertTrue(target.refreshScrollView.refreshControl === target.refreshControl)
 	}
-	
+
 	func test_viewDidLoad_RefreshControlHasATarget() {
 		// Arrange
-		
+
 		// Act
 		loadView()
-		
+
 		// Assert
 		XCTAssertEqual(target.refreshControl.allTargets.count, 1)
 	}
@@ -143,26 +143,26 @@ extension ApodViewControllerTests {
 		// Arrange
 		loadView()
 		let viewModel = prepareViewModel()
-		
+
 		// Act
 		target.displayApod(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertEqual(target.titleLabel.text, viewModel.title)
 	}
-	
+
 	func test_displayApod_ExplanationIsDisplayed() {
 		// Arrange
 		loadView()
 		let viewModel = prepareViewModel()
-		
+
 		// Act
 		target.displayApod(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertEqual(target.explanationTextView.text, viewModel.explanation)
 	}
-	
+
 	func test_displayApod_RemovesImage() {
 		// Arrange
 		loadView()
@@ -170,225 +170,225 @@ extension ApodViewControllerTests {
 		target.displayImage(viewModel: imageViewModel)
 		XCTAssertEqual(target.imageScrollView.subviews.count, 3)
 		let viewModel = prepareViewModel()
-		
+
 		// Act
 		target.displayApod(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertEqual(target.imageScrollView.subviews.count, 2)
 	}
-	
+
 	func test_displayApod_displaysProgressView() {
 		// Arrange
 		loadView()
 		target.progressView.isHidden = true
 		let viewModel = prepareViewModel()
-		
+
 		// Act
-		
+
 		target.displayApod(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertFalse(target.progressView.isHidden)
 	}
-	
+
 	func test_displayApod_setsProgressviewProgressTo0() {
 		// Arrange
 		loadView()
 		target.progressView.progress = 1
 		let viewModel = prepareViewModel()
-		
+
 		// Act
-		
+
 		target.displayApod(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertEqual(target.progressView.progress, 0)
 	}
-	
+
 	func test_displayApod_endsRefreshControlRefreshing() {
 		// Arrange
 		loadView()
 		target.refreshControl.beginRefreshing()
 		let viewModel = prepareViewModel()
-		
+
 		// Act
-		
+
 		target.displayApod(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertFalse(target.refreshControl.isRefreshing)
 	}
-	
+
 	//MARK: - displayImage
 	func test_displayImage_ScrollViewHasSubview() {
 		// Arrange
 		loadView()
 		let viewModel = prepareImageViewModel()
-		
+
 		// Act
 		target.displayImage(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertFalse(target.imageScrollView.subviews.isEmpty)
 	}
-	
+
 	func test_displayImage_ScrollViewSubviewsDoNotAddup() {
 		// Arrange
 		loadView()
 		let viewModel = prepareImageViewModel()
-		
+
 		// Act
 		target.displayImage(viewModel: viewModel)
 		target.displayImage(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertEqual(target.imageScrollView.subviews.count, 3)
 		//the scroll views contains 2 views for the sliders and our view making it 3
 	}
-	
+
 	func test_displayImage_ScrollViewContentsSizeSetToImageSize() {
 		// Arrange
 		loadView()
 		let viewModel = prepareImageViewModel()
-		
+
 		// Act
 		target.displayImage(viewModel: viewModel)
-		
+
 		// Assert
 		let width = viewModel.picture!.size.width * target.imageScrollView.zoomScale
 		let height = viewModel.picture!.size.height * target.imageScrollView.zoomScale
 		XCTAssertEqual(target.imageScrollView.contentSize.height, height)
 		XCTAssertEqual(target.imageScrollView.contentSize.width, width)
 	}
-	
+
 	func test_displayImage_SetsImageViewFrame() {
 		// Arrange
 		loadView()
 		let viewModel = prepareImageViewModel()
-		
-		
+
+
 		// Act
 		target.displayImage(viewModel: viewModel)
 		let imageView = target.getImageViewFromScrollView()
-		
+
 		// Assert
 		let width = viewModel.picture!.size.width * target.imageScrollView.zoomScale
 		let height = viewModel.picture!.size.height * target.imageScrollView.zoomScale
-		
+
 		XCTAssertEqualWithAccuracy((imageView?.frame.width)!, width, accuracy: 0.0001)
 		XCTAssertEqualWithAccuracy((imageView?.frame.height)!, height, accuracy: 0.0001)
 	}
-	
+
 	func test_displayImage_SetsScrollViewMinimumZoomScale() {
 		// Arrange
 		loadView()
 		let viewModel = prepareImageViewModel()
 		let scale = calculateMinimumZoomScale(imageScrollView: target.imageScrollView, picture: viewModel.picture!)
-		
+
 		// Act
 		target.displayImage(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertEqual(target.imageScrollView.minimumZoomScale, scale)
 	}
-	
+
 	private func calculateMinimumZoomScale(imageScrollView: UIScrollView, picture: UIImage) -> CGFloat {
 		let minWidthScale = imageScrollView.frame.width / picture.size.width
 		let minHeightScale = imageScrollView.frame.height / picture.size.height
-		
+
 		return min(minWidthScale, minHeightScale)
 	}
-	
+
 	func test_displayImage_SetsScrollViewScaleToMinimumZoomScale() {
 		// Arrange
 		loadView()
 		let viewModel = prepareImageViewModel()
-		
+
 		// Act
 		target.displayImage(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertEqual(target.imageScrollView.zoomScale, target.imageScrollView.minimumZoomScale)
 	}
-	
+
 	func test_displayImage_hiddesProgressView() {
 		// Arrange
 		loadView()
 		let viewModel = prepareImageViewModel()
 		target.progressView.isHidden = false
-		
+
 		// Act
 		target.displayImage(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertTrue(target.progressView.isHidden)
 	}
-	
+
 	func test_displayImage_hiddesNetworkActivityIndicator() {
 		// Arrange
 		loadView()
 		let viewModel = prepareImageViewModel()
 		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		
+
 		// Act
 		target.displayImage(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertFalse(UIApplication.shared.isNetworkActivityIndicatorVisible)
 	}
-	
+
 	//MARK: - displayError
 	func test_displayError_StopsTheRefreshControl() {
 		// Arrange
 		loadView()
 		let viewModel = ApodErrorViewModel(errorMessage: "Error Message")
 		target.refreshControl.beginRefreshing()
-		
+
 		// Act
 		target.displayApodError(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertFalse(target.refreshControl.isRefreshing)
 	}
-	
+
 	func test_displayError_HidesProgressView() {
 		// Arrange
 		loadView()
 		let viewModel = ApodErrorViewModel(errorMessage: "Error Message")
 		target.progressView.isHidden = false
-		
+
 		// Act
 		target.displayApodError(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertTrue(target.progressView.isHidden)
 	}
-	
+
 	func test_displayError_HidesDownloadIndicator() {
 		// Arrange
 		loadView()
 		let viewModel = ApodErrorViewModel(errorMessage: "Error Message")
 		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		
+
 		// Act
 		target.displayApodError(viewModel: viewModel)
-		
+
 		// Assert
 		XCTAssertFalse(UIApplication.shared.isNetworkActivityIndicatorVisible)
 	}
-	
+
 	//MARK: - onRefreshPull
 	func test_onRefreshPull_CallsOutput_fetchRandomApod() {
 		// Arrange
 		loadView()
-		
+
 		// Act
 		target.onRefreshPull()
-		
+
 		// Assert
 		XCTAssertTrue(outputSpy.fetchRandomApodCalled)
 	}
-	
-	
+
+
 }

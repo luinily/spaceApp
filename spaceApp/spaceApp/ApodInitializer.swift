@@ -12,15 +12,15 @@ struct ApodInitializer: Initializer {
 	private let apodURL = "https://api.nasa.gov/planetary/apod"
 	private let oldestDate = (year: 1995, month: 06, day: 16)
 	private let nasaApiKey = "ooZOv9QcCFLU8kOE9rKJlEx9TtdOhaT4oo9smEx3"
-	
+
 	func createApodNetworkTool() -> NetworkTool {
 		return AlamofireTool()
 	}
-	
+
 	func createDataToApodConverter() -> DataToApodDataConverter {
 		return JsonToApodConvertor()
 	}
-	
+
 	func createApodStore() -> ApodStore {
 		let networkTool = createApodNetworkTool()
 		let dataConvertor = createDataToApodConverter()
@@ -28,7 +28,7 @@ struct ApodInitializer: Initializer {
 		let date = makeDate(date: oldestDate)
 		return NetworkApodStore(requestURl: requestURL, oldestPossibleDate: date, apiKey: nasaApiKey, networkTool: networkTool, dataConvertor: dataConvertor)!
 	}
-	
+
 	private func makeDate(date: (year: Int, month: Int, day: Int)) -> Date {
 		var components = DateComponents()
 		components.year = date.year
@@ -38,7 +38,7 @@ struct ApodInitializer: Initializer {
 		components.minute = 0
 		return Calendar.current.date(from: components)!
 	}
-	
+
 	func createPictureDownloader() -> PictureDownloader {
 		return AlamofirePictureDownloader()
 	}

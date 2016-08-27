@@ -23,7 +23,7 @@ enum DownloadError: LocalizedError {
 
 class AlamofirePictureDownloader: PictureDownloader {
 	private var currentRequest: Request?
-	
+
 	func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, Error?) -> Void) {
 		download(url: url) {
 			progressRatio, fileURL, error in
@@ -38,35 +38,35 @@ class AlamofirePictureDownloader: PictureDownloader {
 			}
 		}
 	}
-	
+
 	func cancelCurrentDownload() {
 		currentRequest?.cancel()
 	}
-	
+
 	private func download(url: URL, completionHandler: @escaping (Double?, URL?, Error?) -> Void) {
-		
+
 		var didSizeErrorCancel = false
-		
+
 		currentRequest = Alamofire.download(url.urlString, to: getFileDestination, withMethod: .get)
-		
+
 		currentRequest?.progress() {
 			bytesRead, totalBytesRead, totalBytesExpectedToRead in
-			
+
 			guard totalBytesExpectedToRead > 0 else {
 				self.currentRequest?.cancel()
 				didSizeErrorCancel = true
 				return
 			}
-			
+
 			DispatchQueue.main.async {
 				let ratio = max(Double(totalBytesRead) / Double(totalBytesExpectedToRead), 0)
 				completionHandler(ratio, nil, nil)
 			}
 		}
-		
+
 		currentRequest?.response() {
 			_, response, _, error in
-			
+
 			if didSizeErrorCancel {
 				let error = self.makeCancelError()
 				completionHandler(nil, nil, error)
@@ -74,7 +74,7 @@ class AlamofirePictureDownloader: PictureDownloader {
 				guard error.code != -999 else {
 					return
 				}
-				
+
 				print("Failed with error: \(error)")
 				completionHandler(nil, nil, error)
 			} else if let response = response {
@@ -83,26 +83,26 @@ class AlamofirePictureDownloader: PictureDownloader {
 			}
 		}
 	}
-	
-	
+
+
 	private func makeCancelError() -> Error {
 		return DownloadError.invalidData
 	}
-	
+
 	private func getFileDestination(temporaryURL: URL, response: HTTPURLResponse) -> URL {
 		let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 
 		let fileName = "ApodPicture.jpg"
-		
+
 		let finalPath = directoryURL.appendingPathComponent(fileName)
-	
+
 		if FileManager.default.fileExists(atPath: finalPath.path) {
 			try? FileManager.default.removeItem(atPath: finalPath.path)
 		}
-		
+
 		return finalPath
 	}
-	
+
 	private func getFileURL(from response: HTTPURLResponse) -> URL {
 		let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 		let fileName = "ApodPicture.jpg"

@@ -11,10 +11,10 @@ import XCTest
 
 class JsonToApodConvertorTests: XCTestCase {
 	// MARK: Subject under test
-	
+
 	var target: JsonToApodConvertor!
 	var data: Data!
-	
+
 	let jsonObject: [String: Any] = [
 		"copyright": "copyright",
 		"date": "2016-07-16",
@@ -33,9 +33,9 @@ extension JsonToApodConvertorTests {
 		target = JsonToApodConvertor()
 		data = try? JSONSerialization.data(withJSONObject: jsonObject, options: [])
 	}
-	
+
 	override func tearDown() {
-		
+
 	}
 }
 
@@ -55,106 +55,106 @@ extension JsonToApodConvertorTests {
 
 // MARK: Test doubles
 extension JsonToApodConvertorTests {
-	
+
 }
 
 // MARK: Tests
 extension JsonToApodConvertorTests {
 	func test_convertDataToApodData_Copyright() {
 		// Arrange
-		
+
 		// Act
 		let apodData = try? target.convertDataToApodData(data: data)
-			
-		
+
+
 		// Assert
 		guard let apod = apodData else {
 			XCTAssert(false, "convertDataToApodData did not end correctly")
 			return
 		}
-		
+
 		XCTAssertEqual(apod.copyright, "copyright")
 	}
-	
+
 	func test_convertDataToApodData_date() {
 		// Arrange
 		let date = dateFor2016_07_16()
-		
+
 		// Act
 		let apodData = try? target.convertDataToApodData(data: data)
-		
-		
+
+
 		// Assert
 		guard let apod = apodData else {
 			XCTAssert(false, "convertDataToApodData did not end correctly")
 			return
 		}
-		
+
 		XCTAssertEqual(apod.date, date)
 	}
-	
+
 	func test_convertDataToApodData_Explanation() {
 		// Arrange
-		
+
 		// Act
 		let apodData = try? target.convertDataToApodData(data: data)
-		
-		
+
+
 		// Assert
 		guard let apod = apodData else {
 			XCTAssert(false, "convertDataToApodData did not end correctly")
 			return
 		}
-		
+
 		XCTAssertEqual(apod.explanation, "explanation")
 	}
-	
+
 	func test_convertDataToApodData_hdURL() {
 		// Arrange
 		let url = URL(string: "http://apod.nasa.gov/apod/image/1607/NGC2736NBbicolor_1250_Jurasevich.jpg")!
-		
+
 		// Act
 		let apodData = try? target.convertDataToApodData(data: data)
-		
+
 		// Assert
 		guard let apod = apodData else {
 			XCTAssert(false, "convertDataToApodData did not end correctly")
 			return
 		}
-		
+
 		XCTAssertEqual(apod.hdUrl, url)
 	}
-	
+
 	func test_convertDataToApodData_Title() {
 		// Arrange
-		
+
 		// Act
 		let apodData = try? target.convertDataToApodData(data: data)
-		
-		
+
+
 		// Assert
 		guard let apod = apodData else {
 			XCTAssert(false, "convertDataToApodData did not end correctly")
 			return
 		}
-		
+
 		XCTAssertEqual(apod.title, "title")
 	}
-	
+
 	func test_convertDataToApodData_url() {
 		// Arrange
 		let url = URL(string: "http://apod.nasa.gov/apod/image/1607/NGC2736NBbicolor_1250_Jurasevich1024c.jpg")!
-		
+
 		// Act
 		let apodData = try? target.convertDataToApodData(data: data)
-		
+
 		// Assert
 		guard let apod = apodData else {
 			XCTAssert(false, "convertDataToApodData did not end correctly")
 			return
 		}
-		
+
 		XCTAssertEqual(apod.url, url)
 	}
-	
+
 }

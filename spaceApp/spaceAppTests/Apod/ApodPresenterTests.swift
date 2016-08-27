@@ -24,7 +24,7 @@ extension ApodPresenterTests {
 		super.setUp()
 		setupApodPresenter()
 	}
-	
+
 	override func tearDown() {
 		super.tearDown()
 	}
@@ -37,7 +37,7 @@ extension ApodPresenterTests {
 		mockOutput = MockOutput()
 		target.output = mockOutput
 	}
-	
+
 	func makeDate(year: Int, month: Int, day: Int) -> Date {
 		var components = DateComponents()
 		components.year = year
@@ -45,7 +45,7 @@ extension ApodPresenterTests {
 		components.day = day
 		components.hour = 0
 		components.minute = 0
-		
+
 		return Calendar.current.date(from: components)!
 	}
 }
@@ -55,31 +55,31 @@ extension ApodPresenterTests {
 	class MockOutput: ApodPresenterOutput {
 		var displayApodCalled = false
 		var apodViewModel: ApodDataViewModel? = nil
-		
+
 		var displayApodErrorCalled = false
 		var errorViewModel: ApodErrorViewModel? = nil
-		
+
 		var displayImageCalled = false
 		var imageViewModel: ApodImageViewModel? = nil
-		
+
 		var displayProgressCalled = false
 		var progress: Float = 0
-		
+
 		func displayApod(viewModel: ApodDataViewModel) {
 			displayApodCalled = true
 			self.apodViewModel = viewModel
 		}
-		
+
 		func displayApodError(viewModel: ApodErrorViewModel) {
 			displayApodErrorCalled = true
 			errorViewModel = viewModel
 		}
-		
+
 		func displayImage(viewModel: ApodImageViewModel) {
 			displayImageCalled = true
 			imageViewModel = viewModel
 		}
-		
+
 		func displayProgress(viewModel: ApodPictureDownloadProgressViewModel) {
 			displayProgressCalled = true
 			progress = viewModel.progressRatio
@@ -93,66 +93,66 @@ extension ApodPresenterTests {
 		// Arrange
 		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: "")
 		let response = ApodResponse(apodData: apodData)
-		
+
 		// Act
 		target.presentApod(response: response)
-		
+
 		// Assert
 		XCTAssertTrue(mockOutput.displayApodCalled)
 	}
-	
+
 	func test_presentApod_viewModelContainsTitle() {
 		// Arrange
 		let title = "title"
 		let apodData = ApodData(title: title, url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: "")
 		let response = ApodResponse(apodData: apodData)
-		
+
 		// Act
 		target.presentApod(response: response)
-		
+
 		// Assert
 		XCTAssertEqual(mockOutput.apodViewModel?.title, title)
 	}
-	
+
 	func test_presentApod_viewModelContainsFormatedDate() {
 		// Arrange
 		let date = makeDate(year: 2016, month: 07, day: 18)
 		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: date, explanation: "", copyright: "")
 		let response = ApodResponse(apodData: apodData)
-		
+
 		// Act
 		target.presentApod(response: response)
-		
+
 		// Assert
 		XCTAssertEqual(mockOutput.apodViewModel?.date, "2016年07月18日")
 	}
-	
+
 	func test_presentApod_viewModelContainsExplaination() {
 		// Arrange
 		let explanation = "explanation"
 		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: explanation, copyright: "")
 		let response = ApodResponse(apodData: apodData)
-		
+
 		// Act
 		target.presentApod(response: response)
-		
+
 		// Assert
 		XCTAssertEqual(mockOutput.apodViewModel?.explanation, explanation)
 	}
-	
+
 	func test_presentApod_viewModelContainsCopyright() {
 		// Arrange
 		let copyright = "copyright"
 		let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: copyright)
 		let response = ApodResponse(apodData: apodData)
-		
+
 		// Act
 		target.presentApod(response: response)
-		
+
 		// Assert
 		XCTAssertEqual(mockOutput.apodViewModel?.copyright, copyright)
 	}
-	
+
 	func test_presentError_DisplayApodErrorCalled() {
 		// Arrange
 		let error = DownloadError.invalidData
@@ -160,69 +160,69 @@ extension ApodPresenterTests {
 
 		// Act
 		target.presentError(response: response)
-		
+
 		// Assert
 		XCTAssertTrue(mockOutput.displayApodErrorCalled)
 	}
-	
+
 	func test_presentError_ViewModelContainsLocalizedDescription() {
 		// Arrange
 		let error = DownloadError.invalidData
 		let response = ApodErrorResponse(error: error)
-		
+
 		// Act
 		target.presentError(response: response)
-		
+
 		// Assert
 		XCTAssertEqual(mockOutput.errorViewModel?.errorMessage, "Invalid Data")
 	}
-	
+
 	func test_presentPictureDownloadProgress_displayProgressIsCalled() {
 		// Arrange
 		let response = ApodPictureDownloadProgressResponse(progressRatio: 0.5)
-		
+
 		// Act
 		target.presentPictureDownloadProgress(response: response)
-		
+
 		// Assert
 		XCTAssertTrue(mockOutput.displayProgressCalled)
 	}
-	
+
 	func test_presentPictureDownloadProgress_displayProgressValueIsOk() {
 		// Arrange
 		let progressRatio = 0.123
 		let response = ApodPictureDownloadProgressResponse(progressRatio: progressRatio)
-		
+
 		// Act
 		target.presentPictureDownloadProgress(response: response)
-		
+
 		// Assert
 		XCTAssertEqual(mockOutput.progress, Float(progressRatio))
 	}
-	
+
 	func test_presentPicture_displayImageIsCalled() {
 		// Arrange
 		let picture = UIImage(imageLiteralResourceName: "UnitTestImage")
 		let response = ApodPictureResponse(picture: picture)
-		
+
 		// Act
 		target.presentPicture(response: response)
-		
+
 		// Assert
 		XCTAssertTrue(mockOutput.displayImageCalled)
 	}
-	
+
 	func test_presentPicture_imageIsPassed() {
 		// Arrange
 		let picture = UIImage(imageLiteralResourceName: "UnitTestImage")
 		let response = ApodPictureResponse(picture: picture)
-		
+
 		// Act
 		target.presentPicture(response: response)
-		
+
 		// Assert
 		XCTAssertEqual(mockOutput.imageViewModel?.picture, picture)
 	}
 
-	
+
 }

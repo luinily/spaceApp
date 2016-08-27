@@ -27,7 +27,7 @@ extension ApodPresenter: ApodInteractorOutput {
 
 class ApodConfigurator {
 	// MARK: Object lifecycle
-	
+
 	class var sharedInstance: ApodConfigurator {
 		struct Static {
 			static var instance = ApodConfigurator()
@@ -35,45 +35,45 @@ class ApodConfigurator {
 		}
 		return Static.instance
 	}
-	
+
 	// MARK: Configuration
-	
+
 	func configure(viewController: ApodViewController) {
 		let router = ApodRouter()
 		router.viewController = viewController
-		
+
 		let presenter = ApodPresenter()
 		presenter.output = viewController
-		
+
 		let interactor = configureInteractor(presenter: presenter)
-		
+
 		viewController.output = interactor
 		viewController.router = router
 	}
-	
+
 	private func configureInteractor(presenter: ApodPresenter) -> ApodInteractor? {
 		guard let initializer = getInitializer() else {
 			return nil
 		}
-		
+
 		let apodWorker = createApodWorker(initializer: initializer)
 		let pictureDownloadWorker = createPictureDownloadWorker(initializer: initializer)
-		
+
 		let interactor = ApodInteractor(apodWorker: apodWorker, pictureDownloadWorker: pictureDownloadWorker)
 		interactor.output = presenter
 		return interactor
 	}
-	
+
 	private func createApodWorker(initializer: Initializer) -> ApodWorker {
 		let apodStore = initializer.createApodStore()
 		return ApodWorker(apodStore: apodStore)
 	}
-	
+
 	private func createPictureDownloadWorker(initializer: Initializer) -> PictureDownloadWorker {
 		let pictureDownloader = initializer.createPictureDownloader()
 		return PictureDownloadWorker(downloader: pictureDownloader)
 	}
-	
+
 	private func getInitializer() -> Initializer? {
 		let appDelegate = UIApplication.shared.delegate as? AppDelegate
 		return appDelegate?.initializer

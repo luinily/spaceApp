@@ -17,9 +17,9 @@ class RandomDateGeneratorTests: XCTestCase {
 extension RandomDateGeneratorTests {
 	override func setUp() {
 	}
-	
+
 	override func tearDown() {
-		
+
 	}
 }
 
@@ -34,7 +34,7 @@ extension RandomDateGeneratorTests {
 
 // MARK: Test doubles
 extension RandomDateGeneratorTests {
-	
+
 }
 
 // MARK: Tests
@@ -43,31 +43,31 @@ extension RandomDateGeneratorTests {
 		// Arrange
 		let lowerBound = makeDate(for: "1900-06-15")
 		let higherBound =  makeDate(for: "2000-09-23")
-		
+
 		let target = RandomDateGenerator(lowerBound: lowerBound, higherBound:higherBound)
 		for _ in 0 ... 10000 {
 			// Act
 			let date = target.generateDate()
-			
+
 			// Assert
 			XCTAssertGreaterThanOrEqual(date, lowerBound)
 			XCTAssertLessThanOrEqual(date, higherBound)
 		}
 	}
-	
+
 	func test_generateDate_dateParameterVaries() {
 		// Arrange
 		let lowerBound = makeDate(for: "1900-06-15")
 		let higherBound =  makeDate(for: "2000-09-23")
 		let target = RandomDateGenerator(lowerBound: lowerBound, higherBound:higherBound)
-		
+
 		var previousDate: Date? = nil
 		var previousPreviousDate: Date? = nil
-		
+
 		for _ in 0 ... 10000 {
 			// Act
 			let currentDate = target.generateDate()
-			
+
 			//Assert
 			if let previousDate = previousDate {
 				if let previousPreviousDate = previousPreviousDate {
