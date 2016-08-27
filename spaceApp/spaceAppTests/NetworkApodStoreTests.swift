@@ -59,7 +59,7 @@ extension NetworkApodStoreTests {
 			requestParameters = parameters
 			
 			if shouldReturnError {
-				completionHandler(nil, NSError(domain: "", code: 0, userInfo: nil))
+				completionHandler(nil, DownloadError.invalidData)
 			} else {
 				completionHandler(Data(), nil)
 			}
@@ -86,7 +86,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchTodaysPicture() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -98,7 +98,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchTodaysPicture() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -110,7 +110,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchTodaysPicture() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -122,7 +122,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchTodaysPicture() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -138,7 +138,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchTodaysPicture() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -154,7 +154,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchTodaysPicture() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		// Assert
 		XCTAssertTrue(dataConvertor.convertDataToApodDataHasBeenCalled)
@@ -190,7 +190,7 @@ extension NetworkApodStoreTests {
 	
 	func testFetchTodaysPicture_WhenHasError_CallsCompletionHandlerWithError() {
 		// Arrange
-		var error: NSError? = nil
+		var error: Error? = nil
 		mockNetworkTool.shouldReturnError = true
 		
 		// Act
@@ -208,7 +208,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -220,7 +220,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -232,7 +232,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -244,7 +244,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -260,7 +260,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -276,7 +276,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureFor(date: makeDate(for: "2016-07-16")) {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		// Assert
 		XCTAssertTrue(dataConvertor.convertDataToApodDataHasBeenCalled)
@@ -312,7 +312,7 @@ extension NetworkApodStoreTests {
 	
 	func test_fetchPictureFor_WhenHasError_CallsCompletionHandlerWithError() {
 		// Arrange
-		var error: NSError? = nil
+		var error: Error? = nil
 		mockNetworkTool.shouldReturnError = true
 		
 		// Act
@@ -330,7 +330,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureForRandomDate() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -342,7 +342,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureForRandomDate() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -354,7 +354,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureForRandomDate() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -366,7 +366,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureForRandomDate() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -382,7 +382,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureForRandomDate() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		
 		// Assert
@@ -398,7 +398,7 @@ extension NetworkApodStoreTests {
 		
 		// Act
 		target.fetchPictureForRandomDate() {
-			(pictureData: ApodData?, error: NSError?) in
+			(pictureData: ApodData?, error: Error?) in
 		}
 		// Assert
 		XCTAssertTrue(dataConvertor.convertDataToApodDataHasBeenCalled)
@@ -434,7 +434,7 @@ extension NetworkApodStoreTests {
 	
 	func test_fetchPictureForRandomDate_WhenHasError_CallsCompletionHandlerWithError() {
 		// Arrange
-		var error: NSError? = nil
+		var error: Error? = nil
 		mockNetworkTool.shouldReturnError = true
 		
 		// Act

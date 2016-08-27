@@ -23,7 +23,7 @@ struct ApodResponse {
 }
 
 struct ApodErrorResponse {
-	var error: NSError
+	var error: Error
 }
 
 struct ApodPictureDownloadProgressResponse {

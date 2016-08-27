@@ -64,7 +64,7 @@ extension ApodWorkerTests {
 				let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: "")
 				completionHandler(apodData, nil)
 			} else {
-				let error = NSError(domain: "", code: 0, userInfo: nil)
+				let error = DownloadError.invalidData
 				completionHandler( nil, error)
 			}
 		}

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol PictureDownloader {
-	func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, NSError?) -> Void)
+	func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, Error?) -> Void)
 	
 	func cancelCurrentDownload()
 }

@@ -156,7 +156,7 @@ extension ApodPresenterTests {
 	func test_presentError_DisplayApodErrorCalled() {
 		// Arrange
 		let error = DownloadError.invalidData
-		let response = ApodErrorResponse(error: error as NSError)
+		let response = ApodErrorResponse(error: error)
 
 		// Act
 		target.presentError(response: response)
@@ -168,7 +168,7 @@ extension ApodPresenterTests {
 	func test_presentError_ViewModelContainsLocalizedDescription() {
 		// Arrange
 		let error = DownloadError.invalidData
-		let response = ApodErrorResponse(error: error as NSError)
+		let response = ApodErrorResponse(error: error)
 		
 		// Act
 		target.presentError(response: response)

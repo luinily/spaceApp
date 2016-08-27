@@ -79,7 +79,7 @@ extension NetworkApodStore: ApodStore {
 		return formatter.string(from: date)
 	}
 	
-	private func handleFetchedResults(data: Data?, error: NSError?, completionHandler: ApodCompletionHandler) {
+	private func handleFetchedResults(data: Data?, error: Error?, completionHandler: ApodCompletionHandler) {
 		guard error == nil else {
 			completionHandler(nil, error)
 			return

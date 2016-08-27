@@ -70,17 +70,17 @@ extension ApodInteractorTests {
 			super.init(apodStore: MockApodStore())
 		}
 		
-		override func fetchTodayAPOD(completionHandler: @escaping (ApodData?, NSError?) -> Void) {
+		override func fetchTodayAPOD(completionHandler: @escaping (ApodData?, Error?) -> Void) {
 			fetchTodayApodCalled = true
 			handleCompletionHandler(completionHandler: completionHandler)
 		}
 		
-		override func fetchRandomApod(completionHandler: @escaping (ApodData?, NSError?) -> Void) {
+		override func fetchRandomApod(completionHandler: @escaping (ApodData?, Error?) -> Void) {
 			fetchRandomApodCalled = true
 			handleCompletionHandler(completionHandler: completionHandler)
 		}
 		
-		private func handleCompletionHandler(completionHandler: (ApodData?, NSError?) -> Void) {
+		private func handleCompletionHandler(completionHandler: (ApodData?, Error?) -> Void) {
 			if shouldReturnData {
 				if shouldReturnHdUrl {
 					let apodData = ApodData(title: "", url: URL(string: "http://www.url.com")!, hdUrl: URL(string: "http://www.hdurl.com")!, date: Date(), explanation: "", copyright: "")
@@ -90,14 +90,14 @@ extension ApodInteractorTests {
 					completionHandler(apodData, nil)
 				}
 			} else {
-				let error = NSError(domain: "", code: 0, userInfo: nil)
+				let error = DownloadError.invalidData
 				completionHandler(nil, error)
 			}
 		}
 	}
 
 	class MockPictureDownloader: PictureDownloader {
-		func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, NSError?) -> Void) {
+		func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, Error?) -> Void) {
 
 		}
 
@@ -110,13 +110,13 @@ extension ApodInteractorTests {
 		var downloadCalled = false
 		var url: URL?
 		var progressHandler: ((Double) -> Void)!
-		var completionHandler: ((UIImage?, NSError?) -> Void)!
+		var completionHandler: ((UIImage?, Error?) -> Void)!
 		
 		init() {
 			super.init(downloader: MockPictureDownloader())
 		}
 		
-		override func downolad(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, NSError?) -> Void) {
+		override func downolad(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, Error?) -> Void) {
 			downloadCalled = true
 			self.url = url
 			self.progressHandler = progressHandler
@@ -267,7 +267,7 @@ extension ApodInteractorTests {
 	func test_fetchTodayApod_pictureDownload_completionHandlerCallsOutputPresentError() {
 		// Arrange
 		let request = TodayApodRequest()
-		let error = NSError( domain: "", code: 0, userInfo: nil)
+		let error = DownloadError.invalidData
 		
 		// Act
 		target.fetchTodayApod(request: request)
