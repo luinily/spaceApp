@@ -41,11 +41,11 @@ extension PictureDownloadWorkerTests {
 		
 		var cancelCurrentDownloadCalled = false
 		
-		func download(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
+		func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, NSError?) -> Void) {
 			downloadCalled = true
 			self.url = url
-			progressHandler(progressRatio: progressRatio)
-			completionHandler(picture: nil, error: nil)
+			progressHandler(progressRatio)
+			completionHandler(nil, nil)
 		}
 		
 		func cancelCurrentDownload() {

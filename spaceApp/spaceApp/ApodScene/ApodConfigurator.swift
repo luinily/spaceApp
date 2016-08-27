@@ -14,7 +14,7 @@ import UIKit
 // MARK: Connect View, Interactor, and Presenter
 
 extension ApodViewController: ApodPresenterOutput {
-	override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		router.passDataToNextScene(segue: segue)
 	}
 }

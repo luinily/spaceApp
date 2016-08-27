@@ -21,7 +21,7 @@ enum JSonToApodConvertorError: Error {
 struct JsonToApodConvertor: DataToApodDataConverter {
 	
 	func convertDataToApodData(data: Data) throws -> ApodData {
-		var json: AnyObject
+		var json: Any
 		do {
 			json = try JSONSerialization.jsonObject(with: data, options: [])
 		} catch {

@@ -187,7 +187,7 @@ extension ApodViewController: UIScrollViewDelegate {
 		updateImageViewFrame(scrollView: scrollView)
 	}
 	
-	private func updateImageViewFrame(scrollView: UIScrollView) {
+	fileprivate func updateImageViewFrame(scrollView: UIScrollView) {
 		if let imageView = getImageViewFromScrollView() {
 			let yOffset = max(0, (scrollView.frame.height - imageView.frame.height) / 2)
 			let xOffset = max(0, (scrollView.frame.width - imageView.frame.width) / 2)

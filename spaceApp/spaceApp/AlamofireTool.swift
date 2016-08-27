@@ -11,16 +11,16 @@ import Alamofire
 
 struct AlamofireTool: NetworkTool {
 	func makeGetRequest(url: URL, parameters: [String: String], completionHandler: RequestCompletionHandler) {
-		let request = Alamofire.request(.GET, url.urlString, parameters: parameters, encoding: .url)
+		let request = Alamofire.request(url.urlString, withMethod: .get, parameters: parameters, encoding: .url)
 		let validatedRequest = request.validate()
 		validatedRequest.responseJSON {
 			response in
 			if response.result.isSuccess {
-				completionHandler(data: response.data, error: nil)
+				completionHandler(response.data, nil)
 			} else {
 				print(response.result.error?.localizedDescription)
 				print(response.request.debugDescription)
-				completionHandler(data: nil, error: response.result.error)
+				completionHandler(nil, response.result.error)
 			}
 		}
 	}

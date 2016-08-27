@@ -62,10 +62,10 @@ extension ApodWorkerTests {
 		func handleCompletionHandler(completionHandler: ApodCompletionHandler) {
 			if shouldReturnData {
 				let apodData = ApodData(title: "", url: URL(string: "http://www.google.com")!, hdUrl: URL(string: "http://www.google.com")!, date: Date(), explanation: "", copyright: "")
-				completionHandler(pictureData: apodData, error: nil)
+				completionHandler(apodData, nil)
 			} else {
 				let error = NSError(domain: "", code: 0, userInfo: nil)
-				completionHandler(pictureData: nil, error: error)
+				completionHandler( nil, error)
 			}
 		}
 	}

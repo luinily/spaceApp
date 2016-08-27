@@ -70,52 +70,53 @@ extension ApodInteractorTests {
 			super.init(apodStore: MockApodStore())
 		}
 		
-		override func fetchTodayAPOD(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
+		override func fetchTodayAPOD(completionHandler: @escaping (ApodData?, NSError?) -> Void) {
 			fetchTodayApodCalled = true
 			handleCompletionHandler(completionHandler: completionHandler)
 		}
 		
-		override func fetchRandomApod(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
+		override func fetchRandomApod(completionHandler: @escaping (ApodData?, NSError?) -> Void) {
 			fetchRandomApodCalled = true
 			handleCompletionHandler(completionHandler: completionHandler)
 		}
 		
-		private func handleCompletionHandler(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
+		private func handleCompletionHandler(completionHandler: (ApodData?, NSError?) -> Void) {
 			if shouldReturnData {
 				if shouldReturnHdUrl {
 					let apodData = ApodData(title: "", url: URL(string: "http://www.url.com")!, hdUrl: URL(string: "http://www.hdurl.com")!, date: Date(), explanation: "", copyright: "")
-					completionHandler(apodData: apodData, error: nil)
+					completionHandler(apodData, nil)
 				} else {
 					let apodData = ApodData(title: "", url: URL(string: "http://www.url.com")!, hdUrl: nil, date: Date(), explanation: "", copyright: "")
-					completionHandler(apodData: apodData, error: nil)
+					completionHandler(apodData, nil)
 				}
 			} else {
 				let error = NSError(domain: "", code: 0, userInfo: nil)
-				completionHandler(apodData: nil, error: error)
+				completionHandler(nil, error)
 			}
 		}
 	}
-	
-	class MockPictureDownloadWorker: PictureDownloader {
-		func download(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
-			
+
+	class MockPictureDownloader: PictureDownloader {
+		func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, NSError?) -> Void) {
+
 		}
-		
+
 		func cancelCurrentDownload() {
-			
+
 		}
 	}
+	
 	class MockPictureDownloaderWorker: PictureDownloadWorker {
 		var downloadCalled = false
 		var url: URL?
-		var progressHandler: ((progressRatio: Double) -> Void)!
-		var completionHandler: ((picture: UIImage?, error: NSError?) -> Void)!
+		var progressHandler: ((Double) -> Void)!
+		var completionHandler: ((UIImage?, NSError?) -> Void)!
 		
 		init() {
-			super.init(downloader: MockPictureDownloadWorker())
+			super.init(downloader: MockPictureDownloader())
 		}
 		
-		override func downolad(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
+		override func downolad(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, NSError?) -> Void) {
 			downloadCalled = true
 			self.url = url
 			self.progressHandler = progressHandler
@@ -232,7 +233,7 @@ extension ApodInteractorTests {
 		
 		// Act
 		target.fetchTodayApod(request: request)
-		mockPictureDownloadWorker.progressHandler(progressRatio : 0.5)
+		mockPictureDownloadWorker.progressHandler(0.5)
 		
 		// Assert
 		XCTAssertTrue(mochOutput.presentPictureDownloadProgressCalled)
@@ -245,7 +246,7 @@ extension ApodInteractorTests {
 		
 		// Act
 		target.fetchTodayApod(request: request)
-		mockPictureDownloadWorker.progressHandler(progressRatio : progressRatio)
+		mockPictureDownloadWorker.progressHandler(progressRatio)
 		
 		// Assert
 		XCTAssertEqual(mochOutput.downloadProgressRatio, progressRatio)
@@ -257,7 +258,7 @@ extension ApodInteractorTests {
 		
 		// Act
 		target.fetchTodayApod(request: request)
-		mockPictureDownloadWorker.completionHandler(picture: UIImage(), error: nil)
+		mockPictureDownloadWorker.completionHandler(UIImage(), nil)
 		
 		// Assert
 		XCTAssertTrue(mochOutput.presentPictureCalled)
@@ -266,11 +267,11 @@ extension ApodInteractorTests {
 	func test_fetchTodayApod_pictureDownload_completionHandlerCallsOutputPresentError() {
 		// Arrange
 		let request = TodayApodRequest()
-		let error = NSError(domain: "", code: 0, userInfo: nil)
+		let error = NSError( domain: "", code: 0, userInfo: nil)
 		
 		// Act
 		target.fetchTodayApod(request: request)
-		mockPictureDownloadWorker.completionHandler(picture: nil, error: error)
+		mockPictureDownloadWorker.completionHandler(nil, error)
 		
 		// Assert
 		XCTAssertTrue(mochOutput.presentErrorCalled)

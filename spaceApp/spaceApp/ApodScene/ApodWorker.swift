@@ -19,18 +19,18 @@ class ApodWorker {
 		_apodStore = apodStore
 	}
 	
-	func fetchTodayAPOD(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
+	func fetchTodayAPOD(completionHandler: @escaping (ApodData?, NSError?) -> Void) {
 		// NOTE: Do the work
 		_apodStore.fetchTodaysPicture() {
 			data, error in
-			completionHandler(apodData: data, error: error)
+			completionHandler(data, error)
 		}
 	}
 	
-	func fetchRandomApod(completionHandler: (apodData: ApodData?, error: NSError?) -> Void) {
+	func fetchRandomApod(completionHandler: @escaping (ApodData?, NSError?) -> Void) {
 		_apodStore.fetchPictureForRandomDate() {
 			data, error in
-			completionHandler(apodData: data, error: error)
+			completionHandler(data, error)
 		}
 	}
 }

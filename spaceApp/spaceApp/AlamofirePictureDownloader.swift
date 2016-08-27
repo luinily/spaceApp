@@ -10,19 +10,30 @@ import Foundation
 import UIKit
 import Alamofire
 
+
+enum DownloadError: LocalizedError {
+	case invalidData
+
+	var errorDescription: String? {
+		switch self {
+		case .invalidData: return NSLocalizedString("Invalid Data", comment: "")
+		}
+	}
+}
+
 class AlamofirePictureDownloader: PictureDownloader {
 	private var currentRequest: Request?
 	
-	func download(url: URL, progressHandler: (progressRatio: Double) -> Void, completionHandler: (picture: UIImage?, error: NSError?) -> Void) {
+	func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, NSError?) -> Void) {
 		download(url: url) {
 			progressRatio, fileURL, error in
 			if let progressRatio = progressRatio {
-				progressHandler(progressRatio: progressRatio)
+				progressHandler(progressRatio)
 			} else if let error = error {
-				completionHandler(picture: nil, error: error)
+				completionHandler(nil, error)
 			} else if let url = fileURL {
 				if let data = try? Data(contentsOf: url) {
-					completionHandler(picture: UIImage(data: data), error: nil)
+					completionHandler(UIImage(data: data), nil)
 				}
 			}
 		}
@@ -32,11 +43,11 @@ class AlamofirePictureDownloader: PictureDownloader {
 		currentRequest?.cancel()
 	}
 	
-	private func download(url: URL, completionHandler: (progressRatio: Double?, fileURL: URL?, error: NSError?) -> Void) {
+	private func download(url: URL, completionHandler: @escaping (Double?, URL?, NSError?) -> Void) {
 		
 		var didSizeErrorCancel = false
 		
-		currentRequest = Alamofire.download(.GET, url.urlString, destination: getFileDestination)
+		currentRequest = Alamofire.download(url.urlString, to: getFileDestination, withMethod: .get)
 		
 		currentRequest?.progress() {
 			bytesRead, totalBytesRead, totalBytesExpectedToRead in
@@ -49,7 +60,7 @@ class AlamofirePictureDownloader: PictureDownloader {
 			
 			DispatchQueue.main.async {
 				let ratio = max(Double(totalBytesRead) / Double(totalBytesExpectedToRead), 0)
-				completionHandler(progressRatio: ratio, fileURL: nil, error: nil)
+				completionHandler(ratio, nil, nil)
 			}
 		}
 		
@@ -58,28 +69,24 @@ class AlamofirePictureDownloader: PictureDownloader {
 			
 			if didSizeErrorCancel {
 				let error = self.makeCancelError()
-				completionHandler(progressRatio: nil, fileURL: nil, error: error)
+				completionHandler(nil, nil, error as NSError)
 			} else if let error = error {
 				guard error.code != -999 else {
 					return
 				}
 				
 				print("Failed with error: \(error)")
-				completionHandler(progressRatio: nil, fileURL: nil, error: error)
+				completionHandler(nil, nil, error)
 			} else if let response = response {
 				let fileURL = self.getFileURL(from: response)
-				completionHandler(progressRatio: nil, fileURL: fileURL, error: nil)
+				completionHandler(nil, fileURL, nil)
 			}
 		}
 	}
 	
 	
-	private func makeCancelError() -> NSError {
-		var userInfo = [NSObject: AnyObject]()
-		userInfo[NSLocalizedDescriptionKey] = "Invalid Data"
-		
-		let error = NSError(domain: "World", code: 200, userInfo: userInfo)
-		return error
+	private func makeCancelError() -> Error {
+		return DownloadError.invalidData
 	}
 	
 	private func getFileDestination(temporaryURL: URL, response: HTTPURLResponse) -> URL {

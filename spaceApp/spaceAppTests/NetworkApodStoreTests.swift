@@ -11,12 +11,12 @@ import XCTest
 
 class NetworkApodStoreTests: XCTestCase {
 	// MARK: Subject under test
-	private var target: NetworkApodStore!
-	private var mockNetworkTool: MockNetworkTool!
-	private var dataConvertor: MockDataConvertor!
+	fileprivate var target: NetworkApodStore!
+	fileprivate var mockNetworkTool: MockNetworkTool!
+	fileprivate var dataConvertor: MockDataConvertor!
 	
-	private var requestURL = "requestURL"
-	private var apiKey = "apiKey"
+	fileprivate var requestURL = "requestURL"
+	fileprivate var apiKey = "apiKey"
 }
 
 // MARK: Test lifecycle
@@ -59,9 +59,9 @@ extension NetworkApodStoreTests {
 			requestParameters = parameters
 			
 			if shouldReturnError {
-				completionHandler(data: nil, error: NSError(domain: "", code: 0, userInfo: nil))
+				completionHandler(nil, NSError(domain: "", code: 0, userInfo: nil))
 			} else {
-				completionHandler(data: Data(), error: nil)
+				completionHandler(Data(), nil)
 			}
 		}
 	}

@@ -9,23 +9,23 @@
 import Foundation
 
 struct NetworkApodStore {
-	private let _requestURL: URL
-	private let _apiKeyParameterName = "api_key"
-	private let _hdParameterName = "hd"
-	private let _hdParameterValue = "true"
-	private let _dateParameterName = "date"
-	private let _dateParameterFormat = "yyyy-MM-dd"
-	private let _oldestDatePossible: Date
-	private let _apiKey: String 
-	private let _networkTool: NetworkTool
-	private let _dataConvertor: DataToApodDataConverter
+	fileprivate let requestURL: URL
+	fileprivate let apiKeyParameterName = "api_key"
+	fileprivate let hdParameterName = "hd"
+	fileprivate let hdParameterValue = "true"
+	fileprivate let dateParameterName = "date"
+	fileprivate let dateParameterFormat = "yyyy-MM-dd"
+	fileprivate let oldestDatePossible: Date
+	fileprivate let apiKey: String
+	fileprivate let networkTool: NetworkTool
+	fileprivate let dataConvertor: DataToApodDataConverter
 	
 	init?(requestURl: URL, oldestPossibleDate: Date, apiKey: String, networkTool: NetworkTool, dataConvertor: DataToApodDataConverter) {
-		_requestURL = requestURl
-		_oldestDatePossible = oldestPossibleDate
-		_apiKey = apiKey
-		_networkTool = networkTool
-		_dataConvertor = dataConvertor
+		self.requestURL = requestURl
+		self.oldestDatePossible = oldestPossibleDate
+		self.apiKey = apiKey
+		self.networkTool = networkTool
+		self.dataConvertor = dataConvertor
 	}
 }
 
@@ -33,7 +33,7 @@ extension NetworkApodStore: ApodStore {
 	func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
 		let parameters = makeParameters()
 		
-		_networkTool.makeGetRequest(url: _requestURL, parameters: parameters) {
+		networkTool.makeGetRequest(url: requestURL, parameters: parameters) {
 			data, error in
 			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
 		}
@@ -41,7 +41,7 @@ extension NetworkApodStore: ApodStore {
 	
 	func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {
 		let parameters = makeParameters(date: date)
-		_networkTool.makeGetRequest(url: _requestURL, parameters: parameters) {
+		networkTool.makeGetRequest(url: requestURL, parameters: parameters) {
 			data, error in
 			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
 		}
@@ -50,7 +50,7 @@ extension NetworkApodStore: ApodStore {
 	func fetchPictureForRandomDate(completionHandler: ApodCompletionHandler) {
 		let date = generateRandomDate()
 		let parameters = makeParameters(date: date)
-		_networkTool.makeGetRequest(url: _requestURL, parameters: parameters) {
+		networkTool.makeGetRequest(url: requestURL, parameters: parameters) {
 			data, error in
 			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
 		}
@@ -58,16 +58,16 @@ extension NetworkApodStore: ApodStore {
 	
 	private func generateRandomDate() -> Date {
 		let today = Date()
-		let randomDateGenerator = RandomDateGenerator(lowerBound: _oldestDatePossible, higherBound: today)
+		let randomDateGenerator = RandomDateGenerator(lowerBound: oldestDatePossible, higherBound: today)
 		return randomDateGenerator.generateDate()
 	}
 	
 	private func makeParameters(date: Date? = nil) -> [String: String] {
 		var parameters = [String: String]()
-		parameters[_apiKeyParameterName] = _apiKey
-		parameters[_hdParameterName] = _hdParameterValue
+		parameters[apiKeyParameterName] = apiKey
+		parameters[hdParameterName] = hdParameterValue
 		if let date = date {
-			parameters[_dateParameterName] = makeDateParameter(date: date)
+			parameters[dateParameterName] = makeDateParameter(date: date)
 		}
 		
 		return parameters
@@ -75,13 +75,13 @@ extension NetworkApodStore: ApodStore {
 	
 	private func makeDateParameter(date: Date) -> String {
 		let formatter = DateFormatter()
-		formatter.dateFormat = _dateParameterFormat
+		formatter.dateFormat = dateParameterFormat
 		return formatter.string(from: date)
 	}
 	
 	private func handleFetchedResults(data: Data?, error: NSError?, completionHandler: ApodCompletionHandler) {
 		guard error == nil else {
-			completionHandler(pictureData: nil, error: error)
+			completionHandler(nil, error)
 			return
 		}
 		
@@ -89,8 +89,8 @@ extension NetworkApodStore: ApodStore {
 			return
 		}
 		
-		let apodData = try? self._dataConvertor.convertDataToApodData(data: data)
-		completionHandler(pictureData: apodData, error: nil)
+		let apodData = try? self.dataConvertor.convertDataToApodData(data: data)
+		completionHandler(apodData, nil)
 	}
 	
 

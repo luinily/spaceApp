@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias RequestCompletionHandler = (data: Data?, error: NSError?) -> Void
+typealias RequestCompletionHandler = (Data?, NSError?) -> Void
 
 protocol NetworkTool {
 	func makeGetRequest(url: URL, parameters: [String: String], completionHandler: RequestCompletionHandler)

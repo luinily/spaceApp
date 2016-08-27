@@ -11,7 +11,7 @@ import XCTest
 
 class DateConvertorTests: XCTestCase {
 	// MARK: Subject under test
-	private var target: ApodDateConvertor!
+	fileprivate var target: ApodDateConvertor!
 }
 
 // MARK: Test lifecycle

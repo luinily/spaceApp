@@ -15,7 +15,7 @@ class JsonToApodConvertorTests: XCTestCase {
 	var target: JsonToApodConvertor!
 	var data: Data!
 	
-	let jsonObject: [String: AnyObject] = [
+	let jsonObject: [String: Any] = [
 		"copyright": "copyright",
 		"date": "2016-07-16",
 		"explanation": "explanation",

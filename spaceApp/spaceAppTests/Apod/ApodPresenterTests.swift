@@ -155,12 +155,9 @@ extension ApodPresenterTests {
 	
 	func test_presentError_DisplayApodErrorCalled() {
 		// Arrange
-		var userInfo = [NSObject: AnyObject]()
-		userInfo[NSLocalizedDescriptionKey] = "Error"
-		let error = NSError(domain: "World", code: 200, userInfo: userInfo)
-		
-		let response = ApodErrorResponse(error: error)
-		
+		let error = DownloadError.invalidData
+		let response = ApodErrorResponse(error: error as NSError)
+
 		// Act
 		target.presentError(response: response)
 		
@@ -170,18 +167,14 @@ extension ApodPresenterTests {
 	
 	func test_presentError_ViewModelContainsLocalizedDescription() {
 		// Arrange
-		let errorMessage = "Error"
-		var userInfo = [NSObject: AnyObject]()
-		userInfo[NSLocalizedDescriptionKey] = errorMessage
-		let error = NSError(domain: "World", code: 200, userInfo: userInfo)
-		
-		let response = ApodErrorResponse(error: error)
+		let error = DownloadError.invalidData
+		let response = ApodErrorResponse(error: error as NSError)
 		
 		// Act
 		target.presentError(response: response)
 		
 		// Assert
-		XCTAssertEqual(mockOutput.errorViewModel?.errorMessage, errorMessage)
+		XCTAssertEqual(mockOutput.errorViewModel?.errorMessage, "Invalid Data")
 	}
 	
 	func test_presentPictureDownloadProgress_displayProgressIsCalled() {
