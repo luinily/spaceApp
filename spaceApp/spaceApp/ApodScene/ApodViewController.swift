@@ -50,6 +50,7 @@ class ApodViewController: UIViewController {
 		imageScrollView.delegate = self
 		setupRefreshControl()
 		setupProgressView()
+		NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: .UIDeviceOrientationDidChange, object: nil)
 	}
 
 	override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -94,6 +95,9 @@ class ApodViewController: UIViewController {
 		return nil
 	}
 
+	func orientationChanged() {
+		updateImageViewFrame(scrollView: imageScrollView)
+	}
 
 }
 

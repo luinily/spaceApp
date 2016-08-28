@@ -26,15 +26,6 @@
                                             <constraint firstAttribute="width" constant="150" id="dmK-GG-YjF"/>
                                         </constraints>
                                     </progressView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ar1-z4-cvO">
-                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="Bh6-vX-8Z2"/>
-                                        </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="nNC-jT-ehx">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="425" id="LKh-jx-Msn"/>
@@ -48,21 +39,27 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ar1-z4-cvO">
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Khg-Ab-rqd" firstAttribute="centerX" secondItem="nNC-jT-ehx" secondAttribute="centerX" id="0WY-21-SuX"/>
-                                    <constraint firstItem="Ar1-z4-cvO" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" id="Bxc-zV-bVq"/>
+                                    <constraint firstItem="Ar1-z4-cvO" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" constant="25" id="Bxc-zV-bVq"/>
                                     <constraint firstItem="nNC-jT-ehx" firstAttribute="top" secondItem="TYk-Vg-bWI" secondAttribute="top" id="GIq-vp-qo4"/>
                                     <constraint firstAttribute="bottom" secondItem="Ar1-z4-cvO" secondAttribute="bottom" constant="16" id="H35-Ct-T16"/>
                                     <constraint firstItem="8cV-rt-aK8" firstAttribute="top" secondItem="nNC-jT-ehx" secondAttribute="bottom" constant="8" id="MHi-Eh-qNz"/>
                                     <constraint firstItem="Ar1-z4-cvO" firstAttribute="top" secondItem="8cV-rt-aK8" secondAttribute="bottom" constant="8" id="ZV6-4q-3in"/>
                                     <constraint firstItem="Khg-Ab-rqd" firstAttribute="centerY" secondItem="nNC-jT-ehx" secondAttribute="centerY" id="e8g-tr-hZQ"/>
                                     <constraint firstAttribute="trailing" secondItem="nNC-jT-ehx" secondAttribute="trailing" id="idX-D2-AcA"/>
-                                    <constraint firstAttribute="trailing" secondItem="8cV-rt-aK8" secondAttribute="trailing" id="jfK-WN-lad"/>
+                                    <constraint firstAttribute="trailing" secondItem="8cV-rt-aK8" secondAttribute="trailing" constant="15" id="jfK-WN-lad"/>
                                     <constraint firstItem="nNC-jT-ehx" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" id="uqu-sm-L2x"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ar1-z4-cvO" secondAttribute="trailing" id="vSY-jy-lBM"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ar1-z4-cvO" secondAttribute="trailing" constant="15" id="vSY-jy-lBM"/>
                                     <constraint firstItem="nNC-jT-ehx" firstAttribute="centerX" secondItem="TYk-Vg-bWI" secondAttribute="centerX" id="va8-Pa-ZQh"/>
-                                    <constraint firstItem="8cV-rt-aK8" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" id="wmZ-U4-0hx"/>
+                                    <constraint firstItem="8cV-rt-aK8" firstAttribute="leading" secondItem="TYk-Vg-bWI" secondAttribute="leading" constant="15" id="wmZ-U4-0hx"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
