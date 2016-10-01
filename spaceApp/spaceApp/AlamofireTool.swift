@@ -10,7 +10,9 @@ import Foundation
 import Alamofire
 
 struct AlamofireTool: NetworkTool {
-	func makeGetRequest(url: URL, parameters: [String: String], completionHandler: @escaping RequestCompletionHandler) {
+	func makeGetRequest(url: URL,
+	                    parameters: [String: String],
+	                    completionHandler: @escaping RequestCompletionHandler) {
 		let request = Alamofire.request(url, method: .get, parameters: parameters)
 
 		let validatedRequest = request.validate()

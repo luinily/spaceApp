@@ -24,7 +24,9 @@ enum DownloadError: LocalizedError {
 class AlamofirePictureDownloader: PictureDownloader {
 	private var currentRequest: DownloadRequest?
 
-	func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, Error?) -> Void) {
+	func download(url: URL,
+	              progressHandler: @escaping (Double) -> Void,
+	              completionHandler: @escaping (UIImage?, Error?) -> Void) {
 		download(url: url) {
 			progressRatio, fileURL, error in
 			if let progressRatio = progressRatio {

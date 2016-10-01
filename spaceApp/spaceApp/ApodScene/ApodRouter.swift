@@ -27,15 +27,19 @@ class ApodRouter: ApodRouterInput {
 		// viewController.performSegueWithIdentifier("ShowSomewhereScene", sender: nil)
 
 		// 2. Present another view controller programmatically
-		// viewController.presentViewController(someWhereViewController, animated: true, completion: nil)
+		// viewController.presentViewController(someWhereViewController,
+		//										animated: true, completion: nil)
 
 		// 3. Ask the navigation controller to push another view controller onto the stack
-		// viewController.navigationController?.pushViewController(someWhereViewController, animated: true)
+		// viewController.navigationController?.pushViewController(someWhereViewController,
+		//														   animated: true)
 
 		// 4. Present a view controller from a different storyboard
 		// let storyboard = UIStoryboard(name: "OtherThanMain", bundle: nil)
-		// let someWhereViewController = storyboard.instantiateInitialViewController() as! SomeWhereViewController
-		// viewController.navigationController?.pushViewController(someWhereViewController, animated: true)
+		// let someWhereViewController =
+		//		storyboard.instantiateInitialViewController() as! SomeWhereViewController
+		// viewController.navigationController?.pushViewController(someWhereViewController,
+        //														   animated: true)
 	}
 
 	// MARK: Communication

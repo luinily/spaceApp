@@ -50,7 +50,9 @@ class ApodViewController: UIViewController {
 		imageScrollView.delegate = self
 		setupRefreshControl()
 		setupProgressView()
-		NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: .UIDeviceOrientationDidChange, object: nil)
+		NotificationCenter.default.addObserver(self,
+		                                       selector: #selector(orientationChanged),
+		                                       name: .UIDeviceOrientationDidChange, object: nil)
 	}
 
 	override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -76,7 +78,9 @@ class ApodViewController: UIViewController {
 	private func setupRefreshControl() {
 		refreshControl = UIRefreshControl()
 		refreshScrollView.refreshControl = refreshControl
-		refreshControl.addTarget(self, action: #selector(ApodViewController.onRefreshPull), for: .valueChanged)
+		refreshControl.addTarget(self,
+		                         action: #selector(ApodViewController.onRefreshPull),
+		                         for: .valueChanged)
 	}
 
 	private func setupProgressView() {
@@ -195,7 +199,10 @@ extension ApodViewController: UIScrollViewDelegate {
 		if let imageView = getImageViewFromScrollView() {
 			let yOffset = max(0, (scrollView.frame.height - imageView.frame.height) / 2)
 			let xOffset = max(0, (scrollView.frame.width - imageView.frame.width) / 2)
-			imageView.frame = CGRect(x: xOffset, y: yOffset, width: imageView.frame.width, height: imageView.frame.height)
+			imageView.frame = CGRect(x: xOffset,
+			                         y: yOffset,
+			                         width: imageView.frame.width,
+			                         height: imageView.frame.height)
 		}
 	}
 }

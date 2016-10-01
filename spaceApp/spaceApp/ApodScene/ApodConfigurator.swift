@@ -59,7 +59,8 @@ class ApodConfigurator {
 		let apodWorker = createApodWorker(initializer: initializer)
 		let pictureDownloadWorker = createPictureDownloadWorker(initializer: initializer)
 
-		let interactor = ApodInteractor(apodWorker: apodWorker, pictureDownloadWorker: pictureDownloadWorker)
+		let interactor = ApodInteractor(apodWorker: apodWorker,
+		                                pictureDownloadWorker: pictureDownloadWorker)
 		interactor.output = presenter
 		return interactor
 	}

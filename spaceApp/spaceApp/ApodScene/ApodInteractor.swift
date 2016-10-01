@@ -73,7 +73,9 @@ class ApodInteractor: ApodInteractorInput {
 	private func downloadPicture(apodData: ApodData) {
 		let url = getValidURL(apodData: apodData)
 
-		_pictureDownloadWorker.downolad(url: url, progressHandler: handleDownloadProgress, completionHandler: handleDownloadCompletion)
+		_pictureDownloadWorker.downolad(url: url,
+		                                progressHandler: handleDownloadProgress,
+		                                completionHandler: handleDownloadCompletion)
 	}
 
 	private func getValidURL(apodData: ApodData) -> URL {

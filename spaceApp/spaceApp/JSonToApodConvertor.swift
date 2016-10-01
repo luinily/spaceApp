@@ -63,7 +63,12 @@ struct JsonToApodConvertor: DataToApodDataConverter {
 			throw JSonToApodConvertorError.titleNotInJson
 		}
 
-		return ApodData(title: title, url: normalUrl, hdUrl: hdUrl, date: date, explanation: explanation, copyright: copyright)
+		return ApodData(title: title,
+		                url: normalUrl,
+		                hdUrl: hdUrl,
+		                date: date,
+		                explanation: explanation,
+		                copyright: copyright)
 	}
 
 	private func getURL(from json: [String: AnyObject], forTag tag: String) -> URL? {

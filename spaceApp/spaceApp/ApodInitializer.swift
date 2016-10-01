@@ -26,7 +26,11 @@ struct ApodInitializer: Initializer {
 		let dataConvertor = createDataToApodConverter()
 		let requestURL = URL(string: apodURL)!
 		let date = makeDate(date: oldestDate)
-		return NetworkApodStore(requestURl: requestURL, oldestPossibleDate: date, apiKey: nasaApiKey, networkTool: networkTool, dataConvertor: dataConvertor)!
+		return NetworkApodStore(requestURl: requestURL,
+		                        oldestPossibleDate: date,
+		                        apiKey: nasaApiKey,
+		                        networkTool: networkTool,
+		                        dataConvertor: dataConvertor)!
 	}
 
 	private func makeDate(date: (year: Int, month: Int, day: Int)) -> Date {

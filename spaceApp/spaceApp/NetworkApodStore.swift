@@ -20,7 +20,11 @@ struct NetworkApodStore {
 	fileprivate let networkTool: NetworkTool
 	fileprivate let dataConvertor: DataToApodDataConverter
 
-	init?(requestURl: URL, oldestPossibleDate: Date, apiKey: String, networkTool: NetworkTool, dataConvertor: DataToApodDataConverter) {
+	init?(requestURl: URL,
+	      oldestPossibleDate: Date,
+	      apiKey: String,
+	      networkTool: NetworkTool,
+	      dataConvertor: DataToApodDataConverter) {
 		self.requestURL = requestURl
 		self.oldestDatePossible = oldestPossibleDate
 		self.apiKey = apiKey
@@ -43,7 +47,9 @@ extension NetworkApodStore: ApodStore {
 		let parameters = makeParameters(date: date)
 		networkTool.makeGetRequest(url: requestURL, parameters: parameters) {
 			data, error in
-			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
+			self.handleFetchedResults(data: data,
+			                          error: error,
+			                          completionHandler: completionHandler)
 		}
 	}
 
@@ -52,13 +58,16 @@ extension NetworkApodStore: ApodStore {
 		let parameters = makeParameters(date: date)
 		networkTool.makeGetRequest(url: requestURL, parameters: parameters) {
 			data, error in
-			self.handleFetchedResults(data: data, error: error, completionHandler: completionHandler)
+			self.handleFetchedResults(data: data,
+			                          error: error,
+			                          completionHandler: completionHandler)
 		}
 	}
 
 	private func generateRandomDate() -> Date {
 		let today = Date()
-		let randomDateGenerator = RandomDateGenerator(lowerBound: oldestDatePossible, higherBound: today)
+		let randomDateGenerator = RandomDateGenerator(lowerBound: oldestDatePossible,
+		                                              higherBound: today)
 		return randomDateGenerator.generateDate()
 	}
 
@@ -79,7 +88,9 @@ extension NetworkApodStore: ApodStore {
 		return formatter.string(from: date)
 	}
 
-	private func handleFetchedResults(data: Data?, error: Error?, completionHandler: ApodCompletionHandler) {
+	private func handleFetchedResults(data: Data?,
+	                                  error: Error?,
+	                                  completionHandler: ApodCompletionHandler) {
 		guard error == nil else {
 			completionHandler(nil, error)
 			return
