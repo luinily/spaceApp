@@ -29,6 +29,8 @@ class ApodPresenter: ApodPresenterInput {
 	weak var output: ApodPresenterOutput!
 
 	private let dateFormat = "yyyy年MM月dd日"
+	private let copyrightHeader = "Image Credits: "
+	private let publicDomain = "Public Domain"
 	// MARK: Presentation logic
 
 	func presentApod(response: ApodResponse) {
@@ -42,13 +44,30 @@ class ApodPresenter: ApodPresenterInput {
 		let explanation = apodData.explanation
 		let copyright = apodData.copyright
 
-		return ApodDataViewModel(title: title, date: date, explanation: explanation, copyright: copyright)
+		let text = makeText(date: date, explanation: explanation, copyright: copyright)
+
+		return ApodDataViewModel(title: title, text: text)
 	}
 
 	private func dateToString(date: Date) -> String {
 		let formatter = DateFormatter()
 		formatter.dateFormat = dateFormat
 		return formatter.string(from: date)
+	}
+
+	private func makeText(date: String, explanation: String, copyright: String) -> String {
+		var text = date + "\r\n"
+		text = text + "\r\n"
+		text = text + explanation + "\r\n"
+		text = text + "\r\n"
+		text = text +  copyrightHeader
+		if copyright.isEmpty {
+			text = text + publicDomain
+		} else {
+			text = text + copyright
+		}
+
+		return text
 	}
 
 	// MARK: - presentError

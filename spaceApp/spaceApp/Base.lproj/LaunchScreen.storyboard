@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11198.2" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,12 +17,45 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="VXE-gT-XWP"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture of the" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qci-7a-xwk">
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRg-92-cxn">
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Astronomical" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdC-eq-NeN">
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qci-7a-xwk" firstAttribute="top" secondItem="SdC-eq-NeN" secondAttribute="bottom" id="0N9-xJ-v8d"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="VXE-gT-XWP" secondAttribute="bottom" id="40L-qJ-IUT"/>
+                            <constraint firstItem="VXE-gT-XWP" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="5n9-TI-3nI"/>
+                            <constraint firstItem="qci-7a-xwk" firstAttribute="leading" secondItem="SdC-eq-NeN" secondAttribute="leading" id="Fxx-fE-wvX"/>
+                            <constraint firstItem="SdC-eq-NeN" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="40" id="PKI-Ny-euC"/>
+                            <constraint firstItem="SdC-eq-NeN" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="20" id="U08-AR-cSD"/>
+                            <constraint firstItem="VXE-gT-XWP" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="dYX-2X-chD"/>
+                            <constraint firstItem="wRg-92-cxn" firstAttribute="top" secondItem="qci-7a-xwk" secondAttribute="bottom" id="jlg-3Q-Abp"/>
+                            <constraint firstAttribute="trailing" secondItem="VXE-gT-XWP" secondAttribute="trailing" id="kuE-Gx-XyN"/>
+                            <constraint firstItem="wRg-92-cxn" firstAttribute="leading" secondItem="SdC-eq-NeN" secondAttribute="leading" id="mgv-HX-v2a"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="48.799999999999997" y="371.96401799100454"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LaunchScreen" width="1417" height="1326"/>
+    </resources>
 </document>

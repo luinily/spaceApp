@@ -104,7 +104,7 @@ class ApodViewController: UIViewController {
 extension ApodViewController: ApodViewControllerInput {
 	func displayApod(viewModel: ApodDataViewModel) {
 		titleLabel.text = viewModel.title
-		explanationTextView.text = viewModel.explanation
+		explanationTextView.text = viewModel.text
 		removeImageView()
 		startProgressView()
 		if refreshControl.isRefreshing {

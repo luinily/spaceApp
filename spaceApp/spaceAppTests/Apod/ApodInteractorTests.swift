@@ -47,15 +47,15 @@ extension ApodInteractorTests {
 // MARK: Test doubles
 extension ApodInteractorTests {
 	class MockApodStore: ApodStore {
-		func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {
+		func fetchPictureFor(date: Date, completionHandler: @escaping ApodCompletionHandler) {
 
 		}
 
-		func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
+		func fetchTodaysPicture(completionHandler: @escaping ApodCompletionHandler) {
 
 		}
 
-		func fetchPictureForRandomDate(completionHandler: ApodCompletionHandler) {
+		func fetchPictureForRandomDate(completionHandler: @escaping ApodCompletionHandler) {
 
 		}
 	}

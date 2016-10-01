@@ -22,7 +22,7 @@ enum DownloadError: LocalizedError {
 }
 
 class AlamofirePictureDownloader: PictureDownloader {
-	private var currentRequest: Request?
+	private var currentRequest: DownloadRequest?
 
 	func download(url: URL, progressHandler: @escaping (Double) -> Void, completionHandler: @escaping (UIImage?, Error?) -> Void) {
 		download(url: url) {
@@ -45,39 +45,23 @@ class AlamofirePictureDownloader: PictureDownloader {
 
 	private func download(url: URL, completionHandler: @escaping (Double?, URL?, Error?) -> Void) {
 
-		var didSizeErrorCancel = false
 
-		currentRequest = Alamofire.download(url.urlString, to: getFileDestination, withMethod: .get)
+		currentRequest = Alamofire.download(url, to: getFileDestination)
 
-		currentRequest?.progress() {
-			bytesRead, totalBytesRead, totalBytesExpectedToRead in
-
-			guard totalBytesExpectedToRead > 0 else {
-				self.currentRequest?.cancel()
-				didSizeErrorCancel = true
-				return
-			}
-
+		currentRequest?.downloadProgress() {
+			progress in
 			DispatchQueue.main.async {
-				let ratio = max(Double(totalBytesRead) / Double(totalBytesExpectedToRead), 0)
-				completionHandler(ratio, nil, nil)
+				completionHandler(progress.fractionCompleted, nil, nil)
 			}
 		}
 
-		currentRequest?.response() {
-			_, response, _, error in
+		currentRequest?.responseData() {
+			response in
 
-			if didSizeErrorCancel {
-				let error = self.makeCancelError()
-				completionHandler(nil, nil, error)
-			} else if let error = error {
-				guard error.code != -999 else {
-					return
-				}
-
+			if let error = response.result.error {
 				print("Failed with error: \(error)")
 				completionHandler(nil, nil, error)
-			} else if let response = response {
+			} else if let response = response.response {
 				let fileURL = self.getFileURL(from: response)
 				completionHandler(nil, fileURL, nil)
 			}
@@ -89,7 +73,9 @@ class AlamofirePictureDownloader: PictureDownloader {
 		return DownloadError.invalidData
 	}
 
-	private func getFileDestination(temporaryURL: URL, response: HTTPURLResponse) -> URL {
+	private func getFileDestination(temporaryURL: URL,
+	                                response: HTTPURLResponse) ->
+		(destinationURL: URL, options: DownloadRequest.DownloadOptions) {
 		let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 
 		let fileName = "ApodPicture.jpg"
@@ -100,7 +86,7 @@ class AlamofirePictureDownloader: PictureDownloader {
 			try? FileManager.default.removeItem(atPath: finalPath.path)
 		}
 
-		return finalPath
+			return (destinationURL: finalPath, options: .removePreviousFile)
 	}
 
 	private func getFileURL(from response: HTTPURLResponse) -> URL {

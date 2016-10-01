@@ -52,10 +52,9 @@ extension ApodViewControllerTests {
 
 	func prepareViewModel() -> ApodDataViewModel {
 		let title = "Title"
-		let date = "2016年07月19日"
-		let explanation = "explanation"
-		let copyright = "copyright"
-		return ApodDataViewModel(title: title, date: date, explanation: explanation, copyright: copyright)
+		let text = "text"
+
+		return ApodDataViewModel(title: title, text: text)
 	}
 
 	func prepareImageViewModel() -> ApodImageViewModel {
@@ -160,7 +159,7 @@ extension ApodViewControllerTests {
 		target.displayApod(viewModel: viewModel)
 
 		// Assert
-		XCTAssertEqual(target.explanationTextView.text, viewModel.explanation)
+		XCTAssertEqual(target.explanationTextView.text, viewModel.text)
 	}
 
 	func test_displayApod_RemovesImage() {

@@ -45,16 +45,16 @@ extension ApodWorkerTests {
 		var fetchPictureForRandomDateCalled = false
 		var shouldReturnData = true
 
-		func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
+		func fetchTodaysPicture(completionHandler: @escaping ApodCompletionHandler) {
 			fetchTodaysPictureCalled = true
 			handleCompletionHandler(completionHandler: completionHandler)
 		}
 
-		func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {
+		func fetchPictureFor(date: Date, completionHandler: @escaping ApodCompletionHandler) {
 
 		}
 
-		func fetchPictureForRandomDate(completionHandler: ApodCompletionHandler) {
+		func fetchPictureForRandomDate(completionHandler: @escaping ApodCompletionHandler) {
 			fetchPictureForRandomDateCalled = true
 			handleCompletionHandler(completionHandler: completionHandler)
 		}

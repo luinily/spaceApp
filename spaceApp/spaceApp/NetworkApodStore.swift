@@ -30,7 +30,7 @@ struct NetworkApodStore {
 }
 
 extension NetworkApodStore: ApodStore {
-	func fetchTodaysPicture(completionHandler: ApodCompletionHandler) {
+	func fetchTodaysPicture(completionHandler: @escaping ApodCompletionHandler) {
 		let parameters = makeParameters()
 
 		networkTool.makeGetRequest(url: requestURL, parameters: parameters) {
@@ -39,7 +39,7 @@ extension NetworkApodStore: ApodStore {
 		}
 	}
 
-	func fetchPictureFor(date: Date, completionHandler: ApodCompletionHandler) {
+	func fetchPictureFor(date: Date, completionHandler: @escaping ApodCompletionHandler) {
 		let parameters = makeParameters(date: date)
 		networkTool.makeGetRequest(url: requestURL, parameters: parameters) {
 			data, error in
@@ -47,7 +47,7 @@ extension NetworkApodStore: ApodStore {
 		}
 	}
 
-	func fetchPictureForRandomDate(completionHandler: ApodCompletionHandler) {
+	func fetchPictureForRandomDate(completionHandler: @escaping ApodCompletionHandler) {
 		let date = generateRandomDate()
 		let parameters = makeParameters(date: date)
 		networkTool.makeGetRequest(url: requestURL, parameters: parameters) {

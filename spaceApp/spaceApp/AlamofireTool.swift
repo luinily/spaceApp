@@ -10,8 +10,9 @@ import Foundation
 import Alamofire
 
 struct AlamofireTool: NetworkTool {
-	func makeGetRequest(url: URL, parameters: [String: String], completionHandler: RequestCompletionHandler) {
-		let request = Alamofire.request(url.urlString, withMethod: .get, parameters: parameters, encoding: .url)
+	func makeGetRequest(url: URL, parameters: [String: String], completionHandler: @escaping RequestCompletionHandler) {
+		let request = Alamofire.request(url, method: .get, parameters: parameters)
+
 		let validatedRequest = request.validate()
 		validatedRequest.responseJSON {
 			response in
@@ -23,6 +24,14 @@ struct AlamofireTool: NetworkTool {
 				completionHandler(nil, response.result.error)
 			}
 		}
+	}
+
+	private func alamofireParameters(parameters: [String: String]) -> Parameters? {
+		var result = Parameters()
+		for key in parameters.keys {
+			result[key] = parameters[key]
+		}
+		return result
 	}
 
 }

@@ -124,7 +124,12 @@ extension ApodPresenterTests {
 		target.presentApod(response: response)
 
 		// Assert
-		XCTAssertEqual(mockOutput.apodViewModel?.date, "2016年07月18日")
+		guard let viewModel = mockOutput.apodViewModel else {
+			XCTAssert(false)
+			return
+		}
+
+		XCTAssertTrue(viewModel.text.contains("2016年07月18日"))
 	}
 
 	func test_presentApod_viewModelContainsExplaination() {
@@ -137,7 +142,11 @@ extension ApodPresenterTests {
 		target.presentApod(response: response)
 
 		// Assert
-		XCTAssertEqual(mockOutput.apodViewModel?.explanation, explanation)
+		guard let viewModel = mockOutput.apodViewModel else {
+			XCTAssert(false)
+			return
+		}
+		XCTAssertTrue(viewModel.text.contains(explanation))
 	}
 
 	func test_presentApod_viewModelContainsCopyright() {
@@ -150,7 +159,11 @@ extension ApodPresenterTests {
 		target.presentApod(response: response)
 
 		// Assert
-		XCTAssertEqual(mockOutput.apodViewModel?.copyright, copyright)
+		guard let viewModel = mockOutput.apodViewModel else {
+			XCTAssert(false)
+			return
+		}
+		XCTAssertTrue(viewModel.text.contains(copyright))
 	}
 
 	func test_presentError_DisplayApodErrorCalled() {

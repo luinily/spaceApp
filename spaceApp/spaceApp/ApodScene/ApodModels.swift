@@ -36,9 +36,7 @@ struct ApodPictureResponse {
 
 struct ApodDataViewModel {
 	var title: String
-	var date: String
-	var explanation: String
-	var copyright: String
+	var text: String
 }
 
 struct ApodImageViewModel {

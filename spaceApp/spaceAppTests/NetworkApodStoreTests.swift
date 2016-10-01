@@ -52,7 +52,7 @@ extension NetworkApodStoreTests {
 		var dateParameter: Date?
 		var shouldReturnError = false
 
-		func makeGetRequest(url: URL, parameters: [String: String], completionHandler: RequestCompletionHandler) {
+		func makeGetRequest(url: URL, parameters: [String: String], completionHandler: @escaping RequestCompletionHandler) {
 			makeGetRequestCalled = true
 			requestURL = url.absoluteString
 			key = parameters["api_key"]
