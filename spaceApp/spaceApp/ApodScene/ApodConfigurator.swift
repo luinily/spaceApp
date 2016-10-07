@@ -37,7 +37,6 @@ class ApodConfigurator {
 	}
 
 	// MARK: Configuration
-
 	func configure(viewController: ApodViewController) {
 		let router = ApodRouter()
 		router.viewController = viewController
