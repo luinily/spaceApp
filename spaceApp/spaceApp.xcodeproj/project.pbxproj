@@ -30,8 +30,6 @@
 		8F941E191D37486300C56ACE /* NetworkApodStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F941E181D37486300C56ACE /* NetworkApodStoreTests.swift */; };
 		8F9D06B31D4E9968003C7127 /* AlamofirePictureDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9D06B21D4E9968003C7127 /* AlamofirePictureDownloader.swift */; };
 		8F9D06B51D4EB8F5003C7127 /* PictureDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9D06B41D4EB8F5003C7127 /* PictureDownloader.swift */; };
-		8FA652E11D55F4E200A32514 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD05091D408EE300E92486 /* Alamofire.framework */; };
-		8FA652E21D55F4E200A32514 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD05091D408EE300E92486 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8FB2948E1D3B29B400E6C7A3 /* ApodConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294871D3B29B400E6C7A3 /* ApodConfigurator.swift */; };
 		8FB2948F1D3B29B400E6C7A3 /* ApodInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294881D3B29B400E6C7A3 /* ApodInteractor.swift */; };
 		8FB294901D3B29B400E6C7A3 /* ApodModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294891D3B29B400E6C7A3 /* ApodModels.swift */; };
@@ -45,6 +43,8 @@
 		8FB2949D1D3B29EE00E6C7A3 /* ApodWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB294991D3B29EE00E6C7A3 /* ApodWorkerTests.swift */; };
 		8FD5D2B11D3B755B007A5F3D /* ApodInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD5D2B01D3B755B007A5F3D /* ApodInitializer.swift */; };
 		8FD5D2B51D3B7701007A5F3D /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD5D2B41D3B7701007A5F3D /* Initializer.swift */; };
+		CBD0D5BC1DA7986200C2D353 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD0D5BB1DA7986200C2D353 /* Alamofire.framework */; };
+		CBD0D5BD1DA7986200C2D353 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBD0D5BB1DA7986200C2D353 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,13 +65,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8FA652E31D55F4E300A32514 /* Embed Frameworks */ = {
+		CBD0D5BE1DA7986300C2D353 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8FA652E21D55F4E200A32514 /* Alamofire.framework in Embed Frameworks */,
+				CBD0D5BD1DA7986200C2D353 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +122,7 @@
 		8FB294991D3B29EE00E6C7A3 /* ApodWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApodWorkerTests.swift; path = Apod/ApodWorkerTests.swift; sourceTree = "<group>"; };
 		8FD5D2B01D3B755B007A5F3D /* ApodInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApodInitializer.swift; sourceTree = "<group>"; };
 		8FD5D2B41D3B7701007A5F3D /* Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
+		CBD0D5BB1DA7986200C2D353 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FA652E11D55F4E200A32514 /* Alamofire.framework in Frameworks */,
+				CBD0D5BC1DA7986200C2D353 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +154,7 @@
 		8F941DCB1D363A9E00C56ACE = {
 			isa = PBXGroup;
 			children = (
+				CBD0D5BB1DA7986200C2D353 /* Alamofire.framework */,
 				8FAD05091D408EE300E92486 /* Alamofire.framework */,
 				8F941DD61D363A9E00C56ACE /* spaceApp */,
 				8F941DEE1D363A9E00C56ACE /* spaceAppTests */,
@@ -266,7 +268,7 @@
 				8F941DD11D363A9E00C56ACE /* Frameworks */,
 				8F941DD21D363A9E00C56ACE /* Resources */,
 				8F6D54DF1D4079720018773D /* ShellScript */,
-				8FA652E31D55F4E300A32514 /* Embed Frameworks */,
+				CBD0D5BE1DA7986300C2D353 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
