@@ -45,7 +45,7 @@
 		8FD5D2B51D3B7701007A5F3D /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD5D2B41D3B7701007A5F3D /* Initializer.swift */; };
 		CBD0D5BC1DA7986200C2D353 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD0D5BB1DA7986200C2D353 /* Alamofire.framework */; };
 		CBD0D5BD1DA7986200C2D353 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBD0D5BB1DA7986200C2D353 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CBDEEF5B1DACDE4800F8B438 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDEEF591DACD66A00F8B438 /* Alamofire.framework */; };
+		CBDEEF5B1DACDE4800F8B438 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDEEF591DACD66A00F8B438 /* Alamofire.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -638,7 +638,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/spaceApp.app/spaceApp";
 			};
 			name = Debug;
 		};
@@ -651,7 +651,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/spaceApp.app/spaceApp";
 			};
 			name = Release;
 		};
