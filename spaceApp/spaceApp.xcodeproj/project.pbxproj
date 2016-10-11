@@ -45,6 +45,7 @@
 		8FD5D2B51D3B7701007A5F3D /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD5D2B41D3B7701007A5F3D /* Initializer.swift */; };
 		CBD0D5BC1DA7986200C2D353 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD0D5BB1DA7986200C2D353 /* Alamofire.framework */; };
 		CBD0D5BD1DA7986200C2D353 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBD0D5BB1DA7986200C2D353 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CBDEEF5A1DACD66A00F8B438 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDEEF591DACD66A00F8B438 /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		8FD5D2B01D3B755B007A5F3D /* ApodInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApodInitializer.swift; sourceTree = "<group>"; };
 		8FD5D2B41D3B7701007A5F3D /* Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
 		CBD0D5BB1DA7986200C2D353 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBDEEF591DACD66A00F8B438 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/spaceApp-bijczyntzrlgaxdlfzfuzoxuicos/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBDEEF5A1DACD66A00F8B438 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +163,7 @@
 				8F941DEE1D363A9E00C56ACE /* spaceAppTests */,
 				8F941DF91D363A9E00C56ACE /* spaceAppUITests */,
 				8F941DD51D363A9E00C56ACE /* Products */,
+				CBDEEF581DACD66A00F8B438 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -255,6 +259,14 @@
 				8FB294991D3B29EE00E6C7A3 /* ApodWorkerTests.swift */,
 			);
 			name = ApodScene;
+			sourceTree = "<group>";
+		};
+		CBDEEF581DACD66A00F8B438 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CBDEEF591DACD66A00F8B438 /* Alamofire.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
