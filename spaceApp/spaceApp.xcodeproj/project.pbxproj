@@ -635,6 +635,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = spaceAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				"LD_RUNPATH_SEARCH_PATHS[arch=*]" = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -649,6 +650,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = spaceAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.YoannColdefy.spaceAppTests;
