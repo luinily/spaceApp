@@ -1,0 +1,6 @@
+input_format: profdata
+coverage_service: cobertura_xml
+output_directory: slather-report
+scheme: spaceApp
+workspace: spaceApp.xcworkspace
+xcodeproj: spaceApp/spaceApp.xcodeproj
