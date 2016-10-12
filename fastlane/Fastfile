@@ -25,7 +25,8 @@ platform :ios do
   desc "Runs all the tests"
   lane :test do
     scan(
-      scheme: "spaceApp"
+      scheme: "spaceApp",
+      code_coverage: "true"
     )
   end
 
