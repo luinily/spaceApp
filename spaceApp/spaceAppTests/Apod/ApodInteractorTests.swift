@@ -152,6 +152,10 @@ extension ApodInteractorTests {
 
 // MARK: Tests
 extension ApodInteractorTests {
+    func test_failingTest() {
+        XCTAssert(false)
+    }
+    
 	// MARK: fetchTodayApod
 	func test_fetchTodayApod_callsApodWorkerFetchTodayApod() {
 		// Arrange
